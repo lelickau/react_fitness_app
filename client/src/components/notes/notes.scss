@@ -1,0 +1,28 @@
+@import '../../styles//variables.scss';
+
+.notes {
+    max-width: 805px;
+    padding: 66px 0  50px 161px;
+
+
+    &__title {
+        margin-top: 39px;
+        color: $title;
+        font-size: 700px;
+        font-size: 18px;
+        line-height: 21px;
+        margin-bottom: 46px;
+    }
+
+    &__box-items{
+        padding: 10px;
+        height: 50vh;
+        overflow-y: scroll;
+    }
+
+    &__empty {
+        font-size: 14px;
+        font-weight: 100;
+        color: rgb(82, 82, 82);
+    }
+}

@@ -1,0 +1,14 @@
+.btn {
+    &__main {
+        border: 1px transparent solid;
+    }
+
+    &__round {
+        width: 50px;
+        height: 50px;
+        color: #fff;
+        background: rgb(21,192,205);
+        background: linear-gradient(90deg, rgba(21,192,205,1) 0%, rgba(60,207,107,1) 65%);
+        border-radius: 50%;
+    }
+}

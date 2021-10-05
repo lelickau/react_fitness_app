@@ -1,0 +1,21 @@
+@import '../../styles/variables.scss';
+
+.auth {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(255,255,255);
+    background: linear-gradient(to right, $main-bg 50%, #27283d 50%);
+
+    &__title {
+        text-align: center;
+        color: $title;
+        font-size: 20px;
+    }
+    &__form {
+        background-color: #fff;
+        padding: 40px 45px;
+    }
+
+}

@@ -1,0 +1,21 @@
+.mainInput {
+    display: block;
+    width: 100%;
+    height: 30px;
+    padding: 5px 10px;
+    color: rgb(54, 139, 54);
+    font-size: 14px;
+    background: transparent;
+    border: 2px solid rgb(54, 126, 54);
+}
+
+.mainTextarea {
+    display: block;
+    width: 100%;
+    height: 90px;
+    padding: 5px 10px;
+    color: rgb(47, 117, 47);
+    font-size: 14px;
+    background: transparent;
+    border: 2px solid rgb(31, 104, 31);
+}
