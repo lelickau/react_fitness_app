@@ -14,44 +14,44 @@ function Sidebar() {
             <nav className="sidebar__menu">
                 <ul className="sidebar__list">
                     <li className="sidebar__item">
-                        <a className="sidebar__link">
+                        <div className="sidebar__link">
                             <img className="sidebar__link-icon" alt="Scale" src={scaleIco} />
                             <span className="sidebar__link-title">Scale</span>
-                        </a>
+                        </div>
                     </li>
                     <li className="sidebar__item">
-                        <a className="sidebar__link">
+                        <div className="sidebar__link">
                             <img className="sidebar__link-icon" alt="Water" src={waterIco} />
                             <span className="sidebar__link-title">Water</span>
-                        </a>
+                        </div>
                     </li>
                     <li className="sidebar__item">
-                        <a className="sidebar__link">
+                        <div className="sidebar__link">
                             <img className="sidebar__link-icon" alt="Food" src={foodIco} />
                             <span className="sidebar__link-title">Food</span>
-                        </a>
+                        </div>
                     </li>
                     <li className="sidebar__item">
-                        <a className="sidebar__link">
+                        <div className="sidebar__link">
                             <img className="sidebar__link-icon" alt="Notes" src={notesIco} />
                             <span className="sidebar__link-title">Notes</span>
-                        </a>
+                        </div>
                     </li>
                 </ul>
             </nav>
             <nav className="sidebar__menu">
                 <ul className="sidebar__list">
                     <li className="sidebar__item">
-                        <a className="sidebar__link">
+                        <div className="sidebar__link">
                             <img className="sidebar__link-icon profile-img" alt="Scale" src={profoleImg} />
                             <span className="sidebar__link-title">Profile</span>
-                        </a>
+                        </div>
                     </li>
                     <li className="sidebar__item">
-                        <a className="sidebar__link">
+                        <div className="sidebar__link">
                             <img className="sidebar__link-icon" alt="Water" src={settingsIco} />
                             <span className="sidebar__link-title">Water</span>
-                        </a>
+                        </div>
                     </li>
                 </ul>
             </nav>

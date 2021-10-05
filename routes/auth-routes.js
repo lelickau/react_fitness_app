@@ -2,7 +2,7 @@ const {Router} = require('express');
 const config = require('config');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const {check, validationResult} = require('express-validator')
+const {check, validationResult} = require('express-validator');
 const User = require('../models/User');
 const router = Router();
 
@@ -11,7 +11,7 @@ router.post(
     '/register',
     [
         check('email', 'Enter your email address.').isEmail(),
-        check('password', 'The password must consist of leas 6 simbols (digist, lowercase and uppercase letters').isLength({min: 6}).isLowercase().isUppercase()
+        check('password', 'The password must consist of leas 6 simbols').isLength({min: 6})
     ],
     async (req, res) => {
     try {
@@ -28,7 +28,7 @@ router.post(
         const hashedPassword = await bcrypt.hash(password, 12);
         const user = new User({email, password: hashedPassword});
 
-        await user.save()
+        await user.save();
 
         res.status(201).json({message: 'The user has been created.'});
 

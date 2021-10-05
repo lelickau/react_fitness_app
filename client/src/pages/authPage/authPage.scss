@@ -3,19 +3,106 @@
 .auth {
     height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background: rgb(255,255,255);
-    background: linear-gradient(to right, $main-bg 50%, #27283d 50%);
+    background: linear-gradient(to right, $main-bg 50%, #D5E3F4 50%);
+
+    &__form-box {
+        background-color: #fff;
+    }
 
     &__title {
-        text-align: center;
         color: $title;
-        font-size: 20px;
+        font-size: 18px;
+        line-height: 21px;
+        font-weight: 700;
+        margin-top: 34px;
+        margin-left: 27px;
     }
-    &__form {
-        background-color: #fff;
-        padding: 40px 45px;
+
+    &__tabs {
+        margin-top: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    &__tab-login,
+    &__tab-register {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 148px;
+        height: 40px;
+        background: #FFFFFF;
+        box-shadow: 1px 3px 4px rgba(172, 172, 172, 0.25);
+        border-radius: 50px 0px 0px 50px;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
+        color: #FA836A;
+        cursor: pointer;
+    }
+
+    &__tab-register {
+        margin-top: 12px;
+    }
+
+    &__inputs {
+        position: relative;
+        margin-top: 21px;
+        margin-bottom: 55px;
+        width: 303px;
+        margin-right: 97px;
+        border-bottom-right-radius: 50px;
+        border-top-right-radius: 50px;
+        box-shadow: 3px 1px 4px rgb(172 172 172 / 25%);
+    }
+
+    &__input {
+        border: none;
+        width: 100%;
+        display: block;
+        border: none;
+        background-color: transparent;
+        border-bottom: 1px solid #E1E1E1;
+        height: 55px;
+        padding: 0 27px;
+
+        &::placeholder {
+            font-size: 16px;
+            line-height: 19px;
+            color: #909090;
+        }
+    }
+
+    &__btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: -35px;
+        width: 70px;
+        height: 70px;
+        color: #fff;
+        background: linear-gradient(90deg, #79F0F8 0%, #7BACDF 100%);
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+        border-radius: 50%;
+    }
+
+    &__forgot {
+        cursor: pointer;
+        font-size: 16px;
+        line-height: 19px;
+        color: #919191;
+        margin-bottom: 18px;
+        text-align: right;
+        margin-right: 18px;
+    }
+
+    .hidden {
+        display: none;
     }
 
 }

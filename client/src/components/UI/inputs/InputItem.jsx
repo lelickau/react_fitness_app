@@ -1,9 +1,10 @@
 import React from 'react';
 
+import './inputItem.scss';
 
 const InputItem = ({...props}) => {
     return (
-        <input className="input__main" {...props} />
+        <input {...props} />
     );
 };
 
