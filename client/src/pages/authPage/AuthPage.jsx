@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import ButtonItem from '../../components/UI/buttons/ButtonItem';
 import InputItem from '../../components/UI/inputs/InputItem';
+import { AuthContext } from '../../context/AuthContext';
 import { useHttp } from '../../hooks/http.hook';
 
 
@@ -8,6 +9,7 @@ import arrowRight from '../../resources/icons/arrowRight.svg';
 import './authPage.scss';
 
 function AuthPage(props) {
+    const auth = useContext(AuthContext);
     const {loading, error, request, clearError} = useHttp();
     const [form, setForm] = useState({
         email: '', password: ''
@@ -31,6 +33,13 @@ function AuthPage(props) {
         try {
             const data = await request('/api/auth/register', 'POST', {...form});
             console.log(data);
+        } catch (err) {}
+    }
+
+    const loginHandler = async () => {
+        try {
+            const data = await request('/api/auth/login', 'POST', {...form});
+            auth.login(data.token, data.userId);
         } catch (err) {}
     }
 
@@ -67,11 +76,12 @@ function AuthPage(props) {
                         </label>
 
                         <ButtonItem
-                            className="auth__btn hidden"
+                            className="auth__btn"
+                            onClick={loginHandler}
                             disabled={loading}
                         ><img src={arrowRight} alt="LogIn"/></ButtonItem>
                         <ButtonItem
-                            className="auth__btn"
+                            className="auth__btn hidden"
                             onClick={registerHandler}
                             disabled={loading}
                         ><img src={arrowRight} alt="Register" /></ButtonItem>

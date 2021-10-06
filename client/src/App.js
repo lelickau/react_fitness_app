@@ -1,8 +1,11 @@
 import React from 'react';
 import {useRoutes} from './routes';
 import {BrowserRouter} from 'react-router-dom';
+import { useAuth } from './hooks/auth.hook';
+import { AuthContext } from './context/AuthContext';
 
 import './styles/style.scss';
+import Sidebar from './components/sidebar/Sidebar';
 
 function App() {
 
@@ -12,15 +15,19 @@ function App() {
   //   {id: 'a3', title: 'Заказать еду', marking: 'red', status: 'In the process'},
   //   {id: 'a4', title: 'Сходить в спортзал', marking: 'yellow', status: 'Done'},
   // ]
-
-  const routes = useRoutes(false);
+  const {token, login, logout, userId} = useAuth();
+  const isAauthenticated = !!token;
+  const routes = useRoutes(isAauthenticated);
 
   return (
-    <BrowserRouter>
-      <div className="app">
-        {routes}
-      </div>
-    </BrowserRouter>
+    <AuthContext.Provider value={{token, login, logout, userId, isAauthenticated}}>
+      <BrowserRouter>
+        <div className="app">
+          {isAauthenticated && <Sidebar/>}
+          {routes}
+        </div>
+      </BrowserRouter>
+    </AuthContext.Provider>
   );
 }
 

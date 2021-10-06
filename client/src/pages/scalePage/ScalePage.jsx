@@ -2,13 +2,12 @@ import React from 'react';
 import HeaderTitle from '../../components/headerTitle/HeaderTitle';
 import Sidebar from '../../components/sidebar/Sidebar';
 
-function NotesPage(props) {
+function ScalePage(props) {
     return (
         <div>
-            <HeaderTitle title={'Notes'} />
-
+            <HeaderTitle title={'Scale'} />
         </div>
     );
 }
 
-export default NotesPage;
+export default ScalePage;

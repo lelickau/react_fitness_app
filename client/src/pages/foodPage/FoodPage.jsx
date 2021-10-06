@@ -2,13 +2,12 @@ import React from 'react';
 import HeaderTitle from '../../components/headerTitle/HeaderTitle';
 import Sidebar from '../../components/sidebar/Sidebar';
 
-function NotesPage(props) {
+function FoodPage(props) {
     return (
         <div>
-            <HeaderTitle title={'Notes'} />
-
+            <HeaderTitle title={'Food'} />
         </div>
     );
 }
 
-export default NotesPage;
+export default FoodPage;
