@@ -11,7 +11,7 @@ function Notes({tasks}) {
             <div className="notes__box-items">
                 {!tasks.length
                 ? <h2 className="notes__empty">The note list is empty</h2>
-                : tasks.map((item, index) => <TaskItem task={item} index={index} key={item.id} />)
+                : tasks.map((item, index) => <TaskItem task={item} index={index} key={item._id} />)
                 }
 
             </div>

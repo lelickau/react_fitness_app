@@ -6,6 +6,7 @@ import HomePage from './pages/homePage/HomePage';
 import NotesPage from './pages/notesPage/NotesPage';
 import ScalePage from './pages/scalePage/ScalePage';
 import WaterPage from './pages/waterPage/WaterPage';
+import NoteEditPage from './pages/noteEditPage/NoteEditPage';
 
 export const useRoutes = (isAuthenticated) => {
     if (isAuthenticated) {
@@ -16,6 +17,9 @@ export const useRoutes = (isAuthenticated) => {
                 </Route>
                 <Route path="/notes" exact>
                     <NotesPage/>
+                </Route>
+                <Route path="/notes/:id">
+                    <NoteEditPage />
                 </Route>
                 <Route path="/water" exact>
                     <WaterPage/>

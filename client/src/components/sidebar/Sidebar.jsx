@@ -4,9 +4,9 @@ import waterIco from '../../resources/icons/wather.svg';
 import foodIco from '../../resources/icons/fork.svg';
 import notesIco from '../../resources/icons/tasks.svg';
 import profoleImg from '../../resources/img/profile-img.png';
+import { NavLink } from 'react-router-dom';
 
 import "./sidebar.scss"
-import { NavLink } from 'react-router-dom';
 
 function Sidebar() {
     return (

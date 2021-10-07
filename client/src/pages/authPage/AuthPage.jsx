@@ -61,6 +61,7 @@ function AuthPage(props) {
                                 type="text"
                                 className="auth__input"
                                 name="email"
+                                value={form.email}
                                 onChange={changeHandler}
                             ></InputItem>
                         </label>
@@ -71,12 +72,13 @@ function AuthPage(props) {
                                 className="auth__input"
                                 type="password"
                                 name="password"
+                                value={form.password}
                                 onChange={changeHandler}
                             ></InputItem>
                         </label>
 
                         <ButtonItem
-                            className="auth__btn"
+                            className="auth__btn "
                             onClick={loginHandler}
                             disabled={loading}
                         ><img src={arrowRight} alt="LogIn"/></ButtonItem>
@@ -87,7 +89,7 @@ function AuthPage(props) {
                         ><img src={arrowRight} alt="Register" /></ButtonItem>
                     </div>
                 </div>
-                <div className="auth__forgot">Rotgot password?</div>
+                <div className="auth__forgot">Forgot password?</div>
             </div>
 
         </div>

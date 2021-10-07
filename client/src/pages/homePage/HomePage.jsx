@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import HeaderTitle from '../../components/headerTitle/HeaderTitle';
-import Sidebar from '../../components/sidebar/Sidebar';
 import { AuthContext } from '../../context/AuthContext';
 import { useHistory } from 'react-router-dom';
 
