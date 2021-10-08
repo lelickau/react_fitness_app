@@ -4,7 +4,7 @@ import './inputItem.scss';
 
 const InputItem = ({...props}) => {
     return (
-        <input {...props} />
+        <input className="main-input" {...props} />
     );
 };
 

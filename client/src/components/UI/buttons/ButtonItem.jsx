@@ -4,7 +4,7 @@ import './buttonItem.scss';
 
 const ButtonItem = ({children, ...props}) => {
     return (
-        <button {...props}>{children}</button>
+        <button className="main-btn" {...props}>{children}</button>
     );
 };
 

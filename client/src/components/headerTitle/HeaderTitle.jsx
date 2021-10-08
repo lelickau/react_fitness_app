@@ -2,10 +2,10 @@ import React from 'react';
 
 import './headerTitle.scss';
 
-function HeaderTitle({title}) {
+function HeaderTitle({children, ...props}) {
     return (
         <div className="header">
-            <h1 className="header__title">{title}</h1>
+            <h1 className="header__title" {...props}>{children}</h1>
         </div>
     );
 }

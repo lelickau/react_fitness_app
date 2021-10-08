@@ -1,9 +1,11 @@
 import React from 'react';
 
+import './loader.scss';
+
 function Loader(props) {
     return (
-        <div>
-            Loader ..............
+        <div className="loader">
+                <div class="loader__box"><div></div><div></div><div></div></div>
         </div>
     );
 }

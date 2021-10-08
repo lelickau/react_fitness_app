@@ -5,7 +5,10 @@ import { useHttp } from '../../hooks/http.hook';
 import { AuthContext } from '../../context/AuthContext';
 import { useHistory } from 'react-router';
 import Loader from '../../components/loader/Loader';
+import InputItem from '../../components/UI/inputs/InputItem';
 
+import './notesPage.scss';
+import ButtonItem from '../../components/UI/buttons/ButtonItem';
 
 function NotesPage() {
     const history = useHistory();
@@ -58,19 +61,29 @@ function NotesPage() {
 
     return (
         <div className="notes">
-            <HeaderTitle title={'Notes'} />
+            <HeaderTitle>Notes</HeaderTitle>
             <article className="notes__content container">
                 <form
                     className="notes__form"
                     onSubmit={e => e.preventDefault()}
                     >
-                    <input
-                        className="notes__input"
+                    <InputItem
+                        placeholder="Task description"
                         type="text"
                         name='title'
                         value={task.title}
                         onChange={changeHandler}
                     />
+                    <div className="notes">
+                        <input type="hidden" name="marking"></input>
+                        <div className="select__head">Choose a marking</div>
+                        <ul className="select__list">
+                            <li className="notes__item-red" value="red"></li>
+                            <li className="notes__item-blue" value="blue"></li>
+                            <li className="notes__item-green" value="green"></li>
+                        </ul>
+                    </div>
+
                     <select
                         className="notes__mark"
                         name="marking"
@@ -94,10 +107,9 @@ function NotesPage() {
                         <option className="notes__blue" value="Closed">Closed</option>
                         <option className="notes__blue" value="Closed">Assigned</option>
                     </select>
-                    <button
-                        className="notes__btn"
+                    <ButtonItem
                         onClick={createNote}
-                    >Add</button>
+                    >Add</ButtonItem>
                 </form>
                 {!loading && <Notes tasks={tasks} />}
             </article>

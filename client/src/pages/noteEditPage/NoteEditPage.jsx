@@ -16,6 +16,7 @@ function NoteEditPage(props) {
             const data = await request(`/api/notes/${noteId}`, 'GET', null, {
                 Authorization: `Bearer ${token}`
             });
+
             setNote(data);
         } catch (err) {}
     }, [noteId, request, token]);
@@ -27,9 +28,10 @@ function NoteEditPage(props) {
     if (loading) {
         return <Loader/>
     }
+
     return (
         <>
-            {!loading && <div><h1>{note.title}</h1></div>}
+            {!loading && note && <TaskItem task={note} index="1"/>}
         </>
     );
 }

@@ -5,7 +5,7 @@ import HeaderTitle from '../../components/headerTitle/HeaderTitle';
 function FoodPage(props) {
     return (
         <div>
-            <HeaderTitle title={'Food'} />
+            <HeaderTitle>Food</HeaderTitle>
         </div>
     );
 }

@@ -4,7 +4,7 @@ import HeaderTitle from '../../components/headerTitle/HeaderTitle';
 function ScalePage(props) {
     return (
         <div>
-            <HeaderTitle title={'Scale'} />
+            <HeaderTitle>Scale</HeaderTitle>
         </div>
     );
 }

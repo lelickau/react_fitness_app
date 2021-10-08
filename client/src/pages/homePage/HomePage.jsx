@@ -2,10 +2,12 @@ import React, { useContext } from 'react';
 import HeaderTitle from '../../components/headerTitle/HeaderTitle';
 import { AuthContext } from '../../context/AuthContext';
 import { useHistory } from 'react-router-dom';
+import ButtonItem from '../../components/UI/buttons/ButtonItem';
 
 import './homePage.scss';
+import Loader from '../../components/loader/Loader';
 
-function HomePage(props) {
+function HomePage() {
     const history = useHistory()
     const auth = useContext(AuthContext);
 
@@ -16,13 +18,12 @@ function HomePage(props) {
     }
     return (
         <div className="profile">
-            <HeaderTitle title={'Profile'} />
+            <HeaderTitle>Profile</HeaderTitle>
             <article className="profile__content">
-                <a
-                    className="profile__logout"
-                    href="/"
+                <ButtonItem
                     onClick={logoutHandler}
-                >Logout</a>
+                >Logout</ButtonItem>
+                <Loader/>
             </article>
         </div>
     );

@@ -6,15 +6,15 @@
     justify-content: space-between;
     width: 100px;
     height: 100vh;
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
-    padding-top: 50px;
+    padding-top: 23px;
     padding-bottom: 30px;
     background-color: $sidebar-bg;
     overflow-y: scroll;
 
-    &__item + .sidebar__item {
+    &__item {
         margin-top: 37px;
     }
 
@@ -35,7 +35,7 @@
         margin-top: 10px;
         font-size: 16px;
         line-height: 18px;
-        font-weight: 400;
+        font-weight: 500;
     }
 }
 
