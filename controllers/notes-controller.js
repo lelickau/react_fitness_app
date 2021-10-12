@@ -3,6 +3,34 @@ const Note = require('../models/Note');
 const auth = require('../middleware/auth.middleware');
 const router = Router();
 
+class NotesController {
+    async createNote(req, res, next) {
+        try {
+
+        } catch (err) {
+
+        }
+    }
+
+    async getAllNotes(req, res, next) {
+        try {
+            res.json(['123', '456'])
+        } catch (err) {
+
+        }
+    }
+
+    async getNote(req, res, next) {
+        try {
+
+        } catch (err) {
+
+        }
+    }
+}
+
+module.exports = new NotesController();
+
 router.post('/create', auth, async (req, res) => {
     try {
         const {title, marking, status} = req.body;
@@ -42,4 +70,4 @@ router.get('/:id', auth, async (req, res) => {
     }
 });
 
-module.exports = router;
+

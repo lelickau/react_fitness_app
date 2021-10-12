@@ -19,6 +19,7 @@ function App() {
       <Loader/>
     )
   }
+
   return (
     <AuthContext.Provider value={{token, login, logout, userId, isAauthenticated}}>
       <BrowserRouter>

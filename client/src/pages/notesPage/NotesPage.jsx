@@ -19,6 +19,10 @@ function NotesPage() {
         marking: '',
         status: '',
     });
+    const [activeMarking, setActiveMarking] = useState(false);
+    const [activeStatus, setActiveStatus] = useState(false);
+    const [markingValue, setMarkingValue] = useState('green');
+    const [statusValue, setStatusValue] = useState('Assigned');
 
     const [tasks, setTasks] = useState([])
 
@@ -55,10 +59,24 @@ function NotesPage() {
         } catch (err) {console.log(err)}
     }
 
+    const showMarking = (e) => {
+        setActiveMarking(!activeMarking);
+    }
+    const showStatus = (e) => {
+        setActiveStatus(!activeStatus);
+    }
+
+    const changeMarkingValue = (e) => {
+        setMarkingValue(e.target.dataset.mark);
+    }
+    const changeStatusValue = (e) => {
+        setStatusValue(e.target.dataset.status);
+    }
+
     if (loading) {
         return <Loader/>
     }
-
+    console.log(markingValue)
     return (
         <div className="notes">
             <HeaderTitle>Notes</HeaderTitle>
@@ -67,46 +85,72 @@ function NotesPage() {
                     className="notes__form"
                     onSubmit={e => e.preventDefault()}
                     >
+                    <label className="notes__label-task">Task descpiption
                     <InputItem
-                        placeholder="Task description"
+                        placeholder="Feed the dog"
                         type="text"
                         name='title'
                         value={task.title}
                         onChange={changeHandler}
                     />
-                    <div className="notes">
-                        <input type="hidden" name="marking"></input>
-                        <div className="select__head">Choose a marking</div>
-                        <ul className="select__list">
-                            <li className="notes__item-red" value="red"></li>
-                            <li className="notes__item-blue" value="blue"></li>
-                            <li className="notes__item-green" value="green"></li>
+                    </label>
+                    <div className="notes__mark">
+                        <input
+                            type="hidden"
+                            name="marking"
+                            value={task.marking = markingValue}
+                        ></input>
+                        <div className="notes__head-mark" onClick={showMarking}>Choose a marking &#9660;</div>
+                        <ul className={`notes__mark-list ${activeMarking ? '' : 'hidden'} `}>
+                            <li
+                            onClick={changeMarkingValue}
+                            className="notes__item-mark notes__item-red"
+                            data-mark="red"
+                            ></li>
+                            <li
+                            className="notes__item-mark notes__item-blue"
+                            data-mark="blue"
+                            onClick={changeMarkingValue}
+                            ></li>
+                            <li
+                            className="notes__item-mark notes__item-green"
+                            data-mark="green"
+                            onClick={changeMarkingValue}
+                            ></li>
+                        </ul>
+                    </div>
+                    <div className="notes__status">
+                        <input
+                            type="hidden"
+                            name="status"
+                            value={task.status = statusValue}
+                        ></input>
+                        <div className="notes__head-status" onClick={showStatus}>Choose a status &#9660;</div>
+                        <ul className={`notes__status-list ${activeStatus ? '' : 'hidden'} `}>
+                            <li
+                            onClick={changeStatusValue}
+                            className="notes__item-status"
+                            data-status="Assigned"
+                            >Assigned</li>
+                            <li
+                            className="notes__item-status"
+                            data-status="Completed"
+                            onClick={changeStatusValue}
+                            >Completed</li>
+                            <li
+                            className="notes__item-status"
+                            data-status="Closed"
+                            onClick={changeStatusValue}
+                            >Closed</li>
+                            <li
+                            className="notes__item-status"
+                            data-status="Assigned"
+                            onClick={changeStatusValue}
+                            >Assigned</li>
                         </ul>
                     </div>
 
-                    <select
-                        className="notes__mark"
-                        name="marking"
-                        value={task.marking}
-                        onChange={changeHandler}
-                    >
-                        <option className="notes__green">Marking</option>
-                        <option className="notes__green" value="green">green</option>
-                        <option className="notes__red" value="red">red</option>
-                        <option className="notes__blue" value="blue">blue</option>
-                    </select>
-                    <select
-                        className="notes__status"
-                        name="status"
-                        value={task.status}
-                        onChange={changeHandler}
-                    >
-                        <option className="notes__green">Status</option>
-                        <option className="notes__green" value="Assigned">Assigned</option>
-                        <option className="notes__red" value="Completed">Completed</option>
-                        <option className="notes__blue" value="Closed">Closed</option>
-                        <option className="notes__blue" value="Closed">Assigned</option>
-                    </select>
+
                     <ButtonItem
                         onClick={createNote}
                     >Add</ButtonItem>

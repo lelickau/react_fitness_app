@@ -1,12 +1,16 @@
 const express = require('express');
 const config = require('config');
 const mongoose = require('mongoose');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const router = require('./routes/index');
 
 const app = express();
 
 app.use(express.json({extended: true}));
-app.use('/api/notes', require('./routes/notes.routes'));
-app.use('/api/auth', require('./routes/auth.routes'));
+app.use(cookieParser());
+app.use(cors());
+app.use('/api', router);
 
 const PORT = config.get('port') || 5000;
 

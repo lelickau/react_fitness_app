@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 import ButtonItem from '../../components/UI/buttons/ButtonItem';
 
 import './homePage.scss';
-import Loader from '../../components/loader/Loader';
 
 function HomePage() {
     const history = useHistory()
@@ -23,7 +22,6 @@ function HomePage() {
                 <ButtonItem
                     onClick={logoutHandler}
                 >Logout</ButtonItem>
-                <Loader/>
             </article>
         </div>
     );

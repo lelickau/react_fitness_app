@@ -1,25 +1,47 @@
 @import '../../styles//variables.scss';
 
 .notes {
+    &__form {
+        display: flex;
+    }
+
     &__content {
         margin-top: 50px;
         margin-left: 50px;
     }
 
-    &__item-red {
+    &__mark-list {
+        display: flex;
+        padding: 10px;
+    }
+
+    &__item-mark {
         width: 40px;
-        height: 20px;
+        height: 30px;
+        cursor: pointer;
+        border: 3px solid rgb(255, 255, 255);
+    }
+
+    &__item-status {
+        cursor: pointer;
+    }
+
+    &__item-red {
         background-color: rgb(245, 73, 139);
     }
     &__item-blue {
-        width: 40px;
-        height: 20px;
         background-color: rgb(74, 91, 241);
     }
     &__item-green {
-        width: 40px;
-        height: 20px;
         background-color: rgb(97, 236, 69);
+    }
+
+    &__head-mark {
+        cursor: pointer;
+    }
+
+    .hidden {
+        display: none;
     }
 
 }
