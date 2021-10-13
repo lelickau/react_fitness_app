@@ -5,13 +5,13 @@ const mailService = require('./mail-service');
 const tokenService = require('./token-service');
 const UserDto = require('../dtos/user-dto');
 const config = require('config');
-
+const ApiError = require('../exeptions/api-error');
 class UserService {
     async registration(email, password) {
         const candidate = await User.findOne({email});
 
         if (candidate) {
-            return res.status(400).json({message: 'E-mail is already busy.'});
+            throw ApiError.BadRequest('E-mail is already busy.');
         }
 
         const hashPassword = await bcrypt.hash(password, 12);
@@ -24,17 +24,57 @@ class UserService {
         const tokens = tokenService.generateTokens({...userDto});
         await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
-        return {...tokens, user: userDto}
+        return {...tokens, user: userDto};
     }
 
     async activate(activationLink) {
         const user = await User.findOne({activationLink});
         if (!user) {
-            return res.status(400).json({message: 'Error activation link'});
+            throw ApiError.BadRequest('Error activation link');
         }
-        console.log(user);
+
         user.isActivatedMail = true;
         await user.save();
+    }
+
+    async login(email, password) {
+        const user = await User.findOne({email});
+        if (!user) {
+            throw ApiError.BadRequest(`The user ${email} was not found`);
+        }
+
+        const isPassEquals = await bcrypt.compare(password, user.password);
+        if (!isPassEquals) {
+            throw ApiError.BadRequest('Email or password is not correct');
+        }
+        const userDto = new UserDto(user);
+        const tokens = tokenService.generateTokens({...userDto});
+        await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+        return {...tokens, user: userDto}
+    }
+
+    async logout(refreshToken) {
+        const token = await tokenService.removeToken(refreshToken);
+        return token;
+    }
+
+    async refresh(refreshToken) {
+        if (!refreshToken) {
+            throw ApiError.UnauthorizedError();
+        }
+        const userData = tokenService.validateRefreshToken(refreshToken);
+        const tokenFromDb = await tokenService.findToken(refreshToken);
+
+        if(!userData || !tokenFromDb) {
+            throw ApiError.UnauthorizedError();
+        }
+        const user = await User.findById(userData.id);
+        const userDto = new UserDto(user);
+        const tokens = tokenService.generateTokens({...userDto});
+        await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+        return {...tokens, user: userDto}
     }
 }
 

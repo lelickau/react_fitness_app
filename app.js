@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const router = require('./routes/index');
+const errorsMiddleware = require('./middleware/error-middelware');
 
 const app = express();
 
@@ -12,12 +13,17 @@ app.use(cookieParser());
 app.use(cors());
 app.use('/api', router);
 
+app.use(errorsMiddleware);
+
 const PORT = config.get('port') || 5000;
 
 async function start() {
     try {
         await mongoose.connect(config.get('mongoUri'));
-        app.listen(PORT, () => console.log(`App has been started. ${PORT}`));
+        app.listen(PORT, () => console.log(`App has been started. ${PORT}`), {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
     } catch (e) {
         console.log('Server Error', e.message);
         process.exit(1);
