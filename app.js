@@ -1,7 +1,6 @@
 const express = require('express');
 const config = require('config');
 const mongoose = require('mongoose');
-const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const router = require('./routes/index');
 const errorsMiddleware = require('./middleware/error-middelware');
@@ -10,7 +9,6 @@ const app = express();
 
 app.use(express.json({extended: true}));
 app.use(cookieParser());
-app.use(cors());
 app.use('/api', router);
 
 app.use(errorsMiddleware);

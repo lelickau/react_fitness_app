@@ -8,8 +8,8 @@ import ScalePage from './pages/scalePage/ScalePage';
 import WaterPage from './pages/waterPage/WaterPage';
 import NoteEditPage from './pages/noteEditPage/NoteEditPage';
 
-export const useRoutes = (isAuthenticated) => {
-    if (isAuthenticated) {
+export const useRoutes = (isAuth) => {
+    if (isAuth) {
         return (
             <Switch>
                 <Route path="/home" exact>
@@ -18,9 +18,9 @@ export const useRoutes = (isAuthenticated) => {
                 <Route path="/notes" exact>
                     <NotesPage/>
                 </Route>
-                <Route path="/notes/:id">
+                {/* <Route path="/notes/:id">
                     <NoteEditPage />
-                </Route>
+                </Route> */}
                 <Route path="/water" exact>
                     <WaterPage/>
                 </Route>
@@ -36,10 +36,10 @@ export const useRoutes = (isAuthenticated) => {
     }
     return (
         <Switch>
-            <Route path="/" exact>
+            <Route path="/autorization" exact>
                 <AuthPage/>
             </Route>
-            <Redirect to="/"/>
+            <Redirect to="/autorization"/>
         </Switch>
     )
 }

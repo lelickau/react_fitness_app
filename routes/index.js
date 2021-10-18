@@ -18,7 +18,7 @@ router.get('/auth/refresh', authController.refresh);
 
 // notes
 router.post('/notes/create', authMiddleware, notesController.createNote);
-router.get('/notes/', authMiddleware, notesController.getAllNotes);
+router.get('/notes/getall', authMiddleware, notesController.getAllNotes);
 router.get('/notes/:id', authMiddleware, notesController.getNote);
 
 module.exports = router;

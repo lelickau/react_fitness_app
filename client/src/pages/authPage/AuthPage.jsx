@@ -1,43 +1,34 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { useHttp } from '../../hooks/http.hook';
+import { registration, login } from '../../redux/actions/user';
+import {useDispatch} from 'react-redux';
 
 import './authPage.scss';
 
 function AuthPage() {
-    const auth = useContext(AuthContext);
-    const {loading, error, request, clearError} = useHttp();
+    // const auth = useContext(AuthContext);
+    // const {loading, error, request, clearError} = useHttp();
+
     const [form, setForm] = useState({
         email: '', password: ''
     });
     const [active, setActive] = useState(false);
+    const dispatch = useDispatch();
 
-    // error ?
-    const showError = (text) => {
-        console.log(text)
-    }
 
-    useEffect(() => {
-        showError(error);
-        clearError()
-    }, [error, clearError])
+    // // error ?
+    // const showError = (text) => {
+    //     console.log(text)
+    // }
+
+    // useEffect(() => {
+    //     showError(error);
+    //     clearError()
+    // }, [error, clearError])
 
     const changeHandler = e => {
         setForm({...form, [e.target.name]: e.target.value});
-    }
-
-    const registerHandler = async () => {
-        try {
-            const data = await request('/api/auth/register', 'POST', {...form});
-            console.log(data);
-        } catch (err) {}
-    }
-
-    const loginHandler = async () => {
-        try {
-            const data = await request('/api/auth/login', 'POST', {...form});
-            auth.login(data.token, data.userId);
-        } catch (err) {}
     }
 
     const changeActive = () => {
@@ -90,17 +81,17 @@ function AuthPage() {
 
                             <button
                                 className={`auth__btn ${!active ? '' : "hidden"}`}
-                                onClick={loginHandler}
-                                disabled={loading}
+                                onClick={() => dispatch(login(form))}
+                                // disabled={loading}
                             ><span className="auth__btn-arrow"></span></button>
                             <button
                                 className={`auth__btn ${active ? '' : "hidden"}`}
-                                onClick={registerHandler}
-                                disabled={loading}
+                                onClick={() => registration(form)}
+                                // disabled={loading}
                             ><span className="auth__btn-arrow"></span></button>
                         </div>
                     </div>
-                    <div className="auth__forgot">Forgot password?</div>
+                    <div className="auth__forgot">Forgot Password?</div>
                 </div>
             </form>
         </div>

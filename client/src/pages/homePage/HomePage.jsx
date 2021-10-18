@@ -5,22 +5,22 @@ import { useHistory } from 'react-router-dom';
 import ButtonItem from '../../components/UI/buttons/ButtonItem';
 
 import './homePage.scss';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../redux/actions/user';
 
 function HomePage() {
-    const history = useHistory()
-    const auth = useContext(AuthContext);
+    const isAuth = useSelector(state => state.user.isAuth);
+    const dispatch = useDispatch();
 
-    const logoutHandler = (e) => {
-        e.preventDefault();
-        auth.logout();
-        history.push('/');
-    }
+    // const history = useHistory()
+    // const auth = useContext(AuthContext);
+
     return (
         <div className="profile">
             <HeaderTitle>Profile</HeaderTitle>
             <article className="profile__content">
                 <ButtonItem
-                    onClick={logoutHandler}
+                    onClick={() => dispatch(logout())}
                 >Logout</ButtonItem>
             </article>
         </div>

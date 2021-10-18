@@ -9,55 +9,35 @@ import InputItem from '../../components/UI/inputs/InputItem';
 
 import './notesPage.scss';
 import ButtonItem from '../../components/UI/buttons/ButtonItem';
+import { createNote, getNotes } from '../../redux/actions/notes';
+import { useDispatch, useSelector } from 'react-redux';
 
 function NotesPage() {
-    const history = useHistory();
-    const auth = useContext(AuthContext);
-    const {request, loading} = useHttp();
+    // const history = useHistory();
+    // const auth = useContext(AuthContext);
+    // const {request, loading} = useHttp();
+
     const [task, setTask] = useState({
         title: '',
         marking: '',
         status: '',
     });
+    const dispatch = useDispatch();
+    const getAllNotes = useSelector(state => state.notes.notesList);
+
     const [activeMarking, setActiveMarking] = useState(false);
     const [activeStatus, setActiveStatus] = useState(false);
     const [markingValue, setMarkingValue] = useState('green');
     const [statusValue, setStatusValue] = useState('Assigned');
 
-    const [tasks, setTasks] = useState([])
-
     const changeHandler = e => {
         setTask({...task, [e.target.name]: e.target.value});
     }
 
-    const getNotes = useCallback(async () => {
-        try {
-            const data = await request('/api/notes', 'GET', null, {
-                Authorization: `Bearer ${auth.token}`
-            });
-            console.log(data)
-            setTasks(data)
-        } catch (err) {}
-    }, [auth, request]);
-
     useEffect(() => {
-        getNotes()
+        dispatch(getNotes())
     }, [getNotes]);
 
-    const createNote = async () => {
-        try {
-            const data = await request('/api/notes/create', 'POST', {...task}, {
-                Authorization: `Bearer ${auth.token}`
-            });
-            console.log(data)
-            history.push(`/notes/${data._id}`);
-            setTask({
-                title: '',
-                marking: '',
-                status: '',
-            });
-        } catch (err) {console.log(err)}
-    }
 
     const showMarking = (e) => {
         setActiveMarking(!activeMarking);
@@ -73,10 +53,10 @@ function NotesPage() {
         setStatusValue(e.target.dataset.status);
     }
 
-    if (loading) {
-        return <Loader/>
-    }
-    console.log(markingValue)
+    // if (loading) {
+    //     return <Loader/>
+    // }
+
     return (
         <div className="notes">
             <HeaderTitle>Notes</HeaderTitle>
@@ -84,7 +64,7 @@ function NotesPage() {
                 <form
                     className="notes__form"
                     onSubmit={e => e.preventDefault()}
-                    >
+                >
                     <label className="notes__label-task">Task descpiption
                     <InputItem
                         placeholder="Feed the dog"
@@ -99,8 +79,12 @@ function NotesPage() {
                             type="hidden"
                             name="marking"
                             value={task.marking = markingValue}
+                            onChange={changeHandler}
                         ></input>
-                        <div className="notes__head-mark" onClick={showMarking}>Choose a marking &#9660;</div>
+                        <div
+                            className="notes__head-mark"
+                            onClick={showMarking}
+                            >Choose a marking &#9660;</div>
                         <ul className={`notes__mark-list ${activeMarking ? '' : 'hidden'} `}>
                             <li
                             onClick={changeMarkingValue}
@@ -124,6 +108,7 @@ function NotesPage() {
                             type="hidden"
                             name="status"
                             value={task.status = statusValue}
+                            onChange={changeHandler}
                         ></input>
                         <div className="notes__head-status" onClick={showStatus}>Choose a status &#9660;</div>
                         <ul className={`notes__status-list ${activeStatus ? '' : 'hidden'} `}>
@@ -152,10 +137,10 @@ function NotesPage() {
 
 
                     <ButtonItem
-                        onClick={createNote}
+                        onClick={() => createNote(task)}
                     >Add</ButtonItem>
                 </form>
-                {!loading && <Notes tasks={tasks} />}
+                <Notes tasks={getAllNotes} />
             </article>
         </div>
     );
