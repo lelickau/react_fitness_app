@@ -48,17 +48,13 @@ export const logout = () => {
 
 export const authentication = () => {
     return async dispatch => {
-        dispatch(setLoading(true));
         try {
             const response = await axios.get(`${API_URL}refresh`, {withCredentials: true});
             console.log(response)
             dispatch(setUserAC(response.data.user))
             localStorage.setItem('token', response.data.accessToken);
-
         } catch (e) {
             localStorage.removeItem('token');
-        } finally {
-            dispatch(setLoading(false));
         }
     }
 }

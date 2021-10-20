@@ -1,11 +1,9 @@
 const SET_USER = "SET_USER";
 const LOGOUT = "LOGOUT";
-const LOADING = "LOADING";
 
 const userState = {
     currentUser: {},
     isAuth: false,
-    isLoading: false
 }
 
 export default function userReducer (state = userState, action) {
@@ -22,12 +20,6 @@ export default function userReducer (state = userState, action) {
                 currentUser: {},
                 isAuth: false,
             }
-        case LOADING:
-            return {
-                ...state,
-                isLoading: action.payload
-            }
-
         default:
             return state;
     }
@@ -37,4 +29,4 @@ export default function userReducer (state = userState, action) {
 // action creator
 export const setUserAC = (user) => ({type: SET_USER, payload: user});
 export const logoutAC = () => ({type: LOGOUT});
-export const setLoading = (val) => ({type: LOADING, payload: val});
+

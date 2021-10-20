@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getNotesAC } from "../reducers/notesReducer";
+import { getNotesAC, deleteNoteAC } from "../reducers/notesReducer";
 
 const API_URL = `/api/notes/`;
 
@@ -23,6 +23,19 @@ export const getNotes = () => {
             dispatch(getNotesAC(response.data))
         } catch (err) {
             console.log(err.response.data.message);
+        }
+    }
+}
+export const deleteFile = (task) => {
+    return async dispatch => {
+        try {
+            const response = await axios.delete(`${API_URL}delete?id=${task._id}`, {
+                headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
+            });
+            dispatch(deleteNoteAC(task._id));
+            console.log(response.data.message);
+        } catch (err) {
+            console.log(err?.response?.data?.message);
         }
     }
 }

@@ -7,23 +7,26 @@ import Sidebar from './components/sidebar/Sidebar';
 import Loader from './components/loader/Loader';
 import { useSelector, useDispatch } from 'react-redux';
 import { authentication } from './redux/actions/user';
+import { initializeApp } from './redux/reducers/initializeReducer';
 
 import './styles/style.scss';
 
 function App() {
 
   const isAuth = useSelector(state => state.user.isAuth);
-  const isLoading = useSelector(state => state.user.isLoading);
+
+  const initialized = useSelector(state => state.initializedApp.initialized);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(authentication())
+    dispatch(initializeApp())
   }, []);
 
   // const {token, login, logout, userId, ready} = useAuth();
   // const isAauthenticated = !!token;
   const routes = useRoutes(isAuth);
 
-  if(isLoading) {
+  if(!initialized) {
     return (
       <Loader/>
     )

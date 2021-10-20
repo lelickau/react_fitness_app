@@ -1,8 +1,6 @@
 const {Router} = require('express');
-const Note = require('../models/Note');
-const auth = require('../middleware/auth-middleware');
 const notesService = require('../service/notes-service');
-const router = Router();
+
 
 class NotesController {
     async createNote(req, res, next) {
@@ -29,6 +27,18 @@ class NotesController {
         }
     }
 
+    async deleteNote(req, res, next) {
+            try {
+                const userId = req.user.id;
+                const  noteId = req.query.id;
+                const noteData = await notesService.deleteNote(userId, noteId);
+
+                return res.json(noteData);
+            } catch (err) {
+                next(err);
+            }
+        }
+    //
     async getNote(req, res, next) {
         try {
 
@@ -36,6 +46,8 @@ class NotesController {
             next(err);
         }
     }
+
+
 }
 
 module.exports = new NotesController();

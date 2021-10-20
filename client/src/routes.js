@@ -9,6 +9,7 @@ import WaterPage from './pages/waterPage/WaterPage';
 import NoteEditPage from './pages/noteEditPage/NoteEditPage';
 
 export const useRoutes = (isAuth) => {
+
     if (isAuth) {
         return (
             <Switch>
@@ -18,7 +19,7 @@ export const useRoutes = (isAuth) => {
                 <Route path="/notes" exact>
                     <NotesPage/>
                 </Route>
-                {/* <Route path="/notes/:id">
+                {/* <Route path="/notes/:id" exact>
                     <NoteEditPage />
                 </Route> */}
                 <Route path="/water" exact>
