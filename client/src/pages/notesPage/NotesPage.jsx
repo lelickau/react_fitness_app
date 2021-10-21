@@ -11,48 +11,10 @@ import './notesPage.scss';
 import ButtonItem from '../../components/UI/buttons/ButtonItem';
 import { createNote, getNotes } from '../../redux/actions/notes';
 import { useDispatch, useSelector } from 'react-redux';
+import CreateNote from '../../components/createNote/CreateNote';
 
 function NotesPage() {
-    // const history = useHistory();
-    // const auth = useContext(AuthContext);
-    // const {request, loading} = useHttp();
-
-    const [task, setTask] = useState({
-        title: '',
-        marking: '',
-        status: '',
-    });
-    const dispatch = useDispatch();
     const getAllNotes = useSelector(state => state.notes.notesList);
-
-    const [activeMarking, setActiveMarking] = useState(false);
-    const [activeStatus, setActiveStatus] = useState(false);
-    const [markingValue, setMarkingValue] = useState('green');
-    const [statusValue, setStatusValue] = useState('Assigned');
-
-    const changeHandler = e => {
-        setTask({...task, [e.target.name]: e.target.value});
-    }
-
-    useEffect(() => {
-        dispatch(getNotes())
-    }, [getNotes]);
-
-
-    const showMarking = (e) => {
-        setActiveMarking(!activeMarking);
-    }
-    const showStatus = (e) => {
-        setActiveStatus(!activeStatus);
-    }
-
-    const changeMarkingValue = (e) => {
-        setMarkingValue(e.target.dataset.mark);
-    }
-    const changeStatusValue = (e) => {
-        setStatusValue(e.target.dataset.status);
-    }
-
     // if (loading) {
     //     return <Loader/>
     // }
@@ -61,85 +23,10 @@ function NotesPage() {
         <div className="notes">
             <HeaderTitle>Notes</HeaderTitle>
             <article className="notes__content container">
-                <form
-                    className="notes__form"
-                    onSubmit={e => e.preventDefault()}
-                >
-                    <label className="notes__label-task">Task descpiption
-                    <InputItem
-                        placeholder="Feed the dog"
-                        type="text"
-                        name='title'
-                        value={task.title}
-                        onChange={changeHandler}
-                    />
-                    </label>
-                    <div className="notes__mark">
-                        <input
-                            type="hidden"
-                            name="marking"
-                            value={task.marking = markingValue}
-                            onChange={changeHandler}
-                        ></input>
-                        <div
-                            className="notes__head-mark"
-                            onClick={showMarking}
-                            >Choose a marking &#9660;</div>
-                        <ul className={`notes__mark-list ${activeMarking ? '' : 'hidden'} `}>
-                            <li
-                            onClick={changeMarkingValue}
-                            className="notes__item-mark notes__item-red"
-                            data-mark="red"
-                            ></li>
-                            <li
-                            className="notes__item-mark notes__item-blue"
-                            data-mark="blue"
-                            onClick={changeMarkingValue}
-                            ></li>
-                            <li
-                            className="notes__item-mark notes__item-green"
-                            data-mark="green"
-                            onClick={changeMarkingValue}
-                            ></li>
-                        </ul>
-                    </div>
-                    <div className="notes__status">
-                        <input
-                            type="hidden"
-                            name="status"
-                            value={task.status = statusValue}
-                            onChange={changeHandler}
-                        ></input>
-                        <div className="notes__head-status" onClick={showStatus}>Choose a status &#9660;</div>
-                        <ul className={`notes__status-list ${activeStatus ? '' : 'hidden'} `}>
-                            <li
-                            onClick={changeStatusValue}
-                            className="notes__item-status"
-                            data-status="Assigned"
-                            >Assigned</li>
-                            <li
-                            className="notes__item-status"
-                            data-status="Completed"
-                            onClick={changeStatusValue}
-                            >Completed</li>
-                            <li
-                            className="notes__item-status"
-                            data-status="Closed"
-                            onClick={changeStatusValue}
-                            >Closed</li>
-                            <li
-                            className="notes__item-status"
-                            data-status="Assigned"
-                            onClick={changeStatusValue}
-                            >Assigned</li>
-                        </ul>
-                    </div>
+                <div className="notes__create-box hidden">
+                    <CreateNote/>
+                </div>
 
-
-                    <ButtonItem
-                        onClick={() => createNote(task)}
-                    >Add</ButtonItem>
-                </form>
                 <Notes tasks={getAllNotes} />
             </article>
         </div>

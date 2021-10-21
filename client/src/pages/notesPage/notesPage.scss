@@ -1,43 +1,24 @@
 @import '../../styles//variables.scss';
 
 .notes {
-    &__form {
-        display: flex;
-    }
 
     &__content {
         margin-top: 50px;
         margin-left: 50px;
     }
 
-    &__mark-list {
+    &__create-box {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         display: flex;
-        padding: 10px;
-    }
-
-    &__item-mark {
-        width: 40px;
-        height: 30px;
-        cursor: pointer;
-        border: 3px solid rgb(255, 255, 255);
-    }
-
-    &__item-status {
-        cursor: pointer;
-    }
-
-    &__item-red {
-        background-color: rgb(245, 73, 139);
-    }
-    &__item-blue {
-        background-color: rgb(74, 91, 241);
-    }
-    &__item-green {
-        background-color: rgb(97, 236, 69);
-    }
-
-    &__head-mark {
-        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(43, 42, 42, 0.281);
+        width: 100%;
+        height: 100%;
     }
 
     .hidden {
