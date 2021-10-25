@@ -20,6 +20,6 @@ router.get('/auth/refresh', authController.refresh);
 router.post('/notes/create', authMiddleware, notesController.createNote);
 router.delete('/notes/delete', authMiddleware, notesController.deleteNote);
 router.get('/notes/getall', authMiddleware, notesController.getAllNotes);
-router.get('/notes/:id', authMiddleware, notesController.getNote);
+router.put('/notes/edit/:id', authMiddleware, notesController.editNote);
 
 module.exports = router;

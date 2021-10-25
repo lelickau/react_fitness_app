@@ -6,12 +6,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgb(255,255,255);
+    background: $link-color;
     background: linear-gradient(to right, $main-bg 50%, #D5E3F4 50%);
 
     &__form-box {
         padding-bottom: 15px;
-        background-color: #fff;
+        background-color: $link-color;
     }
 
     &__title {
@@ -36,7 +36,7 @@
         justify-content: center;
         width: 148px;
         height: 40px;
-        background: #FFFFFF;
+        background: $link-color;
         box-shadow: 1px 3px 4px rgba(172, 172, 172, 0.25);
         border-radius: 50px 0px 0px 50px;
         font-weight: 700;
@@ -86,7 +86,7 @@
         right: -35px;
         width: 70px;
         height: 70px;
-        color: #fff;
+        color: $link-color;
         background: linear-gradient(90deg, #79F0F8 0%, #7BACDF 100%);
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
         border-radius: 50%;
@@ -103,7 +103,7 @@
         position: absolute;
         width: 30px;
         height: 3px;
-        background-color: #fff;
+        background-color: $link-color;
         border-radius: 30px;
         top: 50%;
         transform: translateY(-50%);
@@ -117,7 +117,7 @@
         width: 15px;
         height: 3px;
         border-radius: 30px;
-        background-color: #fff;
+        background-color: $link-color;
         right: -2px;
     }
 

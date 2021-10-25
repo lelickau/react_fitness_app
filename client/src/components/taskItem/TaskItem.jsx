@@ -1,21 +1,30 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteFile } from '../../redux/actions/notes';
+import { deleteFile, editNote } from '../../redux/actions/notes';
 
 import settingsIco from '../../resources/icons/settTask.svg';
+
+import {useHistory} from 'react-router-dom'
 import './taskItem.scss';
 
 function TaskItem({task, index}) {
     const dispatch = useDispatch();
+    const history = useHistory()
 
-    function deleteClickHandler(e) {
+    const deleteClickHandler = (e) => {
         e.stopPropagation();
         dispatch(deleteFile(task));
+    }
+    const editClickHandler = (e) => {
+        e.stopPropagation();
+        //console.log(task);
+        dispatch(editNote(task));
+        history.push(`/notes/edit/${task._id}`)
     }
 
     const [activeStatus, setActiveStatus] = useState(false);
     const showBtns = (e) => {
-            setActiveStatus(!activeStatus);
+        setActiveStatus(!activeStatus);
     }
 
     return (
@@ -25,7 +34,7 @@ function TaskItem({task, index}) {
                     {index+1}
                 </div>
                 <div className="task__item-name">{task.title}</div>
-                <div className={`task__item-mark ${task.marking}`}></div>
+                <div className='task__item-mark' style={{background: task.marking}}></div>
                 <div className="task__item-status">{task.status}</div>
             </div>
             <div className="task__item-settings">
@@ -37,11 +46,11 @@ function TaskItem({task, index}) {
                         </div>
                         <ul className={`settings__status-list ${activeStatus ? '' : 'hidden'} `}>
                             <li
-                            onClick={(e) => deleteClickHandler(e)}
+                            onClick={deleteClickHandler}
                             className="settings__item-status"
                             >Delete</li>
                             <li
-                            // onClick={(e) => editClickHandler(e)}
+                            onClick={editClickHandler}
                             className="settings__item-status"
                             >Edit</li>
                         </ul>

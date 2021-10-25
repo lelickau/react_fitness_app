@@ -1,12 +1,12 @@
 import React from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
+import EditNote from './components/editNote/EditNote';
 import AuthPage from './pages/authPage/AuthPage';
 import FoodPage from './pages/foodPage/FoodPage';
 import HomePage from './pages/homePage/HomePage';
 import NotesPage from './pages/notesPage/NotesPage';
 import ScalePage from './pages/scalePage/ScalePage';
 import WaterPage from './pages/waterPage/WaterPage';
-import NoteEditPage from './pages/noteEditPage/NoteEditPage';
 
 export const useRoutes = (isAuth) => {
 
@@ -19,9 +19,9 @@ export const useRoutes = (isAuth) => {
                 <Route path="/notes" exact>
                     <NotesPage/>
                 </Route>
-                {/* <Route path="/notes/:id" exact>
-                    <NoteEditPage />
-                </Route> */}
+                <Route path="/notes/edit/:id" exact>
+                    <EditNote/>
+                </Route>
                 <Route path="/water" exact>
                     <WaterPage/>
                 </Route>

@@ -1,6 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
-import { AuthContext } from '../../context/AuthContext';
-import { useHttp } from '../../hooks/http.hook';
+import React, {useState} from 'react';
 import { registration, login } from '../../redux/actions/user';
 import {useDispatch} from 'react-redux';
 

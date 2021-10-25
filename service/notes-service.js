@@ -39,8 +39,13 @@ class NotesService {
 
     //
 
-    async getNote() {
+    async editNote(noteId, noteEditData) {
+        const note = await Note.findByIdAndUpdate({_id: noteId}, noteEditData);
 
+        if (!note) {
+            throw ApiError.BadRequest('Error trying to delete. File not found.');
+        }
+        await note.save();
     }
 }
 

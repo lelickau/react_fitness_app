@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getNotesAC, deleteNoteAC } from "../reducers/notesReducer";
+import { getNotesAC, deleteNoteAC, changeHiddenAC, editNoteAC } from "../reducers/notesReducer";
 
 const API_URL = `/api/notes/`;
 
@@ -39,3 +39,26 @@ export const deleteFile = (task) => {
         }
     }
 }
+
+export const changeHidden = (val) => {
+    return dispatch => {
+        dispatch(changeHiddenAC(val));
+    }
+}
+
+export const editNote = (task) => {
+    return dispatch => {
+        dispatch(editNoteAC(task));
+    }
+}
+
+export const updateEditNote = async ({title, marking, status}, id) => {
+    try {
+        const response = await axios.put(`${API_URL}edit/${id}`, {title, marking, status}, {
+            headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
+        });
+    } catch (err) {
+        console.log(err.response.data.message);
+    }
+}
+

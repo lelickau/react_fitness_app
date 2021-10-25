@@ -1,10 +1,11 @@
+@import '../../../styles//variables.scss';
 .main-input {
 
     width: 250px;
     display: block;
     border: none;
     border-radius: 50px;
-    background-color: #fff;
+    background-color: $link-color;
     border-bottom: 1px solid #E1E1E1;
     height: 40px;
     padding: 0 27px;

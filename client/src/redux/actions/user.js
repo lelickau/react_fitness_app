@@ -50,7 +50,7 @@ export const authentication = () => {
     return async dispatch => {
         try {
             const response = await axios.get(`${API_URL}refresh`, {withCredentials: true});
-            console.log(response)
+            // console.log(response)
             dispatch(setUserAC(response.data.user))
             localStorage.setItem('token', response.data.accessToken);
         } catch (e) {

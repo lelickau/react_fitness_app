@@ -1,28 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import Loader from '../../components/loader/Loader';
-import InputItem from '../../components/UI/inputs/InputItem';
+import InputItem from '../UI/inputs/InputItem';
 
-import './createNote.scss';
-import ButtonItem from '../../components/UI/buttons/ButtonItem';
-import { changeHidden, createNote } from '../../redux/actions/notes';
-import { useDispatch } from 'react-redux';
+import './editNote.scss';
+import ButtonItem from '../UI/buttons/ButtonItem';
+import { changeHidden, updateEditNote } from '../../redux/actions/notes';
+import { useDispatch, useSelector } from 'react-redux';
+import HeaderTitle from '../headerTitle/HeaderTitle';
+import { useHistory } from 'react-router';
 
+function EditNote() {
+    const taskEdit = useSelector(state => state.notes.editNote[0])
 
-
-function CreateNote(props) {
     const dispatch = useDispatch();
+    const history = useHistory();
+
+    useEffect(() => {
+        if (!taskEdit) {
+            history.push(`/notes`);
+        }
+    }, [taskEdit, history]);
+
+    const [task, setTask] = useState({
+        title: taskEdit ? taskEdit.title : "",
+            marking: taskEdit ? taskEdit.marking : "",
+            status: taskEdit ? taskEdit.status : "",
+    });
 
     const cancelCreateNote = (e) => {
         e.preventDefault();
         dispatch(changeHidden(true));
     }
-
-    const [task, setTask] = useState({
-        title: '',
-        marking: '',
-        status: '',
-    });
-
 
     const [activeMarking, setActiveMarking] = useState(3);
     const [activeStatus, setActiveStatus] = useState(3);
@@ -36,6 +44,7 @@ function CreateNote(props) {
         setActiveMarking(idx);
         changeMarkingValue(val);
     }
+
     const changeMarkingValue = (value) => {
         setMarkingValue(value);
     }
@@ -57,31 +66,28 @@ function CreateNote(props) {
         turquoise: {background: `#79F8E1`},
     };
 
-    const createAndAddNote = (e) => {
-        createNote(task);
-        dispatch(changeHidden(true));
-    }
-
     return (
-    <div className="note">
-        <form
-            className="note__form"
+    <div className="edit ">
+    <HeaderTitle>Edit</HeaderTitle>
+    <article className="edit__content container">
+            <form
+            className="edit__form"
             onSubmit={e => e.preventDefault()}
         >
-        <div className="note__btns">
+        <div className="edit__btns">
             <button
-                    className="note__cancel-btn"
+                    className="edit__cancel-btn"
                     onClick={cancelCreateNote}
             >Cancel</button>
             <ButtonItem
-                    onClick={createAndAddNote}
-            >Add</ButtonItem>
+                    onClick={() => updateEditNote(task, taskEdit._id)}
+            >Update</ButtonItem>
         </div>
 
 
-            <label className="note__label-task">Title
+            <label className="edit__label-task">Title
             <InputItem
-                className="note__input-title"
+                className="edit__input-title"
                 placeholder="add a title ..."
                 type="text"
                 name='title'
@@ -89,10 +95,10 @@ function CreateNote(props) {
                 onChange={changeHandler}
             />
             </label>
-            <div className="note__items-box">
-            <label className="note__label-task" >Description
+            <div className="edit__items-box">
+            <label className="edit__label-task" >Description
             <textarea
-                className="note__description"
+                className="edit__description"
                 name="description"
                 placeholder="add a description ..."
                 // value={task.description}
@@ -100,7 +106,7 @@ function CreateNote(props) {
             ></textarea></label>
 
 
-                <div className="note__mark">
+                <div className="edit__mark">
                     <input
                         type="hidden"
                         name="marking"
@@ -108,85 +114,87 @@ function CreateNote(props) {
                         onChange={changeHandler}
                     ></input>
                     <div
-                        className="note__label-task"
+                        className="edit__label-task"
                         >Marking</div>
-                    <ul className='note__mark-list'>
+                    <ul className='edit__mark-list'>
                             <li
                             onClick={(e) => showMarking(1, e.target.dataset.mark)}
-                            className={`note__item-mark ${activeMarking === 1 ? 'note__item--active' : ""}`}
+                            className={`edit__item-mark ${activeMarking === 1 ? 'edit__item--active' : ""}`}
                             data-mark="#FF7272"
                             style={markStyle.red}
                             ></li>
                             <li
-                            className={`note__item-mark ${activeMarking === 2 ? 'note__item--active' : ""}`}
+                            className={`edit__item-mark ${activeMarking === 2 ? 'edit__item--active' : ""}`}
                             data-mark="#2B76BB"
                             style={markStyle.blue}
                             onClick={(e) => showMarking(2, e.target.dataset.mark)}
                             ></li>
                             <li
-                            className={`note__item-mark ${activeMarking === 3 ? 'note__item--active' : ""}`}
+                            className={`edit__item-mark ${activeMarking === 3 ? 'edit__item--active' : ""}`}
                             data-mark="#57AE49"
                             style={markStyle.green}
                             onClick={(e) => showMarking(3, e.target.dataset.mark)}
                             ></li>
                             <li
-                            className={`note__item-mark ${activeMarking === 4 ? 'note__item--active' : ""}`}
+                            className={`edit__item-mark ${activeMarking === 4 ? 'edit__item--active' : ""}`}
                             onClick={(e) => showMarking(4, e.target.dataset.mark)}
                             data-mark="#FBF458"
                             style={markStyle.yellow}
                             ></li>
                             <li
-                            className={`note__item-mark ${activeMarking === 5 ? 'note__item--active' : ""}`}
+                            className={`edit__item-mark ${activeMarking === 5 ? 'edit__item--active' : ""}`}
                             data-mark="#CC79DA"
                             style={markStyle.violet}
                             onClick={(e) => showMarking(5, e.target.dataset.mark)}
                             ></li>
                             <li
-                            className={`note__item-mark ${activeMarking === 6 ? 'note__item--active' : ""}`}
+                            className={`edit__item-mark ${activeMarking === 6 ? 'edit__item--active' : ""}`}
                             data-mark="#79F8E1"
                             style={markStyle.turquoise}
                             onClick={(e) => showMarking(6, e.target.dataset.mark)}
                             ></li>
                             <li
-                            className="note__item-mark-own"
+                            className="edit__item-mark-own"
                             > <input type="color" onChange={(e) => showMarking(null, e.target.value)} /><span>Choose your own</span> </li>
                     </ul>
 
                 </div>
             </div>
 
-                <div className="note__status">
+                <div className="edit__status">
                     <input
                         type="hidden"
                         name="status"
                         value={task.status = statusValue}
                         onChange={changeHandler}
                     ></input>
-                    <div className="note__label-task" onClick={showStatus}>Status</div>
-                    <ul className='note__status-list'>
+                    <div className="edit__label-task" onClick={showStatus}>Status</div>
+                    <ul className='edit__status-list'>
                             <li
-                            className={`note__item-status ${activeStatus === 1 ? 'note__item--active' : ""}`}
+                            className={`edit__item-status ${activeStatus === 1 ? 'edit__item--active' : ""}`}
                             data-status="Completed"
                             onClick={(e) => showStatus(1, e.target.dataset.status)}
                             >Completed</li>
                             <li
-                            className={`note__item-status ${activeStatus === 2 ? 'note__item--active' : ""}`}
+                            className={`edit__item-status ${activeStatus === 2 ? 'edit__item--active' : ""}`}
                             data-status="Closed"
                             onClick={(e) => showStatus(2, e.target.dataset.status)}
                             >Closed</li>
                             <li
-                            className={`note__item-status ${activeStatus === 3 ? 'note__item--active' : ""}`}
+                            className={`edit__item-status ${activeStatus === 3 ? 'edit__item--active' : ""}`}
                             data-status="Assigned"
                             onClick={(e) => showStatus(3, e.target.dataset.status)}
                             >Assigned</li>
                             <li
-                            className="note__item-status-own"
-                            > <input className="note__input-status-own" placeholder="choose your own ..." type="text" onChange={(e) => showStatus(null, e.target.value)} /></li>
+                            className="edit__item-status-own"
+                            > <input className="edit__input-status-own" placeholder="choose your own ..." type="text" onChange={(e) => showStatus(null, e.target.value)} /></li>
                     </ul>
                 </div>
             </form>
+        </article>
+
         </div>
     );
 }
 
-export default CreateNote;
+export default EditNote;

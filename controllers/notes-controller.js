@@ -1,7 +1,4 @@
-const {Router} = require('express');
 const notesService = require('../service/notes-service');
-
-
 class NotesController {
     async createNote(req, res, next) {
         try {
@@ -39,9 +36,13 @@ class NotesController {
             }
         }
     //
-    async getNote(req, res, next) {
+    async editNote(req, res, next) {
         try {
-
+            const noteId = req.params.id;
+            const noteEditData = req.body;
+            const noteData = await notesService.editNote(noteId, noteEditData);
+            
+            return res.json(noteData);
         } catch (err) {
             next(err);
         }

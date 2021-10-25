@@ -6,8 +6,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgb(255,255,255);
-    background: linear-gradient(to right, $main-bg 50%, #D5E3F4 50%);
+    background: $sidebar-bg;
 
     &__box {
         position: relative;

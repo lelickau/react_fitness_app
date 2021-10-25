@@ -8,12 +8,12 @@
     display: flex;
     align-items: center;
     height: 58px;
-    margin-left: 100px;
-    background-color: #E9EBFF;
+    margin-left: 184px;
+    background-color: $head-bg;
 
     &__title {
         margin-left: 64px;
-        color: $title;
+        color: $link-color;
         font-size: 22px;
         line-height: 26px;
         font-weight: 700;
