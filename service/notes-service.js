@@ -4,14 +4,15 @@ const Note = require('../models/Note');
 
 class NotesService {
 
-    async createNote(title, marking, status, userId) {
+    async createNote(title, description, marking, status, userId) {
 
         if (!title || !marking || !status || !userId) {
-            throw ApiError.BadRequest('Fill in all fields');
+            throw ApiError.BadRequest('Fill in the field');
         }
 
         const note = await new Note({
             title,
+            description,
             marking,
             status,
             owner: userId,
@@ -19,6 +20,8 @@ class NotesService {
             important: false,
         });
         await note.save();
+
+        return note;
     }
 
     async getAllNotes(userId) {
@@ -46,18 +49,8 @@ class NotesService {
             throw ApiError.BadRequest('Error trying to delete. File not found.');
         }
         await note.save();
+        return note;
     }
 }
 
 module.exports = new NotesService();
-
-
-// router.get('/:id', auth, async (req, res) => {
-//     try {
-//         const note = await Note.findById(req.params.id);
-//         res.json(note);
-
-//     } catch (e) {
-//         res.status(500).json({message: 'Something went wrong. Try again.'});
-//     }
-// });

@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     dispatch(initializeApp())
-  }, [initializeApp]);
+  }, [dispatch]);
 
   // const {token, login, logout, userId, ready} = useAuth();
   // const isAauthenticated = !!token;

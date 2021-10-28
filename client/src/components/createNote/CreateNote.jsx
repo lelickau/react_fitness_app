@@ -4,25 +4,33 @@ import InputItem from '../../components/UI/inputs/InputItem';
 
 import './createNote.scss';
 import ButtonItem from '../../components/UI/buttons/ButtonItem';
-import { changeHidden, createNote } from '../../redux/actions/notes';
-import { useDispatch } from 'react-redux';
+import { changeHidden, createNote, cleanIsError } from '../../redux/actions/notes';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
-function CreateNote(props) {
+function CreateNote() {
     const dispatch = useDispatch();
-
-    const cancelCreateNote = (e) => {
-        e.preventDefault();
-        dispatch(changeHidden(true));
-    }
+    const error = useSelector(state => state.notes.isError);
 
     const [task, setTask] = useState({
         title: '',
+        description: '',
         marking: '',
         status: '',
     });
 
+    const cancelCreateNote = (e) => {
+        e.preventDefault();
+        dispatch(changeHidden(true));
+        dispatch(cleanIsError(null));
+        setTask({
+            title: '',
+            description: '',
+            marking: '',
+            status: '',
+        })
+    }
 
     const [activeMarking, setActiveMarking] = useState(3);
     const [activeStatus, setActiveStatus] = useState(3);
@@ -30,7 +38,8 @@ function CreateNote(props) {
     const [statusValue, setStatusValue] = useState('Assigned');
 
     const changeHandler = e => {
-        setTask({...task, [e.target.name]: e.target.value});
+        dispatch(cleanIsError(null));
+        setTask({...task, [e.target.name]: e.target.value.trim()});
     }
     const showMarking = (idx, val) => {
         setActiveMarking(idx);
@@ -57,9 +66,12 @@ function CreateNote(props) {
         turquoise: {background: `#79F8E1`},
     };
 
-    const createAndAddNote = (e) => {
-        createNote(task);
-        dispatch(changeHidden(true));
+    const createAndAddNote = async (e) => {
+        e.preventDefault();
+        const promise = await dispatch(createNote(task));
+        if (promise && !error) {
+            dispatch(changeHidden(true));
+        }
     }
 
     return (
@@ -77,11 +89,9 @@ function CreateNote(props) {
                     onClick={createAndAddNote}
             >Add</ButtonItem>
         </div>
-
-
-            <label className="note__label-task">Title
+            <label className="note__label-task">Title {!error ? '' : `(${error})`}
             <InputItem
-                className="note__input-title"
+                className={`note__input-title ${!error ? '' : `note__label-title--error`}`}
                 placeholder="add a title ..."
                 type="text"
                 name='title'
@@ -95,8 +105,8 @@ function CreateNote(props) {
                 className="note__description"
                 name="description"
                 placeholder="add a description ..."
-                // value={task.description}
-                // onChange={changeHandler}
+                value={task.description}
+                onChange={changeHandler}
             ></textarea></label>
 
 
@@ -149,7 +159,7 @@ function CreateNote(props) {
                             ></li>
                             <li
                             className="note__item-mark-own"
-                            > <input type="color" onChange={(e) => showMarking(null, e.target.value)} /><span>Choose your own</span> </li>
+                            > <input className={activeMarking === 7 ? 'note__item--active' : ""} type="color" onChange={(e) => showMarking(7, e.target.value)} /><span>Choose your own</span> </li>
                     </ul>
 
                 </div>

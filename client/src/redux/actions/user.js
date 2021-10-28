@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setUserAC, logoutAC, setLoading } from "../reducers/userReducer";
+import { setUserAC, logoutAC } from "../reducers/userReducer";
 
 const API_URL = `/api/auth/`;
 
@@ -8,7 +8,7 @@ export const registration = async ({email, password}) => {
         const response = await axios.post(`${API_URL}registration`, {
             email, password
         });
-        // console.log(response.data.message);
+        console.log(response.data.message);
     } catch (err) {
         console.log(err.response.data.message);
     }
@@ -21,7 +21,7 @@ export const login = ({email, password}) => {
                 email,
                 password
             });
-            console.log(response.data.user)
+            console.log(response)
             dispatch(setUserAC(response.data.user))
             localStorage.setItem('token', response.data.accessToken);
 

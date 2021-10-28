@@ -2,10 +2,10 @@ const notesService = require('../service/notes-service');
 class NotesController {
     async createNote(req, res, next) {
         try {
-            const {title, marking, status} = req.body;
+            const {title, description, marking, status} = req.body;
             const {id} = req.user;
 
-            const noteData = await notesService.createNote(title, marking, status, id);
+            const noteData = await notesService.createNote(title, description, marking, status, id);
             return res.json(noteData);
 
         } catch (err) {
@@ -41,14 +41,12 @@ class NotesController {
             const noteId = req.params.id;
             const noteEditData = req.body;
             const noteData = await notesService.editNote(noteId, noteEditData);
-            
+
             return res.json(noteData);
         } catch (err) {
             next(err);
         }
     }
-
-
 }
 
 module.exports = new NotesController();

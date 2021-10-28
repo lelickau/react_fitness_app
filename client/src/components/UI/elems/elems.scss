@@ -1,0 +1,17 @@
+@import '../../../styles//variables.scss';
+
+.plus-ico {
+    width: 53px;
+    height: 53px;
+    background-color: $sidebar-bg;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    
+    &__img {
+        width: 33px;
+        height: 33px;
+    }
+}

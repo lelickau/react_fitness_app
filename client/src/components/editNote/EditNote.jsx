@@ -23,13 +23,14 @@ function EditNote() {
 
     const [task, setTask] = useState({
         title: taskEdit ? taskEdit.title : "",
-            marking: taskEdit ? taskEdit.marking : "",
-            status: taskEdit ? taskEdit.status : "",
+        description: taskEdit ? taskEdit.description : "",
+        marking: taskEdit ? taskEdit.marking : "",
+        status: taskEdit ? taskEdit.status : "",
     });
 
     const cancelCreateNote = (e) => {
         e.preventDefault();
-        dispatch(changeHidden(true));
+        history.push(`/notes`);
     }
 
     const [activeMarking, setActiveMarking] = useState(3);
@@ -84,7 +85,6 @@ function EditNote() {
             >Update</ButtonItem>
         </div>
 
-
             <label className="edit__label-task">Title
             <InputItem
                 className="edit__input-title"
@@ -101,8 +101,8 @@ function EditNote() {
                 className="edit__description"
                 name="description"
                 placeholder="add a description ..."
-                // value={task.description}
-                // onChange={changeHandler}
+                value={task.description}
+                onChange={changeHandler}
             ></textarea></label>
 
 
@@ -187,7 +187,7 @@ function EditNote() {
                             >Assigned</li>
                             <li
                             className="edit__item-status-own"
-                            > <input className="edit__input-status-own" placeholder="choose your own ..." type="text" onChange={(e) => showStatus(null, e.target.value)} /></li>
+                            > <input className="edit__input-status-own" value={task.status} placeholder="choose your own ..." type="text" onChange={(e) => showStatus(null, e.target.value)} /></li>
                     </ul>
                 </div>
             </form>

@@ -6,6 +6,7 @@ import settingsIco from '../../resources/icons/settTask.svg';
 
 import {useHistory} from 'react-router-dom'
 import './taskItem.scss';
+import ButtonItem from '../UI/buttons/ButtonItem';
 
 function TaskItem({task, index}) {
     const dispatch = useDispatch();
@@ -27,34 +28,41 @@ function TaskItem({task, index}) {
         setActiveStatus(!activeStatus);
     }
 
+    const dateNote = task.date.split('T');
+    const dateCreateNote = dateNote[0].split('-').reverse().join('.');
+
+
     return (
         <div className="task">
-            <div className="task__items">
-                <div className="task__item-number">
-                    {index+1}
-                </div>
-                <div className="task__item-name">{task.title}</div>
                 <div className='task__item-mark' style={{background: task.marking}}></div>
-                <div className="task__item-status">{task.status}</div>
-            </div>
-            <div className="task__item-settings">
-            {/* link */}
+            <div className="task__items">
+                <div className="task__item-box">
+                <div className="task__item-number">{index+1}</div>
+                    <div className="task__items-text">
+                        <div className="task__item-name">{dateCreateNote}</div>
+                        <div className="task__item-name">{task.title}</div>
+                        <div className="task__item-description">{task.description}</div>
+                        <div className="task__item-status">{task.status}</div>
+                    </div>
+                    <div className="task__item-settings">
 
+            </div>
+                </div>
                 <div className="settings">
                         <div className={`settings__head-status ${!activeStatus ? '' : 'hidden'}`} onClick={showBtns}>
                             <img className="settings__ico" src={settingsIco} alt="Settings" />
                         </div>
                         <ul className={`settings__status-list ${activeStatus ? '' : 'hidden'} `}>
-                            <li
+                            <ButtonItem
                             onClick={deleteClickHandler}
-                            className="settings__item-status"
-                            >Delete</li>
-                            <li
+                            className="settings__btn settings__btn-del"
+                            >Delete</ButtonItem>
+                            <ButtonItem
                             onClick={editClickHandler}
-                            className="settings__item-status"
-                            >Edit</li>
+                            className="settings__btn settings__btn-edit"
+                            >Edit</ButtonItem>
                         </ul>
-                    </div>
+                </div>
             </div>
         </div>
     );

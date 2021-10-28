@@ -34,10 +34,7 @@
 
     &__label-task {
         display: block;
-        font-weight: 700;
-        font-size: 22px;
-        line-height: 26px;
-        color: $text;
+        @extend %title-font;
         margin-bottom: 36px;
     }
 
@@ -54,14 +51,11 @@
     }
 
     &__input-title {
-        width: 100%;
-        display: block;
-        margin-top: 15px;
-        height: 51px;
-        border: none;
-        padding: 0 23px;
-        background: #EDEDED;
-        border-radius: 9px;
+        @extend %iput-item;
+    }
+
+    &__label-title--error {
+        background: #ffdbdb;
     }
 
     &__mark-list {
@@ -84,7 +78,6 @@
 
     &__item-mark-own {
         margin-top: 15px;
-        border: 5px solid $text;
         padding: 0px;
         line-height: 0px;
         border-radius: 50px;
@@ -104,7 +97,6 @@
         background: $link-color;
         width: 40px;
         height: 40px;
-        border-radius: 50%;
         overflow: hidden;
         outline: none;
         cursor: pointer;
@@ -117,20 +109,17 @@
 
     input[type="color"]::-webkit-color-swatch {
     border: 1px solid  $text;
-    border-radius: 50%;
     }
 
     /* firefox */
     input[type=color]::-moz-focus-inner {
         border: 1px solid  $text;
     padding: 0;
-    border-radius: 50%;
     }
 
     input[type=color]::-moz-color-swatch {
         border: 1px solid  $text;
-    border-radius: 50%;
-    height: 140px;
+        height: 140px;
     }
 
     &__item--active {
@@ -142,8 +131,8 @@
         display: inline-block;
         cursor: pointer;
         padding: 14px 33px;
-        background-color: rgb(155, 199, 235);
-        color:#8A8A8A;
+        background-color: #bdf3b2;
+        color:$text;
         margin-right: 21px;
     }
 

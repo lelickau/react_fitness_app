@@ -1,5 +1,7 @@
 import React from 'react';
+import FoodItem from '../../components/foodItem/FoodItem';
 import HeaderTitle from '../../components/headerTitle/HeaderTitle';
+import SearchFood from '../../components/searchFood/SearchFood';
 
 
 function FoodPage(props) {
@@ -7,7 +9,8 @@ function FoodPage(props) {
         <div className="food">
             <HeaderTitle>Food</HeaderTitle>
             <article className="food__content container">
-                FoodPage
+                <SearchFood/>
+                <FoodItem/>
             </article>
         </div>
     );

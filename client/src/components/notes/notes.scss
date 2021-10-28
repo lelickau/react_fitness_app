@@ -4,16 +4,13 @@
 
     &__title {
         margin-top: 39px;
-        color: $title;
-        font-size: 700px;
-        font-size: 18px;
-        line-height: 21px;
+        @extend %title-font;
         margin-bottom: 46px;
     }
 
     &__box-items{
         padding: 10px;
-        height: 50vh;
+        height: 65vh;
         overflow-y: scroll;
     }
 

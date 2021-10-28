@@ -3,7 +3,7 @@
 .edit {
 
     &__form {
-        
+
         width: 910px;
         min-height: 607px;
         background: $link-color;
@@ -34,10 +34,7 @@
 
     &__label-task {
         display: block;
-        font-weight: 700;
-        font-size: 22px;
-        line-height: 26px;
-        color: $text;
+        @extend %title-font;
         margin-bottom: 36px;
     }
 
