@@ -33,7 +33,7 @@ function NotesPage() {
                 </div>
                 <ButtonItem className="notes__btn" onClick={showCreateNote}>
                     <div className="notes__btn-create">
-                        <PlusElem src={plusIco}/>
+                        <PlusElem alt="Add" src={plusIco}/>
                     </div>
                     <span className="notes__btn-text">Add a task</span>
                 </ButtonItem>

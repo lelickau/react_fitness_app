@@ -4,15 +4,14 @@ import InputItem from '../UI/inputs/InputItem';
 
 import './editNote.scss';
 import ButtonItem from '../UI/buttons/ButtonItem';
-import { changeHidden, updateEditNote } from '../../redux/actions/notes';
-import { useDispatch, useSelector } from 'react-redux';
+import { updateEditNote } from '../../redux/actions/notes';
+import { useSelector } from 'react-redux';
 import HeaderTitle from '../headerTitle/HeaderTitle';
 import { useHistory } from 'react-router';
 
 function EditNote() {
     const taskEdit = useSelector(state => state.notes.editNote[0])
 
-    const dispatch = useDispatch();
     const history = useHistory();
 
     useEffect(() => {

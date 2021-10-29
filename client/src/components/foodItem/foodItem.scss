@@ -3,7 +3,6 @@
 .food-item {
     margin-top: 44px;
     width: 343px;
-    height: 180px;
     padding: 30px 32px 19px;
     background-color: #FFFFFF;
     box-shadow: 0px 4px 21px rgba(51, 51, 51, 0.25);
@@ -26,27 +25,5 @@
 
     &__nutrients {
         display: flex;
-    }
-
-    &__nutrient {
-        display: flex;
-        padding-right: 30px;
-        align-items: center;
-        margin-bottom: 11px;
-    }
-
-    &__nutrient-title,
-    &__nutrient-text {
-        font-size: 16px;
-        line-height: 19px;
-        font-weight: 500;
-        margin-left: 6px;
-        color: $text;
-    }
-
-    &__color {
-        width: 10px;
-        height: 10px;
-        border-radius: 5px;
     }
 }

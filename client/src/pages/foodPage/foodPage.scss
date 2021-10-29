@@ -1,0 +1,17 @@
+@import '../../styles/variables.scss';
+
+.food {
+    &__serach,
+    &__add-create {
+        padding-right: 44px;
+    }
+    &__content  {
+        display: flex;
+    }
+
+    &__serach-items {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}

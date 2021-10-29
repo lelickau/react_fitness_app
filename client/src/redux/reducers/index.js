@@ -4,11 +4,13 @@ import thunk from 'redux-thunk';
 import notesReducer from './notesReducer';
 import userReducer from './userReducer';
 import initializeReducer from './initializeReducer';
+import foodsReducer from './foodsReducer';
 
 const rootReducer = combineReducers({
     user: userReducer,
     notes: notesReducer,
-    initializedApp: initializeReducer
+    initializedApp: initializeReducer,
+    foods: foodsReducer,
 });
 
 const composedEnhancer = composeWithDevTools(applyMiddleware(thunk));
