@@ -11,7 +11,7 @@ class UserService {
         const candidate = await User.findOne({email});
 
         if (candidate) {
-            throw ApiError.BadRequest('E-mail is already busy.');
+            throw ApiError.BadRequest('An account with this email address already exists.');
         }
 
         const hashPassword = await bcrypt.hash(password, 12);
@@ -40,12 +40,12 @@ class UserService {
     async login(email, password) {
         const user = await User.findOne({email});
         if (!user) {
-            throw ApiError.BadRequest(`The user ${email} was not found`);
+            throw ApiError.BadRequest(`We couldn't find an account with that email address.`);
         }
 
         const isPassEquals = await bcrypt.compare(password, user.password);
         if (!isPassEquals) {
-            throw ApiError.BadRequest('Email or password is not correct');
+            throw ApiError.BadRequest('Invalid email or password');
         }
         const userDto = new UserDto(user);
         const tokens = tokenService.generateTokens({...userDto});
