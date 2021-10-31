@@ -4,6 +4,7 @@ const notesController = require('../controllers/notes-controller');
 const router = new Router();
 const {body} = require('express-validator');
 const authMiddleware = require('../middleware/auth-middleware');
+const foodController = require('../controllers/food-controller');
 
 // autorization
 router.post('/auth/registration',
@@ -21,5 +22,9 @@ router.post('/notes/create', authMiddleware, notesController.createNote);
 router.delete('/notes/delete', authMiddleware, notesController.deleteNote);
 router.get('/notes/getall', authMiddleware, notesController.getAllNotes);
 router.put('/notes/edit/:id', authMiddleware, notesController.editNote);
+
+// foods
+router.post('/foods/create', authMiddleware, foodController.createFood);
+router.get('/foods/getfoods', authMiddleware, foodController.getFoods);
 
 module.exports = router;

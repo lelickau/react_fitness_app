@@ -4,8 +4,11 @@ import PlusMinusElem from '../UI/elems/PlusMinusElem';
 import './myFoodList.scss';
 import plusIco from '../../resources/icons/addTask.svg';
 import MyFoodItem from '../myFoodItem/MyFoodItem';
+import { useSelector } from 'react-redux';
 
 function MyFoodList(props) {
+    const myFavoritList = useSelector(state => state.foods.favoritList);
+
     return (
         <article className="food-list">
             <div className="food-list__title-box">
@@ -16,9 +19,10 @@ function MyFoodList(props) {
                 </button>
             </div>
             <div className="food-list__content">
-                <MyFoodItem/>
-                <MyFoodItem/>
-                <MyFoodItem/>
+            {myFavoritList.length
+            ? myFavoritList.map(food => <MyFoodItem key={food._id} myFood={food} />)
+            : <></>
+            }
             </div>
         </article>
     );

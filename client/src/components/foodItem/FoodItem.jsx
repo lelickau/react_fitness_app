@@ -1,16 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import './foodItem.scss';
 import starEmpty from '../../resources/icons/star-empty.svg';
 import starFill from '../../resources/icons/star-fill.svg';
 import NutrientItem from '../UI/elems/NutrientItem';
+import { useDispatch } from 'react-redux';
+import { addFood } from '../../redux/actions/foods';
 
 function FoodItem({foods}) {
+
+    const dispatch = useDispatch();
+
+    const addSearchFood = (e) => {
+        e.preventDefault();
+        dispatch(addFood(foods));
+    }
 
     return (
         <article className="food-item">
             <div className="food-item__title-box">
-                <img className="food-item__star" src={starEmpty} alt="Save" />
+                <button onClick={addSearchFood}>
+                    <img className="food-item__star" src={starEmpty} alt="Save" />
+                </button>
                 <h3 className="food-item__title">{foods.food.label}</h3>
             </div>
             <div className="food-item__nutrients">

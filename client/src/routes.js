@@ -25,7 +25,7 @@ export const useRoutes = (isAuth) => {
                 <Route path="/water" exact>
                     <WaterPage/>
                 </Route>
-                <Route path="/food" exact>
+                <Route path="/foods" exact>
                     <FoodPage/>
                 </Route>
                 <Route path="/scale" exact>

@@ -3,7 +3,7 @@ import InputItem from '../UI/inputs/InputItem';
 import ButtonItem from '../UI/buttons/ButtonItem';
 import PlusElem from '../UI/elems/PlusMinusElem';
 import { useDispatch } from 'react-redux';
-import {getFood} from '../../redux/actions/foods';
+import {searchFood} from '../../redux/actions/foods';
 
 import plusIco from '../../resources/icons/addTask.svg';
 import minusIco from '../../resources/icons/minus.svg';
@@ -20,7 +20,7 @@ function SearchFood() {
 
     const getFoodsItem = (e) => {
         e.preventDefault();
-        dispatch(getFood(inputValue));
+        dispatch(searchFood(inputValue));
     }
     return (
         <div className="search-food">

@@ -40,8 +40,6 @@ class NotesService {
 
     }
 
-    //
-
     async editNote(noteId, noteEditData) {
         const note = await Note.findByIdAndUpdate({_id: noteId}, noteEditData);
 

@@ -1,14 +1,21 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, {useEffect} from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import FoodItem from '../../components/foodItem/FoodItem';
 import HeaderTitle from '../../components/headerTitle/HeaderTitle';
 import MyFoodList from '../../components/myFoodList/MyFoodList';
 import SearchFood from '../../components/searchFood/SearchFood';
+import { getFoods } from '../../redux/actions/foods';
 
 import './foodPage.scss';
 
 function FoodPage() {
+    const dispatch = useDispatch()
     const allSearchedFoods = useSelector(state => state.foods.searchFoodList);
+
+    useEffect(() => {
+        dispatch(getFoods())
+    }, [dispatch]);
+
     return (
         <div className="food">
             <HeaderTitle>Food</HeaderTitle>

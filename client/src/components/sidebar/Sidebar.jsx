@@ -41,7 +41,7 @@ function Sidebar() {
                         </NavLink>
                     </li>
                     <li className="sidebar__item">
-                        <NavLink to="/food" className="sidebar__link">
+                        <NavLink to="/foods" className="sidebar__link">
                             <img className="sidebar__link-icon" alt="Food" src={foodIco} />
                             <span className="sidebar__link-title">Food</span>
                         </NavLink>
