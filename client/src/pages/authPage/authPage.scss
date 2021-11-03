@@ -165,7 +165,21 @@
         line-height: 16px;
         font-weight: 500;
         color: #FA836A;
+    }
 
+    &__pass-box {
+        position: relative;
+    }
+
+    &__show-pass {
+        cursor: pointer;
+        top: 18px;
+        right: 46px;
+        position: absolute;
+    }
+
+    &__show-pass-ico {
+        width: 20px;
     }
 
 }

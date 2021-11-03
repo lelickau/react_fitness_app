@@ -34,14 +34,26 @@
     &__marking {
         width: 22px;
         height: 22px;
+    }
+
+    &__delete-btn {
+        width: 22px;
+        height: 22px;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        cursor: pointer;
         margin-right: 13px;
     }
 
     &__title {
         @extend  %title-font;
     }
-    &__content {
+
+    &__nutrients-box {
         display: flex;
+    }
+    &__content {
         background-color: #f4f4f4;
     }
 
@@ -56,13 +68,21 @@
 
     &__content--open {
         transition: height .3s, opacity 1s;
-        height: 119px;
+        height: 150px;
         opacity: 1;
         padding: 22px 12px 8px 52px;
     }
 
     &__nutrients-item {
         margin-right: 10px;
+    }
+
+    &__weight {
+        text-align: right;
+        font-size: 13px;
+        line-height: 16px;
+        font-weight: 500;
+        color: $text;
     }
 
 }

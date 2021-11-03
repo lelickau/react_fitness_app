@@ -54,7 +54,6 @@ input::-webkit-inner-spin-button {
 .app {
     position: relative;
     max-width: 1600px;
-    margin: 0 auto;
     min-height: 100vh;
     background-color: $main-bg;
 }
@@ -62,4 +61,28 @@ input::-webkit-inner-spin-button {
 .container {
     padding-top: 106px;
     padding-left: 234px;
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 1620px) {
+    .container {
+        padding-top: 70px;
+        padding-left: 195px;
+    }
+}
+
+@media (max-width: 970px) {
+    .container {
+        padding-top: 70px;
+        padding-left: 115px;
+    }
+}
+
+@media (max-width: 690px) {
+    .container {
+        padding-left: 6px;
+    }
 }

@@ -5,8 +5,7 @@ import AuthPage from './pages/authPage/AuthPage';
 import FoodPage from './pages/foodPage/FoodPage';
 import HomePage from './pages/homePage/HomePage';
 import NotesPage from './pages/notesPage/NotesPage';
-import ScalePage from './pages/scalePage/ScalePage';
-import WaterPage from './pages/waterPage/WaterPage';
+
 
 export const useRoutes = (isAuth) => {
 
@@ -22,14 +21,8 @@ export const useRoutes = (isAuth) => {
                 <Route path="/notes/edit/:id" exact>
                     <EditNote/>
                 </Route>
-                <Route path="/water" exact>
-                    <WaterPage/>
-                </Route>
                 <Route path="/foods" exact>
                     <FoodPage/>
-                </Route>
-                <Route path="/scale" exact>
-                    <ScalePage/>
                 </Route>
                 <Redirect to="/home" />
             </Switch>

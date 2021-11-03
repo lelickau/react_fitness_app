@@ -1,6 +1,4 @@
 import React from 'react';
-import scaleIco from '../../resources/icons/scale.svg';
-import waterIco from '../../resources/icons/water.svg';
 import foodIco from '../../resources/icons/food.svg';
 import notesIco from '../../resources/icons/tasks.svg';
 import logoutIco from '../../resources/icons/logout.svg';
@@ -18,26 +16,10 @@ function Sidebar() {
         <div className="sidebar">
             <nav className="sidebar__menu">
                 <ul className="sidebar__list">
-                    <li className="sidebar__item sidebar__item-profile">
+                    <li className="sidebar__item">
                         <NavLink to="/home" className="sidebar__link">
                             <img className="sidebar__link-img profile-img" alt="Scale" src={profoleImg} />
                             <span className="sidebar__link-title">Profile</span>
-                        </NavLink>
-                    </li>
-                </ul>
-            </nav>
-            <nav className="sidebar__menu">
-                <ul className="sidebar__list">
-                    <li className="sidebar__item">
-                        <NavLink to="/scale" className="sidebar__link">
-                            <img className="sidebar__link-icon" alt="Scale" src={scaleIco} />
-                            <span className="sidebar__link-title">Scale</span>
-                        </NavLink>
-                    </li>
-                    <li className="sidebar__item">
-                        <NavLink to="/water" className="sidebar__link">
-                            <img className="sidebar__link-icon" alt="Water" src={waterIco} />
-                            <span className="sidebar__link-title">Water</span>
                         </NavLink>
                     </li>
                     <li className="sidebar__item">
@@ -59,7 +41,8 @@ function Sidebar() {
                     onClick={() => dispatch(logout())}
             >
             <img className="sidebar__logout-ico" src={logoutIco} alt="logout" />
-            Log Out</ButtonItem>
+            <span className="sidebar__logout-title">Log Out</span>
+            </ButtonItem>
         </div>
     );
 }

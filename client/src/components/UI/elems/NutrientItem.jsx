@@ -2,7 +2,7 @@ import React from 'react';
 
 import './elems.scss';
 
-function NutrientItem({color, measure, value}) {
+function NutrientItem({color, measure, value, title}) {
 
     const colorNutrients = {
         'crabs': {background: '#62CF58'},
@@ -14,7 +14,7 @@ function NutrientItem({color, measure, value}) {
     return (
         <div className="nutrient">
             <div className="nutrient__color" style={colorNutrients[color]}></div>
-            <div className="nutrient__title">Crabs:</div>
+            <div className="nutrient__title">{title}:</div>
             <div className="nutrient__text"><span>{value}</span><span>{measure ? measure : 'g'}</span></div>
         </div>
     );

@@ -19,6 +19,14 @@ class FoodsService {
         const foods = await Food.find({owner: userId});
         return foods;
     }
+
+    async deleteFood(userId, foodId) {
+        const food = await Food.findOne({_id: foodId, owner: userId});
+        if (!food) {
+            throw ApiError.BadRequest('Error trying to delete. File not found.');
+        }
+        await food.remove();
+    }
 }
 
 module.exports = new FoodsService();

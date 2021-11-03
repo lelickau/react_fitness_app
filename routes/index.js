@@ -26,5 +26,6 @@ router.put('/notes/edit/:id', authMiddleware, notesController.editNote);
 // foods
 router.post('/foods/create', authMiddleware, foodController.createFood);
 router.get('/foods/getfoods', authMiddleware, foodController.getFoods);
+router.delete('/foods/delete', authMiddleware, foodController.deleteFood);
 
 module.exports = router;

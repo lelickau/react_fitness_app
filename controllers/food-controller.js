@@ -32,6 +32,20 @@ class FoodsController {
         }
     }
 
+    async deleteFood(req, res, next) {
+        try {
+            const {id} = req.user;
+            const foodId = req.query.id;
+            console.log(id, foodId);
+            const foodData = await foodsService.deleteFood(id, foodId);
+
+            return res.json(foodData);
+
+        } catch (e) {
+            next(e)
+        }
+    }
+
 }
 
 module.exports = new FoodsController();

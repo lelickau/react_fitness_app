@@ -20,3 +20,15 @@
         font-weight: 700;
     }
 }
+
+@media (max-width: 970px) {
+    .header {
+        margin-left: 100px;
+    }
+}
+
+@media (max-width: 690px) {
+    .header {
+        margin-left: 0;
+    }
+}

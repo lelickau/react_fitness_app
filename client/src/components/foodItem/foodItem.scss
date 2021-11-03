@@ -21,9 +21,33 @@
         display: block;
         width: 23px;
         height: 23px;
+        cursor: pointer;
+    }
+
+    &__star-btn {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        width: 23px;
+        height: 23px;
     }
 
     &__nutrients {
         display: flex;
+    }
+
+    &__weight {
+        text-align: right;
+        font-size: 13px;
+        line-height: 16px;
+        font-weight: 500;
+        color: $text;
+    }
+}
+
+@media (max-width: 1620px) {
+    .food-item {
+        margin-top: 20px;
     }
 }

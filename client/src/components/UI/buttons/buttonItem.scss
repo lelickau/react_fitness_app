@@ -21,3 +21,16 @@
         cursor: progress;
     }
 }
+
+@media (max-width: 890px) {
+    .main-btn {
+        width: auto;
+    }
+}
+
+@media (max-width: 592px) {
+    .main-btn {
+        padding: 5px 10px;
+        height: 39px;
+    }
+}

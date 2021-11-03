@@ -3,10 +3,13 @@ import { registration, login } from '../../redux/actions/user';
 import {useDispatch, useSelector} from 'react-redux';
 
 import './authPage.scss';
+import showPass from '../../resources/icons/show-pass.svg'
+import hidePass from '../../resources/icons/hide-pass.svg'
 
 function AuthPage() {
     const isError = useSelector(state => state.user.isError);
 
+    const [visiblePass, setVisiblePass] = useState(false);
     const [form, setForm] = useState({
         email: '', password: ''
     });
@@ -51,6 +54,10 @@ function AuthPage() {
                 setPassErr('')
             }
         }
+    }
+
+    const toggleShow = (e) => {
+        setVisiblePass(!visiblePass)
     }
 
     useEffect(() => {
@@ -103,17 +110,22 @@ function AuthPage() {
                             </label>
                             <label>
                             {(passDirty && passErr) && <span className="auth__err-valid">{passErr}</span>}
+                            <div className="auth__pass-box">
                                 <input
                                     autoComplete="current-password"
                                     placeholder="Password"
                                     id="loginPassword"
                                     className="auth__input auth__input-bottom"
-                                    type="password"
+                                    type={visiblePass ? "text" : "password"}
                                     name="password"
                                     value={form.password}
                                     onChange={changeHandler}
                                     onBlur={(e) => blurHandler(e)}
-                                ></input>
+                                />
+                                <div className="auth__show-pass" onClick={toggleShow}>
+                                    <img className="auth__show-pass-ico" src={visiblePass ? hidePass : showPass} alt="Show/Hide" />
+                                </div>
+                            </div>
                             </label>
 
                             <button
