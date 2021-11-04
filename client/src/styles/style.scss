@@ -63,10 +63,6 @@ input::-webkit-inner-spin-button {
     padding-left: 234px;
 }
 
-.hidden {
-    display: none;
-}
-
 @media (max-width: 1620px) {
     .container {
         padding-top: 70px;
@@ -78,6 +74,11 @@ input::-webkit-inner-spin-button {
     .container {
         padding-top: 70px;
         padding-left: 115px;
+    }
+}
+@media (max-width: 840px) {
+    .container {
+        padding-bottom: 100px;
     }
 }
 

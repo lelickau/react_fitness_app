@@ -21,7 +21,7 @@
     }
 }
 
-@media (max-width: 970px) {
+@media (max-width: 1500px) {
     .header {
         margin-left: 100px;
     }
@@ -30,5 +30,15 @@
 @media (max-width: 690px) {
     .header {
         margin-left: 0;
+    }
+}
+
+@media (max-width: 360px) {
+    .header {
+        height: 36px;
+        &__title {
+            font-size: 18px;
+            margin-left: 35px;
+        }
     }
 }

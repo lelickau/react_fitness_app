@@ -33,7 +33,7 @@ function FoodPage() {
     return (
         <div className="food">
             <HeaderTitle>Food</HeaderTitle>
-            <div className={widthScreen < 1501 ? "food__tab-btns" : "hidden"}>
+            <div className={widthScreen < 1001 ? "food__tab-btns" : "hidden"}>
                 <button className={!hiddenContent ? "food__tab-btn food__tab-btn--active" : "food__tab-btn"} onClick={showSearchContent}>Search</button>
                 <button className={hiddenContent ? "food__tab-btn food__tab-btn--active" : "food__tab-btn"} onClick={showFavsContent}>My Favs</button>
             </div>
@@ -48,7 +48,7 @@ function FoodPage() {
                     </div>
                 </div>
                 <div
-                    className={widthScreen < 1501 ? `food__add-create ${!hiddenContent ? 'hidden' : ''}` : "food__add-create"}>
+                    className={widthScreen < 1001 ? `food__add-create ${!hiddenContent ? 'hidden' : ''}` : "food__add-create"}>
                     <MyFoodList/>
                 </div>
             </article>

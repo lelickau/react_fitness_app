@@ -32,7 +32,7 @@ function MyFoodItem(myFood) {
                 <h3 className="my-food__title">{myFood.myFood.label}</h3>
                 <span className={`my-food__arrow ${visibility ? 'my-food__close' : 'my-food__open'}`}></span>
             </div>
-            <div className={`my-food__content ${visibility ? "my-food__content--open" : "hidden"}` }>
+            <div className={`my-food__content ${visibility ? "my-food__content--open" : "hidden-content"}` }>
                 <div className="my-food__nutrients-box">
                     <div className="my-food__nutrients-item">
                         <NutrientItem value={myFood.myFood.CHOCDF} title={'Crabs'} color={'crabs'}/>

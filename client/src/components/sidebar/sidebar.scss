@@ -7,6 +7,7 @@
     width: 184px;
     height: 100vh;
     position: fixed;
+    z-index: 200;
     left: 0;
     top: 0;
     padding-top: 83px;
@@ -73,7 +74,7 @@
     border-radius: 50%;
 }
 
-@media (max-width: 970px) {
+@media (max-width: 1500px) {
     .sidebar {
         width: 100px;
 
@@ -126,6 +127,36 @@
             width: 100%;
             height: auto;
             margin-right: 0;
+        }
+    }
+}
+
+@media (max-width: 430px) {
+    .sidebar {
+        height: 50px;
+        padding: 10px 30px;
+        .profile-img {
+            width: 30px;
+            height: 30px;
+        }
+
+        &__link,
+        &__logout {
+            width: 30px;
+        }
+
+        &__logout {
+            align-items: start;
+        }
+        &__list {
+            width: 180px;
+        }
+    }
+}
+@media (max-width: 320px) {
+    .sidebar {
+        &__list {
+            width: 140px;
         }
     }
 }

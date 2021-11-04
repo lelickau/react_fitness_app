@@ -41,9 +41,6 @@ function TaskItem({task, index}) {
 
                         </div>
                     </div>
-                    <div className="task__item-settings">
-
-            </div>
                 </div>
                 <div className="settings">
                     <ButtonItem

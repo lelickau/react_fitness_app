@@ -4,7 +4,7 @@
 
     &__create-box {
         position: fixed;
-        z-index: 99;
+        z-index: 250;
         top: 0;
         left: 0;
         right: 0;
@@ -26,7 +26,7 @@
         border-radius: 26px;
         cursor: pointer;
     }
-    
+
     &__btn-ico {
         width: 33px;
         height: 33px;
@@ -43,4 +43,34 @@
         display: none;
     }
 
+}
+
+@media (max-width: 1100px) {
+    .notes {
+        &__title {
+            margin-bottom: 15px;
+        }
+        .container {
+            padding-left: 115px;
+        }
+    }
+}
+
+@media (max-width: 690px) {
+    .notes {
+        .container {
+            padding-left: 10px;
+        }
+        &__box-items {
+            padding: 0;
+            padding-right: 10px;
+        }
+    }
+}
+@media (max-width: 590px) {
+    .notes {
+        &__btn {
+            height: 40px;
+        }
+    }
 }

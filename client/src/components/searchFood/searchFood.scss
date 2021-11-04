@@ -62,36 +62,14 @@
     }
 }
 
-@media (max-width: 890px) {
+@media (max-width: 1420px) {
     .search-food {
         width: 696px;
         padding: 30px;
     }
 }
 
-@media (max-width: 840px) {
-    .search-food {
-        margin: 0 auto;
-        width: 560px;
-        padding: 30px;
-
-        &__title {
-            width: 499px;
-        }
-    }
-}
-
-@media (max-width: 690px) {
-    .search-food {
-        width: 560px;
-        padding: 30px;
-
-        &__title {
-            width: 499px;
-        }
-    }
-}
-@media (max-width: 592px) {
+@media (max-width: 1360px) {
     .search-food {
         box-shadow: 0px 0px 4px rgba(51, 51, 51, 0.25);
         width: 420px;
@@ -119,6 +97,73 @@
             padding: 8px 5px;
             margin-left: 10px;
             margin-right: 10px;
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    .search-food {
+        width: 550px;
+        &__title {
+            width: 490px;
+        }
+    }
+
+}
+
+@media (max-width: 840px) {
+    .search-food {
+        margin: 0 auto;
+        padding: 30px;
+    }
+}
+
+@media (max-width: 570px) {
+    .search-food {
+        width: 400px;
+
+        &__title {
+            width: 340px;
+        }
+    }
+}
+@media (max-width: 430px) {
+    .search-food {
+        width: 340px;
+        padding: 20px;
+
+        &__title {
+            width: 300px;
+        }
+
+        &__weight-item {
+            font-size: 12px;
+        }
+    }
+}
+
+@media (max-width: 360px) {
+    .search-food {
+        width: 307px;
+        padding: 19px 17px;
+        &__title {
+            width: 273px;
+        }
+
+        &__weight-item {
+            padding: 5px 13px;
+        }
+    }
+}
+@media (max-width: 320px) {
+    .search-food {
+        width: 260px;
+        &__title {
+            width: 226px;
+        }
+
+        &__weight-item {
+            padding: 5px 7px;
         }
     }
 }
