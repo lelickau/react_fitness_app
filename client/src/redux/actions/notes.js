@@ -1,5 +1,6 @@
 import axios from "axios";
-import { getNotesAC, deleteNoteAC, changeHiddenAC, editNoteAC, createNoteAC, errorNoteAC, changeLoadingAC } from "../reducers/notesReducer";
+import { changeHiddenAC, errorAC } from "../reducers/globalReducer";
+import { getNotesAC, deleteNoteAC, editNoteAC, createNoteAC, errorNoteAC, changeLoadingAC, updateEditNoteAC, cleanEditNoteAC } from "../reducers/notesReducer";
 
 const API_URL = `/api/notes/`;
 
@@ -11,7 +12,7 @@ export const createNote = ({title, description, marking, status}) => {
             });
             dispatch(createNoteAC(response.data));
         } catch (err) {
-            dispatch(errorNoteAC(err.response.data.message));
+            dispatch(errorAC(err.response.data.message));
             console.log(err.response.data.message);
         }
     }
@@ -48,31 +49,32 @@ export const deleteFile = (task) => {
     }
 }
 
-export const changeHidden = (val) => {
-    return dispatch => {
-        dispatch(changeHiddenAC(val));
-    }
-}
 
-export const cleanIsError = (val) => {
-    return dispatch => {
-        dispatch(errorNoteAC(val));
+export const updateEditNote = ({title, description, marking, status}, id) => {
+    return async dispatch => {
+        try {
+            const response = await axios.put(`${API_URL}edit/${id}`, {title, description, marking, status}, {
+                headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
+            });
+            console.log(response.data)
+            dispatch(updateEditNoteAC(response.data))
+        } catch (err) {
+            dispatch(errorAC(err.response.data.message));
+            console.log(err?.response?.data?.message);
+        }
     }
 }
 
 export const editNote = (task) => {
     return dispatch => {
         dispatch(editNoteAC(task));
+        dispatch(changeHiddenAC(false));
     }
 }
 
-export const updateEditNote = async ({title, description, marking, status}, id) => {
-    try {
-        const response = await axios.put(`${API_URL}edit/${id}`, {title, description, marking, status}, {
-            headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
-        });
-    } catch (err) {
-        console.log(err.response.data.message);
+export const cleanEditNote = () => {
+    return dispatch => {
+        dispatch(cleanEditNoteAC());
     }
 }
 

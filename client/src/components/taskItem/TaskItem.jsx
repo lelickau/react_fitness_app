@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteFile, editNote } from '../../redux/actions/notes';
 import ButtonItem from '../UI/buttons/ButtonItem';
-import {useHistory} from 'react-router-dom'
 
 import deleteIco from '../../resources/icons/delete.svg';
 import editIco from '../../resources/icons/edit.svg';
@@ -10,7 +9,6 @@ import './taskItem.scss';
 
 function TaskItem({task, index}) {
     const dispatch = useDispatch();
-    const history = useHistory()
 
     const deleteClickHandler = (e) => {
         e.stopPropagation();
@@ -19,7 +17,6 @@ function TaskItem({task, index}) {
     const editClickHandler = (e) => {
         e.stopPropagation();
         dispatch(editNote(task));
-        history.push(`/notes/edit/${task._id}`)
     }
 
     const dateNote = task.date.split('T');

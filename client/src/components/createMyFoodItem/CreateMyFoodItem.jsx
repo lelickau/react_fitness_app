@@ -1,94 +1,132 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { useDispatch } from 'react-redux';
+import { changeHidden, cleanIsError } from '../../redux/actions/global';
+import { addFood } from '../../redux/actions/foods';
 import ButtonItem from '../UI/buttons/ButtonItem';
 import InputItem from '../UI/inputs/InputItem';
 
 import './createMyFoodItem.scss';
 
 function CreateMyFoodItem() {
+    const dispatch = useDispatch();
+    const [food, setFood] = useState({
+        scale: 100,
+        searchFood: false,
+        label: '',
+        CHOCDF: 0,
+        PROCNT: 0,
+        FAT: 0,
+        ENERC_KCAL: 0,
+        FIBTG: 0
+    });
+
+    const cleanFoodState = () => {
+        return {
+            scale: 100,
+            searchFood: false,
+            label: '',
+            CHOCDF: 0,
+            PROCNT: 0,
+            FAT: 0,
+            ENERC_KCAL: 0,
+            FIBTG: 0
+        }
+    }
+
+    const cancelCreateFood = (e) => {
+        e.preventDefault();
+        dispatch(changeHidden(true));
+        dispatch(cleanIsError(null));
+        cleanFoodState();
+    }
+
+    const changeHandler = (e) => {
+        dispatch(cleanIsError(null));
+        setFood({...food, [e.target.name]: e.target.value});
+    }
+
+    const createAndAddFood = (e) => {
+        e.preventDefault();
+        dispatch(addFood(food))
+    }
+
     return (
         <div className="create-food">
             <form className="create-food__form">
                 <div className="create-food__btns">
                     <button
-                            className="create-food__cancel-btn"
-                            //onClick={cancelCreateNote}
+                        className="create-food__cancel-btn"
+                        onClick={cancelCreateFood}
                     >Cancel</button>
                     <ButtonItem
-                            //onClick={createAndAddNote}
+                            onClick={createAndAddFood}
                     >Add</ButtonItem>
                 </div>
                 <div className="create-food__data-box">
                     <div className="create-food__data">
                         <label className="create-food__label-item">Name of food
                             <InputItem
-                                //className="create-food__input-title"
                                 placeholder="orange"
                                 type="text"
-                                name='title'
-                                //value={task.title}
-                                //onChange={changeHandler}
+                                name='label'
+                                value={food.label}
+                                onChange={changeHandler}
                             />
                         </label>
                         <label className="create-food__label-item"><span className="create-food__point create-food__crabs"></span>Crabs (g)
                             <InputItem
-                                //className="create-food__input-title"
                                 placeholder="4.8"
-                                type="text"
-                                name='title'
-                                //value={task.title}
-                                //onChange={changeHandler}
+                                type="number"
+                                name='CHOCDF'
+                                value={food.CHOCDF}
+                                onChange={changeHandler}
                             />
                         </label>
                         <label className="create-food__label-item"><span className="create-food__point create-food__fat"></span>Total fat (g)
                             <InputItem
-                                //className="create-food__input-title"
                                 placeholder="3.1"
-                                type="text"
-                                name='title'
-                                //value={task.title}
-                                //onChange={changeHandler}
+                                type="number"
+                                name='FAT'
+                                value={food.FAT}
+                                onChange={changeHandler}
                             />
                         </label>
                         <label className="create-food__label-item"><span className="create-food__point create-food__protein"></span>Protein (g)
                             <InputItem
-                                //className="create-food__input-title"
                                 placeholder="3.2"
-                                type="text"
-                                name='title'
-                                //value={task.title}
-                                //onChange={changeHandler}
+                                type="number"
+                                name='PROCNT'
+                                value={food.PROCNT}
+                                onChange={changeHandler}
                             />
                         </label>
                     </div>
                     <div className="create-food__data">
                         <label className="create-food__label-item">Per grams of product (g)
                             <InputItem
-                                //className="create-food__input-title"
                                 placeholder="100"
-                                type="text"
-                                name='title'
-                                //value={task.title}
-                                //onChange={changeHandler}
+                                type="number"
+                                name='scale'
+                                value={food.scale}
+                                onChange={changeHandler}
                             />
                         </label>
                         <label className="create-food__label-item"><span className="create-food__point create-food__energy"></span>Energy per serving (kcal)
                             <InputItem
-                                //className="create-food__input-title"
                                 placeholder="61"
-                                type="text"
-                                name='title'
-                                //value={task.title}
-                                //onChange={changeHandler}
+                                type="number"
+                                name='ENERC_KCAL'
+                                value={food.ENERC_KCAL}
+                                onChange={changeHandler}
                             />
                         </label>
                         <label className="create-food__label-item"><span className="create-food__point create-food__fiber"></span> Dietary fiber (g)
                             <InputItem
-                                //className="create-food__input-title"
                                 placeholder="0"
-                                type="text"
-                                name='title'
-                                //value={task.title}
-                                //onChange={changeHandler}
+                                type="number"
+                                name='FIBTG'
+                                value={food.FIBTG}
+                                onChange={changeHandler}
                             />
                         </label>
                     </div>

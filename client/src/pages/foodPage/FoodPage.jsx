@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import CreateMyFoodItem from '../../components/createMyFoodItem/CreateMyFoodItem';
 import FoodItem from '../../components/foodItem/FoodItem';
 import HeaderTitle from '../../components/headerTitle/HeaderTitle';
 import MyFoodList from '../../components/myFoodList/MyFoodList';
@@ -12,7 +11,7 @@ import './foodPage.scss';
 function FoodPage() {
     const dispatch = useDispatch()
     const allSearchedFoods = useSelector(state => state.foods.searchFoodList);
-    const isError = useSelector(state => state.foods.isError);
+    const isError = useSelector(state => state.global.isError);
 
     const [hiddenContent, setHiddenContent] = useState(false);
     const widthScreen = window.innerWidth;

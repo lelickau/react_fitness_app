@@ -29,6 +29,8 @@ function AuthPage() {
             case 'password':
                 setPassDirty(true)
                 break
+            default:
+                return;
         }
     }
 

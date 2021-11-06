@@ -6,7 +6,6 @@ import LocalLoader from '../loader/LocalLoader';
 import './notes.scss';
 
 function Notes({tasks}) {
-
     const loading = useSelector(state => state.notes.isLoading);
 
     return (

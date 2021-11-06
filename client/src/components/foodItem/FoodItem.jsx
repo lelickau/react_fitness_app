@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import './foodItem.scss';
 import starEmpty from '../../resources/icons/star-empty.svg';
 import starFill from '../../resources/icons/star-fill.svg';
 import NutrientItem from '../UI/elems/NutrientItem';
 import { useDispatch, useSelector } from 'react-redux';
-import { addFood, setFavorite, deleteFavsFood } from '../../redux/actions/foods';
+import { addFood, setFavorite } from '../../redux/actions/foods';
 
 function FoodItem({foods}) {
 

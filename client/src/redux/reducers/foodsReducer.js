@@ -3,18 +3,18 @@ const ADD__FOOD = 'ADD__FOOD';
 const GET__FOODS = 'GET__FOODS';
 const SET__FAVORITE = 'SET__FAVORITE';
 const DELETE__FAVORITE = 'DELETE__FAVORITE';
-const SET__ERROR = 'SET__ERROR';
+const CLEAN__FOOD__LIST = 'CLEAN__FOOD__LIST';
 
 const foodsState = {
     searchFoodList: [],
     favoritList: [],
-    isError: false
+    isError: false,
 }
 
 export default function foodsReducer (state = foodsState, action) {
     switch (action.type) {
-        case SET__ERROR:
-            return {...state, isError: action.payload, searchFoodList: []}
+        case CLEAN__FOOD__LIST:
+            return {...state, searchFoodList: []}
 
         case GET__FOOD:
             return {...state, searchFoodList: [...action.payload], isError: false}
@@ -46,4 +46,4 @@ export const addFoodAC = (food) => ({type: 'ADD__FOOD', payload: food});
 export const getFoodsAC = (foods) => ({type: 'GET__FOODS', payload: foods});
 export const setFavoriteAC = (id) => ({type: 'SET__FAVORITE', payload: id});
 export const deleteFavsFoodAC = (id) => ({type: 'DELETE__FAVORITE', payload: id});
-export const setErrorAC = (val) => ({type: 'SET__ERROR', payload: val});
+export const cleanFoodListAC = () => ({type: 'CLEAN__FOOD__LIST'});

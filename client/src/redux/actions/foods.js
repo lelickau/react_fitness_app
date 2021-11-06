@@ -1,6 +1,7 @@
 import axios from "axios";
 import {APP_ID, API_KEY} from '../../env';
-import {setErrorAC, searchFoodAC, addFoodAC, getFoodsAC, setFavoriteAC, deleteFavsFoodAC} from '../reducers/foodsReducer';
+import {searchFoodAC, cleanFoodListAC, addFoodAC, getFoodsAC, setFavoriteAC, deleteFavsFoodAC} from '../reducers/foodsReducer';
+import { errorAC } from "../reducers/globalReducer";
 
 const API_URL = `https://api.edamam.com/api/food-database/v2/parser?app_id=${APP_ID}&app_key=${API_KEY}`
 
@@ -29,7 +30,7 @@ function unDublicate(arr, propertyName) {
         const strarr = arrayFromKey.filter((currentVal, ind) => {
             return arrayFromKey.indexOf(currentVal) === ind
         });
-        console.log(strarr);
+        //console.log(strarr);
 
         return strarr.map(key => arr.find(item => item.food[propertyName] === key))
     }
@@ -45,15 +46,17 @@ export const searchFood = (food, favsList, weight) => {
             const response = await axios.get(`${API_URL}&ingr=${food}`);
 
             if (!response.data.hints.length) {
-                dispatch(setErrorAC(true));
+                dispatch(errorAC(true));
+                dispatch(cleanFoodListAC());
+
             } else {
                 const dataFoods = unDublicate(response.data.hints, 'foodId');
 
                 const dataFoodsStore = dataFoods.map(item => new FormationDataFood(item, weight));
-                console.log(dataFoodsStore);
+                //console.log(dataFoodsStore);
 
                 const favsFoodIds = findIdFoods(favsList, 'foodId');
-                const test = dataFoodsStore.map(el => {
+                const finalyFoodData = dataFoodsStore.map(el => {
                     for (let item of favsFoodIds) {
                         if (el.foodId === item) {
                             return {...el, searchFood: true}
@@ -61,9 +64,9 @@ export const searchFood = (food, favsList, weight) => {
                     }
                     return {...el}
                 })
-                console.log(test);
+                //console.log(finalyFoodData);
 
-                dispatch(searchFoodAC(test));
+                dispatch(searchFoodAC(finalyFoodData));
             }
 
         } catch (err) {
@@ -81,8 +84,8 @@ export const setFavorite = (foodId) => {
 export const addFood = (food) => {
     return async dispatch => {
         try {
-            const dataFood = {...food, searchFood: true};
-            const response = await axios.post(`${API_URL_MDB}create`, dataFood, {
+            
+            const response = await axios.post(`${API_URL_MDB}create`, food, {
                 headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
             });
 
