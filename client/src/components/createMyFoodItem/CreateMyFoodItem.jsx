@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeHidden, cleanIsError } from '../../redux/actions/global';
 import { addFood } from '../../redux/actions/foods';
 import ButtonItem from '../UI/buttons/ButtonItem';
@@ -9,6 +9,8 @@ import './createMyFoodItem.scss';
 
 function CreateMyFoodItem() {
     const dispatch = useDispatch();
+    const error = useSelector(state => state.global.isError);
+
     const [food, setFood] = useState({
         scale: 100,
         searchFood: false,
@@ -21,7 +23,7 @@ function CreateMyFoodItem() {
     });
 
     const cleanFoodState = () => {
-        return {
+        setFood({
             scale: 100,
             searchFood: false,
             label: '',
@@ -30,7 +32,7 @@ function CreateMyFoodItem() {
             FAT: 0,
             ENERC_KCAL: 0,
             FIBTG: 0
-        }
+        })
     }
 
     const cancelCreateFood = (e) => {
@@ -38,6 +40,7 @@ function CreateMyFoodItem() {
         dispatch(changeHidden(true));
         dispatch(cleanIsError(null));
         cleanFoodState();
+        console.log(food)
     }
 
     const changeHandler = (e) => {
@@ -47,7 +50,8 @@ function CreateMyFoodItem() {
 
     const createAndAddFood = (e) => {
         e.preventDefault();
-        dispatch(addFood(food))
+        dispatch(addFood(food));
+        if (!error) cleanFoodState();
     }
 
     return (
@@ -64,7 +68,8 @@ function CreateMyFoodItem() {
                 </div>
                 <div className="create-food__data-box">
                     <div className="create-food__data">
-                        <label className="create-food__label-item">Name of food
+                        <label className={!error ? "create-food__label-item" : "create-food__label-item create-food__error"}>Name of food
+                            <span className={error ? "error-message" : "hidden"}>{error}</span>
                             <InputItem
                                 placeholder="orange"
                                 type="text"

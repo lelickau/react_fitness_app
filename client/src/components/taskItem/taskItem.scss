@@ -56,11 +56,38 @@
         border-radius: 8px 0px 0px 8px;
     }
 
+    &__status-box {
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 13px;
+    }
+
     &__item-status {
         background-color: rgb(187, 187, 187);
         padding: 6px 26px;
-        margin-bottom: 13px;
+
         display: inline-block;
+    }
+
+    &__item-done {
+        cursor: pointer;
+        margin-left: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 31px;
+        height: 31px;
+        border: 2px solid $title;
+    }
+
+    &__status-done-title {
+        margin-left: 7px;
+    }
+
+    &__item-done--active {
+        width: 15px;
+        height: 15px;
+        background-color: rgb(255, 138, 138);
     }
 
 }

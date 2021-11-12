@@ -18,7 +18,7 @@ class UserService {
         const activationLink = uuid.v4();
 
         const user = await User.create({email, password: hashPassword, activationLink});
-        await mailService.sendActivationMail(email, `${config.get('baseUrl')}/api/activate/${activationLink}`);
+        await mailService.sendActivationMail(email, `${config.get('clientUrl')}/auth/activate/${activationLink}`);
 
         const userDto = new UserDto(user);
         const tokens = tokenService.generateTokens({...userDto});
@@ -28,7 +28,8 @@ class UserService {
     }
 
     async activate(activationLink) {
-        const user = await User.findOne({activationLink});
+
+        const user = await User.findOne({activationLink:activationLink});
         if (!user) {
             throw ApiError.BadRequest('Error activation link');
         }
@@ -75,6 +76,31 @@ class UserService {
         await tokenService.saveToken(userDto.id, tokens.refreshToken);
 
         return {...tokens, user: userDto}
+    }
+
+    async reset(email, token) {
+        const candidate = await User.findOne({email});
+
+        if (!candidate) {
+            throw ApiError.BadRequest('An account with this email address already exists.');
+        }
+        candidate.resetToken = token;
+        candidate.resetTokenExp = Date.now() + 60*60*1000;
+        await candidate.save();
+        await mailService.resetPasswordMail(email, `${config.get('clientUrl')}/recover/${token}`);
+    }
+
+    async updatePassword(password, token) {
+        const user = await User.findOne({
+            resetToken: token,
+            resetTokenExp: {$gt: Date.now()}
+        });
+
+        if (!user)  throw ApiError.BadRequest('User not found');
+        user.password = await bcrypt.hash(password, 12);
+        user.resetToken = undefined;
+        user.expireToken = undefined;
+        await user.save();
     }
 }
 

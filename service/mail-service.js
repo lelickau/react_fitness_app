@@ -38,6 +38,27 @@ class MailService {
                 `
         })
     };
+
+    async resetPasswordMail(to, link){
+        await this.transporter.sendMail({
+            from: config.get('smtpUser'),
+            to,
+            subject: `Reset password instructions`,
+            text: '',
+            html:
+                `
+                    <div>
+                        <div style="margin-top:28px">
+                        <h3>Someone has requested a link to change your password, and you can do this through the link below.</h3>
+                            <a href='${link}' style="background:#0052cc;border:medium;border-radius:3px;box-sizing:border-box;color:#ffffff;font-size:inherit;font-style:normal;height:2.2em;line-height:2.2em;margin:0;padding:10px 12px 10px 12px;text-align:center;text-decoration:none;vertical-align:middle;white-space:nowrap">Reset</a>
+                            <p>If you didn't request this, please ignore this email.</p>
+                            <p>Your password won't change until you access the link above and create a new one.</p>
+                        </div>
+                        <hr style="border-bottom-color:#c1c7d0;border-style:none none solid none;border-width:0 0 1px 0;margin-bottom:24px;margin-top:24px">
+                    </div>
+                `
+        })
+    };
 }
 
 module.exports = new MailService();

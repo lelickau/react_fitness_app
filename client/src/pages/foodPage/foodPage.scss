@@ -16,6 +16,11 @@
         flex-wrap: wrap;
         justify-content: space-between;
     }
+    &__serach-loader {
+        width: 100%;
+        margin: 0 auto;
+        padding-top: 40px;
+    }
 
     &__serach-error {
         width: 100%;

@@ -25,7 +25,7 @@ export const initializeApp = () => {
     return (dispatch) => {
         let promise = dispatch(authentication());
 
-        Promise.all([promise]).then(() => {dispatch(initializedSuccessAC())})
+        Promise.all([promise]).then(() => {dispatch(initializedSuccessAC())});
     }
 }
 

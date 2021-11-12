@@ -16,6 +16,8 @@ router.post('/auth/login', authController.login);
 router.post('/auth/logout', authController.logout);
 router.get('/auth/activate/:link', authController.activate);
 router.get('/auth/refresh', authController.refresh);
+router.post('/auth/reset', authController.reset);
+router.post('/auth/update/:token', authController.updatePassword);
 
 // notes
 router.post('/notes/create', authMiddleware, notesController.createNote);

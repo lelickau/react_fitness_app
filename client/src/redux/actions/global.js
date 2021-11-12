@@ -1,4 +1,4 @@
-import { changeHiddenAC, errorAC} from "../reducers/globalReducer";
+import { changeHiddenAC, errorAC, setErrorAC} from "../reducers/globalReducer";
 
 export const changeHidden = (val) => {
     return dispatch => {
@@ -9,5 +9,11 @@ export const changeHidden = (val) => {
 export const cleanIsError = (val) => {
     return dispatch => {
         dispatch(errorAC(val));
+    }
+}
+
+export const setIsError = (val) => {
+    return dispatch => {
+        dispatch(setErrorAC(val));
     }
 }

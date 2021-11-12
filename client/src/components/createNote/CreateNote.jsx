@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 // import Loader from '../../components/loader/Loader';
 import InputItem from '../../components/UI/inputs/InputItem';
+import ButtonItem from '../../components/UI/buttons/ButtonItem';
+import { useDispatch, useSelector } from 'react-redux';
+import { changeHidden, cleanIsError } from '../../redux/actions/global';
+import { createNote, updateEditNote, cleanEditNote } from '../../redux/actions/notes';
 
 import './createNote.scss';
-import ButtonItem from '../../components/UI/buttons/ButtonItem';
-import { createNote, updateEditNote, cleanEditNote } from '../../redux/actions/notes';
-import { changeHidden, cleanIsError } from '../../redux/actions/global';
-import { useDispatch, useSelector } from 'react-redux';
 
 function CreateNote() {
     const dispatch = useDispatch();

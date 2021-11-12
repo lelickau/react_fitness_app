@@ -1,4 +1,5 @@
 const Food = require("../models/Food");
+const ApiError = require("../exeptions/api-error");
 
 class FoodsService {
     async createFood(foodCreateData, useId) {

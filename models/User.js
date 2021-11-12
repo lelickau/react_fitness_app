@@ -6,6 +6,8 @@ const userSchema = new Schema({
     isActivatedMail: {type: Boolean, default: false},
     activationLink: {type: String},
     notes: [{ type: Types.ObjectId, ref: 'Note' }],
+    resetToken: String,
+    resetTokenExp: Date,
 });
 
 module.exports = model('User', userSchema);

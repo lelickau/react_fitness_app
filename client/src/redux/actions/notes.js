@@ -1,6 +1,6 @@
 import axios from "axios";
 import { changeHiddenAC, errorAC } from "../reducers/globalReducer";
-import { getNotesAC, deleteNoteAC, editNoteAC, createNoteAC, errorNoteAC, changeLoadingAC, updateEditNoteAC, cleanEditNoteAC } from "../reducers/notesReducer";
+import { getNotesAC, deleteNoteAC, editNoteAC, createNoteAC, changeLoadingAC, updateEditNoteAC, cleanEditNoteAC } from "../reducers/notesReducer";
 
 const API_URL = `/api/notes/`;
 
@@ -64,6 +64,23 @@ export const updateEditNote = ({title, description, marking, status}, id) => {
         }
     }
 }
+
+export const updateCompletedNote = (task, id) => {
+    return async dispatch => {
+        try {
+            const newTask = {...task, completed: !task.completed};
+            const response = await axios.put(`${API_URL}edit/${id}`, newTask, {
+                headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
+            });
+            dispatch(updateEditNoteAC(response.data))
+        } catch (err) {
+            dispatch(errorAC(err.response.data.message));
+            console.log(err?.response?.data?.message);
+        }
+    }
+}
+
+
 
 export const editNote = (task) => {
     return dispatch => {

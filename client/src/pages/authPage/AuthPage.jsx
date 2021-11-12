@@ -5,8 +5,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import './authPage.scss';
 import showPass from '../../resources/icons/show-pass.svg'
 import hidePass from '../../resources/icons/hide-pass.svg'
+import { useHistory } from 'react-router';
 
 function AuthPage() {
+    const history = useHistory();
     const isError = useSelector(state => state.user.isError);
 
     const [visiblePass, setVisiblePass] = useState(false);
@@ -72,6 +74,10 @@ function AuthPage() {
 
     const changeActive = () => {
         setActive(!active)
+    }
+
+    const recoverPassword = (e) => {
+        history.push('forget')
     }
 
     return (
@@ -142,7 +148,10 @@ function AuthPage() {
                             ><span className="auth__btn-arrow"></span></button>
                         </div>
                     </div>
-                    <div className="auth__forgot">Forgot Password?</div>
+                    <div
+                        onClick={recoverPassword}
+                        className="auth__forgot"
+                    >Forgot Password?</div>
                 </div>
             </form>
         </div>

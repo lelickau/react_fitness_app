@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteFile, editNote } from '../../redux/actions/notes';
+import { deleteFile, editNote, updateCompletedNote } from '../../redux/actions/notes';
 import ButtonItem from '../UI/buttons/ButtonItem';
 
 import deleteIco from '../../resources/icons/delete.svg';
@@ -9,6 +9,10 @@ import './taskItem.scss';
 
 function TaskItem({task, index}) {
     const dispatch = useDispatch();
+
+    const changeCompleted = (e) => {
+        dispatch(updateCompletedNote(task, task._id));
+    }
 
     const deleteClickHandler = (e) => {
         e.stopPropagation();
@@ -35,7 +39,12 @@ function TaskItem({task, index}) {
                         <div className="task__item-description">{task.description}</div>
                         <div className="task__status-box">
                             <div className="task__item-status">{task.status}</div>
-
+                            <label className="task__item-done" onClick={changeCompleted}>
+                                <div className={task.completed ? "task__item-done--active" : ''}>
+                                    <input type="hidden" value={task.completed}/>
+                                </div>
+                            </label>
+                            <span className="task__status-done-title">Done</span>
                         </div>
                     </div>
                 </div>

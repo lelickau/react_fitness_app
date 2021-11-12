@@ -2,6 +2,11 @@ const userService = require('../service/user-service');
 const config = require('config');
 const {validationResult} = require('express-validator');
 const ApiError = require('../exeptions/api-error');
+const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
+
+const mailService = require('../service/mail-service');
+const User = require('../models/User');
 
 class AuthController {
     async registration(req, res, next) {
@@ -63,6 +68,44 @@ class AuthController {
             const userData = await userService.refresh(refreshToken);
             res.cookie('refreshToken', userData.refreshToken, {maxAge: 30*24*60*60*1000, httpOnly: true});
 
+            return res.json(userData);
+
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    reset(req, res, next) {
+        try {
+            const errors = validationResult(req);
+
+            if (!errors.isEmpty()) {
+                return next(ApiError.BadRequest('Validation error', errors.array()))
+            }
+
+            crypto.randomBytes(32, async (err, buffer) => {
+                if (err) {
+                    return next(ApiError.BadRequest('Somthing went wrong. Try again later.', errors.array()));
+                }
+                const {email} = req.body;
+                const token = buffer.toString('hex');
+                const userData = await userService.reset(email, token);
+
+                return res.json(userData);
+            })
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async updatePassword(req, res, next) {
+        try {
+            const {token} = req.params;
+            const {password} = req.body;
+
+            if (!token) throw ApiError.BadRequest('User identification error');
+
+            const userData = await userService.updatePassword(password, token);
             return res.json(userData);
 
         } catch (err) {

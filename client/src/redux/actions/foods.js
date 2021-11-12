@@ -1,7 +1,7 @@
 import axios from "axios";
 import {APP_ID, API_KEY} from '../../env';
 import {searchFoodAC, cleanFoodListAC, addFoodAC, getFoodsAC, setFavoriteAC, deleteFavsFoodAC} from '../reducers/foodsReducer';
-import { errorAC } from "../reducers/globalReducer";
+import { changeHiddenAC, changeLoadingAC, errorAC } from "../reducers/globalReducer";
 
 const API_URL = `https://api.edamam.com/api/food-database/v2/parser?app_id=${APP_ID}&app_key=${API_KEY}`
 
@@ -42,6 +42,7 @@ function findIdFoods(arr, propertyName) {
 
 export const searchFood = (food, favsList, weight) => {
     return async dispatch => {
+        dispatch(changeLoadingAC(true))
         try {
             const response = await axios.get(`${API_URL}&ingr=${food}`);
 
@@ -71,6 +72,8 @@ export const searchFood = (food, favsList, weight) => {
 
         } catch (err) {
             console.log(err.response.data.message);
+        } finally {
+            dispatch(changeLoadingAC(false));
         }
     }
 }
@@ -84,14 +87,15 @@ export const setFavorite = (foodId) => {
 export const addFood = (food) => {
     return async dispatch => {
         try {
-            
             const response = await axios.post(`${API_URL_MDB}create`, food, {
                 headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
             });
 
             dispatch(addFoodAC(response.data));
+            dispatch(changeHiddenAC(true));
         } catch (err) {
-            console.log(err.response);
+            dispatch(errorAC(err.response.data.message));
+            console.log(err.response.data.message);
         }
     }
 }
