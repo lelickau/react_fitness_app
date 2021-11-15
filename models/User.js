@@ -8,6 +8,8 @@ const userSchema = new Schema({
     notes: [{ type: Types.ObjectId, ref: 'Note' }],
     resetToken: String,
     resetTokenExp: Date,
+    avatar: {type: String},
+    files : [{type: Types.ObjectId, ref:'File'}]
 });
 
 module.exports = model('User', userSchema);

@@ -18,6 +18,8 @@ router.get('/auth/activate/:link', authController.activate);
 router.get('/auth/refresh', authController.refresh);
 router.post('/auth/reset', authController.reset);
 router.post('/auth/update/:token', authController.updatePassword);
+router.post('/auth/avatar', authMiddleware, authController.uploadAvatar);
+router.delete('/auth/avatar', authMiddleware, authController.deleteAvatar);
 
 // notes
 router.post('/notes/create', authMiddleware, notesController.createNote);

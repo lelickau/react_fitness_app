@@ -6,6 +6,7 @@ const tokenService = require('./token-service');
 const UserDto = require('../dtos/user-dto');
 const config = require('config');
 const ApiError = require('../exeptions/api-error');
+const fs = require('fs')
 class UserService {
     async registration(email, password) {
         const candidate = await User.findOne({email});
@@ -101,6 +102,27 @@ class UserService {
         user.resetToken = undefined;
         user.expireToken = undefined;
         await user.save();
+    }
+
+    async uploadAvatar(userId, file) {
+        const user = await User.findById(userId);
+        if (!user)  throw ApiError.BadRequest('User not found');
+        const avatarName = uuid.v4() + ".jpg"
+        file.mv(config.get('staticPath') + "\\" + avatarName);
+        user.avatar = avatarName;
+        await user.save();
+
+        const userDto = new UserDto(user);
+        return {user: userDto}
+    }
+
+    async deleteAvatar(userId) {
+        const user = await User.findById(userId);
+        fs.unlinkSync(config.get('staticPath') + "\\" + user.avatar);
+        user.avatar = null;
+        await user.save();
+        const userDto = new UserDto(user);
+        return {user: userDto}
     }
 }
 

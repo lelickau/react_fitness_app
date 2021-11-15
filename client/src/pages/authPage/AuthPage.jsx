@@ -10,6 +10,7 @@ import { useHistory } from 'react-router';
 function AuthPage() {
     const history = useHistory();
     const isError = useSelector(state => state.user.isError);
+    const isSuccess = useSelector(state => state.global.isSuccess);
 
     const [visiblePass, setVisiblePass] = useState(false);
     const [form, setForm] = useState({
@@ -80,6 +81,10 @@ function AuthPage() {
         history.push('forget')
     }
 
+    const singUp = (e) => {
+        dispatch(registration(form));
+    }
+
     return (
         <div className="auth">
         <div className="auth__error">
@@ -117,7 +122,6 @@ function AuthPage() {
                                 ></input>
                             </label>
                             <label>
-                            {(passDirty && passErr) && <span className="auth__err-valid">{passErr}</span>}
                             <div className="auth__pass-box">
                                 <input
                                     autoComplete="current-password"
@@ -134,6 +138,7 @@ function AuthPage() {
                                     <img className="auth__show-pass-ico" src={visiblePass ? hidePass : showPass} alt="Show/Hide" />
                                 </div>
                             </div>
+                            {(passDirty && passErr) && <span className="auth__err-valid">{passErr}</span>}
                             </label>
 
                             <button
@@ -143,7 +148,7 @@ function AuthPage() {
                             ><span className="auth__btn-arrow"></span></button>
                             <button
                                 className={`auth__btn ${active ? '' : "hidden"}`}
-                                onClick={() => dispatch(registration(form))}
+                                onClick={singUp}
                                 disabled={!formValid}
                             ><span className="auth__btn-arrow"></span></button>
                         </div>

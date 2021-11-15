@@ -3,10 +3,6 @@ const config = require('config');
 const {validationResult} = require('express-validator');
 const ApiError = require('../exeptions/api-error');
 const crypto = require('crypto');
-const bcrypt = require('bcryptjs');
-
-const mailService = require('../service/mail-service');
-const User = require('../models/User');
 
 class AuthController {
     async registration(req, res, next) {
@@ -107,6 +103,30 @@ class AuthController {
 
             const userData = await userService.updatePassword(password, token);
             return res.json(userData);
+
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async uploadAvatar(req, res, next) {
+        try {
+            const userId = req.user.id;
+            const file = req.files.file;
+            const userData = await userService.uploadAvatar(userId, file);
+
+            return res.json(userData);
+
+        } catch (err) {
+            next(err);
+        }
+    }
+
+    async deleteAvatar(req, res, next) {
+        try {
+            const userId = req.user.id;
+            const userData = await userService.deleteAvatar(userId);
+            return res.json(userData)
 
         } catch (err) {
             next(err);

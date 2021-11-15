@@ -183,3 +183,36 @@
     }
 
 }
+
+@media (max-width: 590px) {
+    .auth {
+        background: $main-bg;
+
+        &__form-box {
+            width: 100vw;
+        }
+
+        &__inputs {
+            width: 90vw;
+        }
+    }
+}
+
+@media (max-width: 390px) {
+    .auth {
+        &__btn {
+            top: 135%;
+            right: auto;
+            left: 8px;
+            height: 60px;
+            color: #fff;
+            border-radius: 10%;
+        }
+
+        &__inputs {
+            width: 100vw;
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+        }
+    }
+}

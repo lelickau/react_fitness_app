@@ -4,10 +4,13 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const router = require('./routes/index');
 const errorsMiddleware = require('./middleware/error-middelware');
+const fileUpload = require("express-fileupload")
 
 const app = express();
 
+app.use(fileUpload({}));
 app.use(express.json({extended: true}));
+app.use(express.static('static'))
 app.use(cookieParser());
 app.use('/api', router);
 
