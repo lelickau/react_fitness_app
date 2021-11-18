@@ -30,6 +30,10 @@
         cursor: pointer;
     }
 
+    &__link-img {
+        object-fit: cover;
+    }
+
     &__link-icon {
         max-width: 40px;
         width: 100%;

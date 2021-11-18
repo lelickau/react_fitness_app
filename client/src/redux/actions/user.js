@@ -1,40 +1,45 @@
 import axios from "axios";
-import { setErrorAC, setSuccessAC } from "../reducers/globalReducer";
+import { setErrorAC, setSuccessAC, changeLoadingAC } from "../reducers/globalReducer";
 import { setUserAC, logoutAC, errorAuthAC, updateUserAC } from "../reducers/userReducer";
-
-const API_URL = `/api/auth/`;
+import { API_URL_AUTH } from "../../env";
 
 export const registration = ({email, password}) => {
     return async dispatch => {
+        dispatch(changeLoadingAC(true));
         try {
-            const response = await axios.post(`${API_URL}registration`, {
-                email, password
-            });
-            console.log(response);
-            dispatch(setSuccessAC(true));
+            const correctEmail = email.toLowerCase();
 
-        } catch (e) {
-            dispatch(errorAuthAC(e.response.data.message))
-            console.log(e.response.data.message);
+            const response = await axios.post(`${API_URL_AUTH}registration`, {
+                email: correctEmail, password
+            });
+            dispatch(setSuccessAC(true));
+            dispatch(setUserAC(response.data.user));
+            localStorage.setItem('token', response.data.accessToken);
+        } catch (err) {
+            dispatch(errorAuthAC(err.response.data.message));
+            console.log(err?.response?.data?.message);
+        } finally {
+            dispatch(changeLoadingAC(false));
         }
     }
-
 }
 
 export const login = ({email, password}) => {
     return async dispatch => {
+        dispatch(changeLoadingAC(true));
         try {
-            const response = await axios.post(`${API_URL}login`, {
-                email,
+            const correctEmail = email.toLowerCase();
+            const response = await axios.post(`${API_URL_AUTH}login`, {
+                email:correctEmail,
                 password
             });
-            console.log(response)
-            dispatch(setUserAC(response.data.user))
+            dispatch(setUserAC(response.data.user));
             localStorage.setItem('token', response.data.accessToken);
-
-        } catch (e) {
-            dispatch(errorAuthAC(e.response.data.message))
-            console.log(e.response.data.message);
+        } catch (err) {
+            dispatch(errorAuthAC(err.response.data.message));
+            console.log(err?.response?.data?.message);
+        } finally {
+            dispatch(changeLoadingAC(false));
         }
     }
 }
@@ -42,15 +47,12 @@ export const login = ({email, password}) => {
 export const logout = () => {
     return async dispatch => {
         try {
-            const response = await axios.post(`${API_URL}logout`);
+            await axios.post(`${API_URL_AUTH}logout`);
             localStorage.removeItem('token');
-
-            console.log(response)
-            dispatch(logoutAC())
-
-        } catch (e) {
-            dispatch(errorAuthAC(e.response.data.message))
-            console.log(e.response.data.message);
+            dispatch(logoutAC());
+        } catch (err) {
+            dispatch(errorAuthAC(err.response.data.message));
+            console.log(err?.response?.data?.message);
         }
     }
 }
@@ -58,11 +60,12 @@ export const logout = () => {
 export const authentication = () => {
     return async dispatch => {
         try {
-            const response = await axios.get(`${API_URL}refresh`, {withCredentials: true});
+            const response = await axios.get(`${API_URL_AUTH}refresh`, {withCredentials: true});
             dispatch(setUserAC(response.data.user));
             localStorage.setItem('token', response.data.accessToken);
-        } catch (e) {
+        } catch (err) {
             localStorage.removeItem('token');
+            console.log(err?.response?.data?.message);
         }
     }
 }
@@ -72,13 +75,13 @@ export const uploadAvatar =  (file) => {
         try {
             const formData = new FormData();
             formData.append('file', file);
-            const response = await axios.post(`${API_URL}avatar`, formData,
+            const response = await axios.post(`${API_URL_AUTH}avatar`, formData,
                 {headers:{Authorization:`Bearer ${localStorage.getItem('token')}`}}
             )
-            dispatch(updateUserAC(response.data.user.avatar))
-        } catch (e) {
-            dispatch(errorAuthAC(e.response.data.message))
-            console.log(e)
+            dispatch(updateUserAC(response.data.user.avatar));
+        } catch (err) {
+            dispatch(errorAuthAC(err.response.data.message));
+            console.log(err?.response?.data?.message);
         }
     }
 }
@@ -86,14 +89,13 @@ export const uploadAvatar =  (file) => {
 export const deleteAvatar =  () => {
     return async dispatch => {
         try {
-            const response = await axios.delete(`${API_URL}avatar`,
+            const response = await axios.delete(`${API_URL_AUTH}avatar`,
                 {headers:{Authorization:`Bearer ${localStorage.getItem('token')}`}}
             )
-            console.log(response)
             dispatch(updateUserAC(response.data.user.avatar));
-        } catch (e) {
-            dispatch(errorAuthAC(e.response));
-            console.log(e)
+        } catch (err) {
+            dispatch(errorAuthAC(err.response));
+            console.log(err?.response?.data?.message);
         }
     }
 }
@@ -102,15 +104,13 @@ export const deleteAvatar =  () => {
 export const reset = ({email}) => {
     return async dispatch => {
         try {
-            const response = await axios.post(`${API_URL}reset`, {email});
-            console.log(response);
+            const response = await axios.post(`${API_URL_AUTH}reset`, {email});
             if (response.status === 200) {
                 dispatch(setSuccessAC(response.data.email))
             }
-
-        } catch (e) {
-            dispatch(setErrorAC(e.response.data.message))
-            console.log(e.response.data.message);
+        } catch (err) {
+            dispatch(setErrorAC(err.response.data.message));
+            console.log(err);
         }
     }
 }
@@ -118,13 +118,13 @@ export const reset = ({email}) => {
 export const updatePassword = ({password}, token) => {
     return async dispatch => {
         try {
-            const response = await axios.post(`${API_URL}update/${token}`, {password});
+            const response = await axios.post(`${API_URL_AUTH}update/${token}`, {password});
             if (response.status === 200) {
                 dispatch(setSuccessAC(true))
             }
-        } catch (e) {
-            dispatch(setErrorAC(e.response.data.message))
-            console.log(e.response.data.message);
+        } catch (err) {
+            dispatch(setErrorAC(err.response.data.message));
+            console.log(err?.response?.data?.message);
         }
     }
 }

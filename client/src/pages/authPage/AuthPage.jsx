@@ -1,16 +1,19 @@
 import React, {useState, useEffect} from 'react';
 import { registration, login } from '../../redux/actions/user';
 import {useDispatch, useSelector} from 'react-redux';
+import InputItem from '../../components/UI/inputs/InputItem';
+import LocalLoader from '../../components/loader/LocalLoader';
 
 import './authPage.scss';
 import showPass from '../../resources/icons/show-pass.svg'
 import hidePass from '../../resources/icons/hide-pass.svg'
+import logo from '../../resources/img/logo-bg.svg';
 import { useHistory } from 'react-router';
 
 function AuthPage() {
     const history = useHistory();
     const isError = useSelector(state => state.user.isError);
-    const isSuccess = useSelector(state => state.global.isSuccess);
+    const isLoading = useSelector(state => state.global.isLoading);
 
     const [visiblePass, setVisiblePass] = useState(false);
     const [form, setForm] = useState({
@@ -41,7 +44,7 @@ function AuthPage() {
         setForm({...form, [e.target.name]: e.target.value});
 
         if (e.target.name === 'email') {
-            const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            const re = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm;
 
             if (!re.test(String(e.target.value).toLowerCase())) {
                 setEmailErr('Please check the email address entered')
@@ -85,78 +88,83 @@ function AuthPage() {
         dispatch(registration(form));
     }
 
+    const loginUser = (e) => {
+        dispatch(login(form))
+    }
+
+    const preventDef = (e) => {
+        e.preventDefault();
+    }
+
+
     return (
         <div className="auth">
-        <div className="auth__error">
-            {isError}
-        </div>
-            <form onSubmit={e => e.preventDefault()} className="auth__form">
+        <div className="auth__logo"><img src={logo} alt="Check Your Food" /></div>
+            <form onSubmit={preventDef} className="auth__form-main">
+                <div className={isError ? "auth__error" : 'hidden'}>{isError}</div>
                 <div className="auth__form-box">
-                    <div className="auth__tabs">
-                        <div
-                            className={`auth__tab ${active ? '' : "hidden"} `}
-                            onClick={changeActive}
-                        >Log in</div>
-                        <div
-                            className={`auth__tab ${!active ? '' : "hidden"} `}
-                            onClick={changeActive}
-                        >Sing up</div>
-                    </div>
-
                     <div className="auth__form">
                         <h1 className={`auth__title ${!active ? '' : "hidden"} `}>Log in</h1>
                         <h1 className={`auth__title ${active ? '' : "hidden"} `}>Sing up</h1>
                         <div className="auth__inputs">
-                            <label>
-                        {(emailDirty && emailErr) && <span className="auth__err-valid">{emailErr}</span>}
-                                <input
+                            <label className="auth__label">Email address
+                        {(emailDirty && emailErr) && <span className="auth__err-valid">{` (${emailErr})`}</span>}
+                                <InputItem
                                     autoComplete="username"
-                                    placeholder="Email"
+                                    placeholder="email@mail.com"
                                     id="loginEmail"
-                                    type="text"
-                                    className="auth__input"
+                                    type="email"
                                     name="email"
                                     value={form.email}
                                     onChange={changeHandler}
-                                    onBlur={(e) => blurHandler(e)}
-                                ></input>
+                                    onBlur={blurHandler}
+                                />
                             </label>
-                            <label>
+                            <label className="auth__label">Password
+                            {(passDirty && passErr) && <span className="auth__err-valid">{` (${passErr})`}</span>}
                             <div className="auth__pass-box">
-                                <input
+                                <InputItem
                                     autoComplete="current-password"
-                                    placeholder="Password"
+                                    placeholder="******"
                                     id="loginPassword"
-                                    className="auth__input auth__input-bottom"
                                     type={visiblePass ? "text" : "password"}
                                     name="password"
                                     value={form.password}
                                     onChange={changeHandler}
-                                    onBlur={(e) => blurHandler(e)}
+                                    onBlur={blurHandler}
                                 />
                                 <div className="auth__show-pass" onClick={toggleShow}>
                                     <img className="auth__show-pass-ico" src={visiblePass ? hidePass : showPass} alt="Show/Hide" />
                                 </div>
                             </div>
-                            {(passDirty && passErr) && <span className="auth__err-valid">{passErr}</span>}
                             </label>
 
-                            <button
+                            {!isLoading ? <><button
                                 className={`auth__btn ${!active ? '' : "hidden"}`}
-                                onClick={() => dispatch(login(form))}
+                                onClick={loginUser}
                                 disabled={!formValid}
-                            ><span className="auth__btn-arrow"></span></button>
+                            >Log In</button>
                             <button
                                 className={`auth__btn ${active ? '' : "hidden"}`}
                                 onClick={singUp}
                                 disabled={!formValid}
-                            ><span className="auth__btn-arrow"></span></button>
+                            >Sing Up</button></> : <div className="auth__loader-box"><LocalLoader/></div>}
                         </div>
                     </div>
                     <div
                         onClick={recoverPassword}
                         className="auth__forgot"
                     >Forgot Password?</div>
+                    <div className="auth__tabs">
+                        <div
+                            className={`auth__tab ${active ? '' : "hidden"} `}
+                            onClick={changeActive}
+                        >Already have an account? <span>Sign in</span></div>
+                        <div
+                            className={`auth__tab ${!active ? '' : "hidden"} `}
+                            onClick={changeActive}
+                        >New user? Sing up</div>
+                    </div>
                 </div>
             </form>
         </div>

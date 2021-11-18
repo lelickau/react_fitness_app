@@ -31,7 +31,7 @@ function RecoverPassword() {
     }
 
     const sendNewPassword = (e) => {
-        if (!(checkPassword == newPassword.password) || (checkPassword.length < 6)) {
+        if (!(checkPassword === newPassword.password) || (checkPassword.length < 6)) {
             dispatch(setIsError('Passwords must match and contain at least six characters'))
         } else {
             dispatch(updatePassword(newPassword, token));
@@ -43,9 +43,14 @@ function RecoverPassword() {
         history.push('/autorization')
     }
 
+    const preventDef = (e) => {
+        e.preventDefault();
+    }
+
+
     return (
     <div className="recover">
-        <form onSubmit={e => e.preventDefault()} className="recover__form">
+        <form onSubmit={preventDef} className="recover__form">
         <div className={error ? "error" : "hidden"}>{error}</div>
         <div className={success ? "success" : "hidden"}>Password successfully recover</div>
         <button onClick={backToAutorization} className="recover__back">Back to log-in</button>
@@ -59,7 +64,6 @@ function RecoverPassword() {
                     name="password"
                     value={newPassword.password}
                     onChange={changeHandler}
-                    //onBlur={(e) => blurHandler(e)}
                 />
                 <div className="recover__show-pass" onClick={toggleShow}>
                     <img className="recover__show-pass-ico" src={visiblePass ? hidePass : showPass} alt="Show/Hide" />
@@ -81,7 +85,6 @@ function RecoverPassword() {
             </div>
 
             <ButtonItem
-                //className="recover__btn"
                 onClick={sendNewPassword}
             >Send</ButtonItem>
         </form>

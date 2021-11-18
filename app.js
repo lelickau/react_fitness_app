@@ -4,8 +4,9 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const router = require('./routes/index');
 const errorsMiddleware = require('./middleware/error-middelware');
-const fileUpload = require("express-fileupload")
+const fileUpload = require("express-fileupload");
 
+const PORT = process.env.PORT || config.get('port');
 const app = express();
 
 app.use(fileUpload({}));
@@ -16,7 +17,6 @@ app.use('/api', router);
 
 app.use(errorsMiddleware);
 
-const PORT = config.get('port') || 5000;
 
 async function start() {
     try {

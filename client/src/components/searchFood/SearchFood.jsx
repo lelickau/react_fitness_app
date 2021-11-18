@@ -18,14 +18,11 @@ function SearchFood() {
     const [weight, setWeight] = useState(100);
 
     const increaseWeight = (e) => {
-        setWeight(+weight + 1)
+        setWeight(+weight + 1);
     }
 
     const reduceWeight = (e) => {
-        if (!weight === 0) {
-            setWeight(+weight - 1)
-        }
-        setWeight(0)
+        +weight < 2 ? setWeight(1) : setWeight(+weight - 1)
     }
 
     const setDefaultWeight = (e) => {
@@ -82,7 +79,6 @@ function SearchFood() {
                     <div onClick={setDefaultWeight} data-waigth="700" className="search-food__weight-item">700</div>
                     <div onClick={setDefaultWeight} data-waigth="1000" className="search-food__weight-item">1000</div>
                 </div>
-
             </label>
         </div>
     );

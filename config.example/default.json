@@ -1,0 +1,14 @@
+{
+    "port": 5051,
+    "mongoUri": "mongodb://user:password@cluster***mongodb.net/nameapp?retryWrites=true&w=majority",
+    "jwtAccessSecret": "sicret line",
+    "jwtRefreshSecret": "sicret line",
+    "smtpHost": "smtp.mail.com",
+    "smtpPort": 465,
+    "smtpUser": "mail@mail.com",
+    "smtpPassword": "password",
+    "baseUrl": "http://localhost:5051",
+    "clientUrl": "http://localhost:3005",
+    "staticPath": "C:\\Users\\user\\Desktop\\main\\static"
+}
+

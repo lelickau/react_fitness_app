@@ -4,6 +4,9 @@ const {validationResult} = require('express-validator');
 const ApiError = require('../exeptions/api-error');
 const crypto = require('crypto');
 
+const mailService = require('../service/mail-service');
+const User = require('../models/User');
+
 class AuthController {
     async registration(req, res, next) {
         try {
@@ -76,7 +79,7 @@ class AuthController {
             const errors = validationResult(req);
 
             if (!errors.isEmpty()) {
-                return next(ApiError.BadRequest('Validation error', errors.array()))
+                return next(ApiError.BadRequest('Validation error', errors.array()));
             }
 
             crypto.randomBytes(32, async (err, buffer) => {
@@ -85,10 +88,17 @@ class AuthController {
                 }
                 const {email} = req.body;
                 const token = buffer.toString('hex');
-                const userData = await userService.reset(email, token);
+                const candidate = await User.findOne({email});
 
-                return res.json(userData);
-            })
+                if (!candidate) {
+                    return next(ApiError.BadRequest("We couldn't find an account with that email address.", errors.array()));
+                }
+                candidate.resetToken = token;
+                candidate.resetTokenExp = Date.now() + 60*60*1000;
+                await candidate.save();
+                await mailService.resetPasswordMail(email, `${config.get('clientUrl')}/recover/${token}`);
+                return res.json(candidate);
+            });
         } catch (err) {
             next(err);
         }

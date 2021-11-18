@@ -69,18 +69,29 @@ function CreateNote() {
         dispatch(cleanIsError(null));
         setTask({...task, [e.target.name]: e.target.value});
     }
-    const showMarking = (idx, val) => {
-        setActiveMarking(idx);
-        changeMarkingValue(val);
+    const showMarking = (e) => {
+        setActiveMarking(+(e.target.dataset.number));
+        changeMarkingValue(e.target.dataset.mark);
+    }
+
+    const showOwnMarking = (e) => {
+        setActiveMarking(+(e.target.dataset.number));
+        changeMarkingValue(e.target.value);
     }
     const changeMarkingValue = (value) => {
         setMarkingValue(value);
     }
 
-    const showStatus = (idx, val) => {
-        setActiveStatus(idx);
-        changeStatusValue(val)
+    const showStatus = (e) => {
+        setActiveStatus(+(e.target.dataset.number));
+        changeStatusValue(e.target.dataset.status)
     }
+    const showOwnStatus = (e) => {
+        setActiveStatus(+(e.target.dataset.number));
+        changeStatusValue(e.target.value)
+    }
+
+
 
     const changeStatusValue = (value) => {
         setStatusValue(value);
@@ -117,11 +128,16 @@ function CreateNote() {
         }
     }
 
+    const preventDef = (e) => {
+        e.preventDefault();
+    }
+
+
     return (
     <div className="create-note">
         <form
             className="create-note__form"
-            onSubmit={e => e.preventDefault()}
+            onSubmit={preventDef}
         >
         <div className="create-note__btns">
             <button
@@ -173,44 +189,50 @@ function CreateNote() {
                         >Marking</div>
                     <ul className='create-note__mark-list'>
                             <li
-                            onClick={(e) => showMarking(1, e.target.dataset.mark)}
+                            onClick={showMarking}
                             className={`create-note__item-mark ${activeMarking === 1 ? 'create-note__item--active' : ""}`}
                             data-mark="#57AE49"
+                            data-number="1"
                             style={markStyle.green}
                             ></li>
                             <li
                             className={`create-note__item-mark ${activeMarking === 2 ? 'create-note__item--active' : ""}`}
                             data-mark="#2B76BB"
+                            data-number="2"
                             style={markStyle.blue}
-                            onClick={(e) => showMarking(2, e.target.dataset.mark)}
+                            onClick={showMarking}
                             ></li>
                             <li
                             className={`create-note__item-mark ${activeMarking === 3 ? 'create-note__item--active' : ""}`}
                             data-mark="#FF7272"
+                            data-number="3"
                             style={markStyle.red}
-                            onClick={(e) => showMarking(3, e.target.dataset.mark)}
+                            onClick={showMarking}
                             ></li>
                             <li
                             className={`create-note__item-mark ${activeMarking === 4 ? 'create-note__item--active' : ""}`}
-                            onClick={(e) => showMarking(4, e.target.dataset.mark)}
+                            onClick={showMarking}
                             data-mark="#FBF458"
+                            data-number="4"
                             style={markStyle.yellow}
                             ></li>
                             <li
                             className={`create-note__item-mark ${activeMarking === 5 ? 'create-note__item--active' : ""}`}
                             data-mark="#CC79DA"
+                            data-number="5"
                             style={markStyle.violet}
-                            onClick={(e) => showMarking(5, e.target.dataset.mark)}
+                            onClick={showMarking}
                             ></li>
                             <li
                             className={`create-note__item-mark ${activeMarking === 6 ? 'create-note__item--active' : ""}`}
                             data-mark="#79F8E1"
+                            data-number="6"
                             style={markStyle.turquoise}
-                            onClick={(e) => showMarking(6, e.target.dataset.mark)}
+                            onClick={showMarking}
                             ></li>
                             <li
                             className="create-note__item-mark-own"
-                            > <input className={activeMarking === 7 ? 'create-note__item--active' : ""} type="color" onChange={(e) => showMarking(7, e.target.value)} /><span>Own</span> </li>
+                            > <input className={activeMarking === 7 ? 'create-note__item--active' : ""} type="color" data-number="7" onChange={showOwnMarking} /><span>Own</span> </li>
                     </ul>
 
                 </div>
@@ -228,21 +250,24 @@ function CreateNote() {
                             <li
                             className={`create-note__item-status ${activeStatus === 1 ? 'create-note__item--active' : ""}`}
                             data-status="New"
-                            onClick={(e) => showStatus(1, e.target.dataset.status)}
+                            data-number="1"
+                            onClick={showStatus}
                             >New</li>
                             <li
                             className={`create-note__item-status ${activeStatus === 2 ? 'create-note__item--active' : ""}`}
                             data-status="Discussed"
-                            onClick={(e) => showStatus(2, e.target.dataset.status)}
+                            data-number="2"
+                            onClick={showStatus}
                             >Discussed</li>
                             <li
                             className={`create-note__item-status ${activeStatus === 3 ? 'create-note__item--active' : ""}`}
                             data-status="Assigned"
-                            onClick={(e) => showStatus(3, e.target.dataset.status)}
+                            data-number="3"
+                            onClick={showStatus}
                             >Assigned</li>
                             <li
                             className="create-note__item-status-own"
-                            > <input className="create-note__input-status-own" value={task.status} placeholder="choose your own ..." type="text" onChange={(e) => showStatus(4, e.target.value)} /></li>
+                            > <input className="create-note__input-status-own" value={task.status} data-number="4" placeholder="choose your own ..." type="text" onChange={showOwnStatus} /></li>
                     </ul>
                 </div>
             </form>

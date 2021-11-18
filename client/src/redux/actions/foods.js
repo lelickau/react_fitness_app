@@ -1,11 +1,8 @@
 import axios from "axios";
-import {APP_ID, API_KEY} from '../../env';
+import {API_FOOD_URL, MY_API_URL_FOODS} from '../../env';
 import {searchFoodAC, cleanFoodListAC, addFoodAC, getFoodsAC, setFavoriteAC, deleteFavsFoodAC} from '../reducers/foodsReducer';
 import { changeHiddenAC, changeLoadingAC, errorAC } from "../reducers/globalReducer";
 
-const API_URL = `https://api.edamam.com/api/food-database/v2/parser?app_id=${APP_ID}&app_key=${API_KEY}`
-
-const API_URL_MDB = `/api/foods/`;
 
 function FormationDataFood (objFood, weight = 100){
     const {food} = objFood;
@@ -30,7 +27,6 @@ function unDublicate(arr, propertyName) {
         const strarr = arrayFromKey.filter((currentVal, ind) => {
             return arrayFromKey.indexOf(currentVal) === ind
         });
-        //console.log(strarr);
 
         return strarr.map(key => arr.find(item => item.food[propertyName] === key))
     }
@@ -44,7 +40,7 @@ export const searchFood = (food, favsList, weight) => {
     return async dispatch => {
         dispatch(changeLoadingAC(true))
         try {
-            const response = await axios.get(`${API_URL}&ingr=${food}`);
+            const response = await axios.get(`${API_FOOD_URL}&ingr=${food}`);
 
             if (!response.data.hints.length) {
                 dispatch(errorAC(true));
@@ -54,7 +50,6 @@ export const searchFood = (food, favsList, weight) => {
                 const dataFoods = unDublicate(response.data.hints, 'foodId');
 
                 const dataFoodsStore = dataFoods.map(item => new FormationDataFood(item, weight));
-                //console.log(dataFoodsStore);
 
                 const favsFoodIds = findIdFoods(favsList, 'foodId');
                 const finalyFoodData = dataFoodsStore.map(el => {
@@ -64,12 +59,9 @@ export const searchFood = (food, favsList, weight) => {
                         }
                     }
                     return {...el}
-                })
-                //console.log(finalyFoodData);
-
+                });
                 dispatch(searchFoodAC(finalyFoodData));
             }
-
         } catch (err) {
             console.log(err.response.data.message);
         } finally {
@@ -87,10 +79,9 @@ export const setFavorite = (foodId) => {
 export const addFood = (food) => {
     return async dispatch => {
         try {
-            const response = await axios.post(`${API_URL_MDB}create`, food, {
+            const response = await axios.post(`${MY_API_URL_FOODS}create`, food, {
                 headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
             });
-
             dispatch(addFoodAC(response.data));
             dispatch(changeHiddenAC(true));
         } catch (err) {
@@ -103,11 +94,9 @@ export const addFood = (food) => {
 export const getFoods = () => {
     return async dispatch => {
         try {
-            const response = await axios.get(`${API_URL_MDB}getfoods`, {
+            const response = await axios.get(`${MY_API_URL_FOODS}getfoods`, {
                 headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
             });
-            console.log(response.data);
-
             dispatch(getFoodsAC(response.data));
         } catch (err) {
             console.log(err.response.data.message);
@@ -118,12 +107,9 @@ export const getFoods = () => {
 export const deleteFavsFood = (idFood) => {
     return async dispatch => {
         try {
-            const response = await axios.delete(`${API_URL_MDB}delete?id=${idFood}`, {
+            await axios.delete(`${MY_API_URL_FOODS}delete?id=${idFood}`, {
                 headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
             });
-
-            console.log(response.data);
-
             dispatch(deleteFavsFoodAC(idFood));
         } catch (err) {
             console.log(err.response.data.message);

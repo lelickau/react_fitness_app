@@ -1,218 +1,183 @@
 @import '../../styles/variables.scss';
 
 .auth {
+    position: relative;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background: $link-color;
-    background: linear-gradient(to right, $main-bg 50%, #D5E3F4 50%);
+    background: linear-gradient(to right, #fff 40%, $sidebar-bg 40%);
 
-    &__form-box {
-        padding-bottom: 15px;
-        background-color: $link-color;
+    &__form-main {
+        width: 556px;
+        box-shadow: 0px 0px 16px rgba(181, 181, 181, 0.25);
+        border-radius: 29px;
+        padding: 53px;
+        background-color: #fff;
+    }
+
+    &__logo img{
+        width: 230px;
     }
 
     &__title {
-        color: $title;
-        font-size: 20px;
-        line-height: 21px;
-        font-weight: 700;
-        margin-top: 34px;
-        margin-left: 27px;
+        @extend %title-font;
+        margin-top: 18px;
+        margin-bottom: 40px;
     }
 
-    &__tabs {
-        margin-top: 15px;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-    }
-
-    &__tab {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 148px;
-        height: 40px;
-        background: $link-color;
-        box-shadow: 1px 3px 4px rgba(172, 172, 172, 0.25);
-        border-radius: 50px 0px 0px 50px;
-        font-weight: 700;
-        font-size: 18px;
-        line-height: 21px;
-        color: #FA836A;
-        cursor: pointer;
-        margin-top: 12px;
-    }
-
-    &__inputs {
-        position: relative;
-        margin-top: 21px;
-        margin-bottom: 55px;
-        width: 303px;
-        margin-right: 97px;
-        border-bottom-right-radius: 50px;
-        border-top-right-radius: 50px;
-        box-shadow: 3px 1px 4px rgb(172 172 172 / 25%);
-    }
-
-    &__input {
-        border: none;
-        width: 100%;
+    &__label {
         display: block;
-        border: none;
-        background-color: transparent;
-        border-bottom: 1px solid #E1E1E1;
-        height: 55px;
-        padding: 0 27px;
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 300;
+        margin-top: 18px;
+    }
 
-        &::placeholder {
-            font-size: 16px;
-            line-height: 19px;
-            color: #909090;
+    &__pass-box {
+        position: relative;
+
+        input {
+            padding-right: 40px;
         }
     }
 
-    &__input-bottom {
-        border-bottom: none;
+    &__show-pass {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 10px;
+    }
+
+    &__show-pass-ico {
+        width: 30px;
+        height: 30px;
     }
 
     &__btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        right: -35px;
-        width: 70px;
-        height: 70px;
-        color: $link-color;
-        background: linear-gradient(90deg, #79F0F8 0%, #7BACDF 100%);
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
-        border-radius: 50%;
-        border: none;
         cursor: pointer;
+        @extend %title-font;
+        margin-top: 49px;
+        margin-bottom: 13px;
+        width: 100%;
+        border: none;
+        border-radius: 9px;
+        height: 51px;
+        color: #fff;
+        background-color: $btn-color;
     }
 
     &__btn:disabled {
-        background: linear-gradient(90deg, #bbcacc 0%, #cad5e0 100%);
-        cursor: progress;
-    }
-
-    &__btn-arrow {
-        position: absolute;
-        width: 30px;
-        height: 3px;
-        background-color: $link-color;
-        border-radius: 30px;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 20px;
-    }
-
-    &__btn-arrow::after,
-    &__btn-arrow::before {
-        content: '';
-        position: absolute;
-        width: 15px;
-        height: 3px;
-        border-radius: 30px;
-        background-color: $link-color;
-        right: -2px;
-    }
-
-    &__btn-arrow::after {
-        top: -4px;
-        transform: rotate(35deg);
-    }
-
-    &__btn-arrow::before {
-        top: 4px;
-        transform: rotate(-35deg);
+        background: linear-gradient(90deg, #64787c 0%, #7a8c9f 100%);
+        cursor: not-allowed;
     }
 
     &__forgot {
+        color: $title;
         cursor: pointer;
-        font-size: 16px;
-        line-height: 19px;
-        color: #919191;
         text-align: right;
-        margin-right: 18px;
+        font-size: 18px;
+        line-height: 24px;
+        font-weight: 300;
+        margin-bottom: 28px;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 
-    &__forgot:hover,
-    &__forgot:focus {
-        text-decoration: underline;
+    &__tab {
+        cursor: pointer;
+        @extend %title-font;
+        font-size: 18px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__loader-box {
+        height: 113px;
+    }
+
+    .local-loader__box {
+        transform: translateY(0);
+    }
+
+    &__error {
+        text-align: center;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        color: #fff;
+        padding: 10px;
+        background-color: #FA836A;
+    }
+
+    &__err-valid {
+        color: #FA836A;
     }
 
     .hidden {
         display: none;
     }
-
-    &__error {
-        display: block;
-        font-size: 12px;
-        line-height: 16px;
-        font-weight: 500;
-        color: #fff;
-        background-color: #FA836A;
-    }
-
-    &__err-valid {
-        display: inline-block;
-        padding: 3px 35px 3px 15px;
-        font-size: 12px;
-        line-height: 16px;
-        font-weight: 500;
-        color: #FA836A;
-    }
-
-    &__pass-box {
-        position: relative;
-    }
-
-    &__show-pass {
-        cursor: pointer;
-        top: 18px;
-        right: 46px;
-        position: absolute;
-    }
-
-    &__show-pass-ico {
-        width: 20px;
-    }
-
 }
-
-@media (max-width: 590px) {
+@media (max-width: 1120px) {
     .auth {
-        background: $main-bg;
+        background: linear-gradient(to right, #fff 34%, $sidebar-bg 34%);
+    }
+}
 
-        &__form-box {
-            width: 100vw;
+@media (max-height: 768px) {
+    .auth {
+        &__form-main {
+            padding: 25px;
         }
-
-        &__inputs {
-            width: 90vw;
+    }
+}
+@media (max-height: 684px) {
+    .auth {
+        &__logo {
+            img {
+                width: 135px;
+            }
         }
     }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 600px) {
+    .auth {
+        background: linear-gradient(to right, #fff 0%, $sidebar-bg 0%);
+        &__form-main {
+            width: 100%;
+            box-shadow: none;
+            border-radius: 0;
+            padding: 20px;
+            background-color: transparent;
+        }
+        &__title,
+        &__label,
+        &__forgot,
+        &__tab {
+            color: #fff;
+        }
+
+        &__btn {
+            background-color: #FA836A;
+        }
+    }
+}
+
+@media (max-width: 592px) {
     .auth {
         &__btn {
-            top: 135%;
-            right: auto;
-            left: 8px;
-            height: 60px;
-            color: #fff;
-            border-radius: 10%;
+            height: 39px;
         }
-
-        &__inputs {
-            width: 100vw;
-            border-bottom-right-radius: 0;
-            border-top-right-radius: 0;
+        &__tab {
+            font-size: 16px;
         }
     }
 }

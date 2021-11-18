@@ -79,18 +79,6 @@ class UserService {
         return {...tokens, user: userDto}
     }
 
-    async reset(email, token) {
-        const candidate = await User.findOne({email});
-
-        if (!candidate) {
-            throw ApiError.BadRequest('An account with this email address already exists.');
-        }
-        candidate.resetToken = token;
-        candidate.resetTokenExp = Date.now() + 60*60*1000;
-        await candidate.save();
-        await mailService.resetPasswordMail(email, `${config.get('clientUrl')}/recover/${token}`);
-    }
-
     async updatePassword(password, token) {
         const user = await User.findOne({
             resetToken: token,

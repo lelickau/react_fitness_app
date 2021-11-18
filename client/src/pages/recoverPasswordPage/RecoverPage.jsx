@@ -18,7 +18,7 @@ function RecoverPage() {
     const changeHandler = (e) => {
         setUserEmail({...userEmail, [e.target.name]: e.target.value});
         if (e.target.name === 'email') {
-            const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            const re = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm;
 
             if (!re.test(String(e.target.value).toLowerCase())) {
                 dispatch(setIsError('Please check the email address entered'));
@@ -36,9 +36,13 @@ function RecoverPage() {
         dispatch(reset(userEmail));
     }
 
+    const preventDef = (e) => {
+        e.preventDefault();
+    }
+
     return (
     <div className="recover">
-        <form onSubmit={e => e.preventDefault()} className="recover__form">
+        <form onSubmit={preventDef} className="recover__form">
         <div className={error ? "error" : "hidden"}>{error}</div>
         <div className={success ? "success" : "hidden"}>Chack email {success} to recover your password</div>
         <button onClick={backToAutorization} className="recover__back">Back to log-in</button>
@@ -48,17 +52,14 @@ function RecoverPage() {
                     autoComplete="username"
                     placeholder="Email"
                     id="loginEmail"
-                    type="text"
-                    //className="recover__input"
+                    type="email"
                     name="email"
                     value={userEmail.email}
                     onChange={changeHandler}
-                    //onBlur={(e) => blurHandler(e)}
                 />
             </div>
 
             <ButtonItem
-                //className="recover__btn"
                 onClick={resetPassword}
             >Send</ButtonItem>
         </form>

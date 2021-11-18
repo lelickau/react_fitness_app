@@ -2,7 +2,7 @@ import React from 'react';
 import HeaderTitle from '../../components/headerTitle/HeaderTitle';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteAvatar, uploadAvatar } from '../../redux/actions/user';
-import {SERVER_URL} from '../../config.js';
+import {SERVER_URL} from '../../env.js';
 
 import editBtn from '../../resources/icons/edit-pen.svg';
 import defaultAvatar from '../../resources/img/profile-img.png';
@@ -10,7 +10,7 @@ import './homePage.scss';
 
 function HomePage() {
     const user = useSelector(state => state.user.currentUser);
-    const avatar = user.avatar ? `${SERVER_URL + user.avatar}` : defaultAvatar
+    const avatar = user.avatar ? `${SERVER_URL + user.avatar}` : defaultAvatar;
     const dispatch = useDispatch();
 
     const changeHandler = (e) => {

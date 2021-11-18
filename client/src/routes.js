@@ -13,16 +13,16 @@ export const useRoutes = (isAuth) => {
     if (isAuth) {
         return (
             <Switch>
+                <Route path="/foods" exact>
+                    <FoodPage/>
+                </Route>
                 <Route path="/home" exact>
                     <HomePage/>
                 </Route>
                 <Route path="/notes" exact>
                     <NotesPage/>
                 </Route>
-                <Route path="/foods" exact>
-                    <FoodPage/>
-                </Route>
-                <Redirect to="/home" />
+                <Redirect to="/foods" />
             </Switch>
         )
     }
