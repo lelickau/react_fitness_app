@@ -2,16 +2,14 @@ import axios from "axios";
 import { setErrorAC, setSuccessAC, changeLoadingAC } from "../reducers/globalReducer";
 import { setUserAC, logoutAC, errorAuthAC, updateUserAC } from "../reducers/userReducer";
 import { API_URL_AUTH } from "../../env";
+import AuthService from "../../services/AuthServices";
 
 export const registration = ({email, password}) => {
     return async dispatch => {
         dispatch(changeLoadingAC(true));
         try {
             const correctEmail = email.toLowerCase();
-
-            const response = await axios.post(`${API_URL_AUTH}registration`, {
-                email: correctEmail, password
-            });
+            const response = await AuthService.registration(correctEmail, password);
             dispatch(setSuccessAC(true));
             dispatch(setUserAC(response.data.user));
             localStorage.setItem('token', response.data.accessToken);
@@ -29,10 +27,8 @@ export const login = ({email, password}) => {
         dispatch(changeLoadingAC(true));
         try {
             const correctEmail = email.toLowerCase();
-            const response = await axios.post(`${API_URL_AUTH}login`, {
-                email:correctEmail,
-                password
-            });
+            const response = await AuthService.login(correctEmail, password);
+
             dispatch(setUserAC(response.data.user));
             localStorage.setItem('token', response.data.accessToken);
         } catch (err) {
@@ -47,7 +43,7 @@ export const login = ({email, password}) => {
 export const logout = () => {
     return async dispatch => {
         try {
-            await axios.post(`${API_URL_AUTH}logout`);
+            await AuthService.logout();
             localStorage.removeItem('token');
             dispatch(logoutAC());
         } catch (err) {
