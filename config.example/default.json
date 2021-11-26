@@ -1,14 +1,15 @@
 {
     "port": 5051,
-    "mongoUri": "mongodb://user:password@cluster***mongodb.net/nameapp?retryWrites=true&w=majority",
-    "jwtAccessSecret": "sicret line",
-    "jwtRefreshSecret": "sicret line",
-    "smtpHost": "smtp.mail.com",
+    "mongoUri": "mongodb+srv://root:root@cluster0.daol3.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    "jwtAccessSecret": "sicret access",
+    "jwtRefreshSecret": "sicret refresh",
+    "smtpHost": "smtp.yandex.ru",
     "smtpPort": 465,
-    "smtpUser": "mail@mail.com",
-    "smtpPassword": "password",
+    "smtpUser": "kautest@yandex.ru",
+    "smtpPassword": "gdoffwmmwszkehjj",
     "baseUrl": "http://localhost:5051",
     "clientUrl": "http://localhost:3005",
+    
     "staticPath": "C:\\Users\\user\\Desktop\\main\\static"
 }
 
