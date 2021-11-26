@@ -29,7 +29,7 @@ password: 123456
 
 
 ##### Application tree:
-
+```
 _**server**_
 --| **config.example**
 ----|default.json
@@ -159,6 +159,6 @@ _**client**_
 ----| env.example.js
 ----| index.js
 ----| routes.js
-
+```
 
 
