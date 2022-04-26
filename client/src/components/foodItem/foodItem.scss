@@ -1,10 +1,9 @@
 @import '../../styles//variables.scss';
 
 .food-item {
-    margin-top: 44px;
-    width: 343px;
+    width: 100%;
     padding: 30px 32px 19px;
-    background-color: #FFFFFF;
+    background-color: $link-color;
     box-shadow: 0px 4px 21px rgba(51, 51, 51, 0.25);
     border-radius: 17px;
 
@@ -13,7 +12,7 @@
     }
 
     &__title {
-        @extend %title-font;
+        @include title-fonts;
         margin-left: 14px;
         margin-bottom: 14px;
     }
@@ -35,6 +34,7 @@
 
     &__nutrients {
         display: flex;
+        flex-wrap: wrap;
     }
 
     &__weight {
@@ -46,48 +46,18 @@
     }
 }
 
-@media (max-width: 1620px) {
-    .food-item {
-        margin-top: 20px;
-    }
-}
 
 @media (max-width: 1360px) {
     .food-item {
-        width: 420px;
         box-shadow: 0px 0px 4px rgba(51, 51, 51, 0.25);
     }
 }
 
-@media (max-width: 1000px) {
-    .food-item {
-        width: 550px;
-    }
-}
-
-@media (max-width: 570px) {
-    .food-item {
-        width: 400px;
-    }
-}
 @media (max-width: 430px) {
     .food-item {
-        width: 340px;
-        padding: 20px 18px;
+        padding: 20px;
         &__title {
             font-size: 18px;
-        }
-    }
-
-}
-
-@media (max-width: 360px) {
-    .food-item {
-        width: 307px;
-        margin-top: 7px;
-
-        &__nutrients {
-            flex-direction: column;
         }
     }
 }

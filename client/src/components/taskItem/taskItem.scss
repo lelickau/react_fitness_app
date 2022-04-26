@@ -119,12 +119,24 @@
 
 @media (max-width: 590px) {
     .task {
+        &__items {
+            flex-direction: column;
+        }
         &__item-number {
             display: none;
         }
 
         &__items-text {
             margin-left: 15px;
+        }
+
+        .settings {
+            display: flex;
+            justify-content: flex-end;
+            &__btn-del {
+                margin-bottom: 0;
+                margin-right: 10px;
+            }
         }
     }
 }
@@ -134,22 +146,9 @@
         &__items {
             flex-direction: column;
         }
-
-        &__status-box {
-            padding-right: 100px;
-        }
     }
 
-    .settings {
-        padding: 0;
-        display: flex;
-        width: 79px;
-        margin: -48px 10px 10px auto ;
-        &__btn-del {
-            margin-bottom: 0;
-            margin-right: 9px;
-        }
-    }
+
 }
 
 @media (max-width: 320px) {
@@ -157,9 +156,6 @@
         &__status-box {
             padding-right: 0;
         }
-    }
-    .settings {
-        margin: 0 10px 10px auto ;
     }
 }
 

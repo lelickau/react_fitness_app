@@ -38,6 +38,27 @@ function CreateNote() {
         setStatusValue('New');
     }
 
+    const getStatus = (status) => {
+        const statusMapping = {
+            New: 1,
+            Discussed: 2,
+            Assigned: 3
+        }
+        return statusMapping[status]
+    }
+
+    const getMarking = (marking) => {
+        const markingMapping = {
+            '#57AE49': 1,
+            '#2B76BB': 2,
+            '#FF7272': 3,
+            '#FBF458': 4,
+            '#CC79DA': 5,
+            '#79F8E1': 6,
+        }
+        return markingMapping[marking]
+    }
+
     useEffect(() => {
         if (editNote.length){
             setTask(editNote[0]);
@@ -45,15 +66,18 @@ function CreateNote() {
             setStatusValue(editNote[0].status);
             if (editNote[0].marking) setActiveMarking(7);
             if (editNote[0].status) setActiveStatus(4);
-            if (editNote[0].marking === '#57AE49') setActiveMarking(1);
-            if (editNote[0].marking === '#2B76BB') setActiveMarking(2);
-            if (editNote[0].marking === '#FF7272') setActiveMarking(3);
-            if (editNote[0].marking === '#FBF458') setActiveMarking(4);
-            if (editNote[0].marking === '#CC79DA') setActiveMarking(5);
-            if (editNote[0].marking === '#79F8E1') setActiveMarking(6);
-            if (editNote[0].status === 'New') setActiveStatus(1);
-            if (editNote[0].status === 'Discussed') setActiveStatus(2);
-            if (editNote[0].status === 'Assigned') setActiveStatus(3);
+            // if (editNote[0].marking === '#57AE49') setActiveMarking(1);
+            // if (editNote[0].marking === '#2B76BB') setActiveMarking(2);
+            // if (editNote[0].marking === '#FF7272') setActiveMarking(3);
+            // if (editNote[0].marking === '#FBF458') setActiveMarking(4);
+            // if (editNote[0].marking === '#CC79DA') setActiveMarking(5);
+            // if (editNote[0].marking === '#79F8E1') setActiveMarking(6);
+            setActiveMarking(getMarking(editNote[0].marking))
+            // if (editNote[0].status === 'New') setActiveStatus(1);
+            // if (editNote[0].status === 'Discussed') setActiveStatus(2);
+            // if (editNote[0].status === 'Assigned') setActiveStatus(3);
+            setActiveStatus(getStatus(editNote[0].status))
+
         };
     }, [editNote]);
 

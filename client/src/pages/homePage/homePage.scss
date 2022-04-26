@@ -5,18 +5,74 @@
     &__content {
         padding-top: 66px;
         padding-left: 100px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    &__info {
+        width: 68%;
+        display: flex;
+        align-items: flex-start;
     }
 
     &__box {
+        width: 30%;
         position: relative;
         display: flex;
         align-items: center;
         flex-direction: column;
         padding: 24px;
-        margin-right: 50px;
-        background-color: #fff;
+        margin-right: 10px;
+        background-color: $link-color;
         box-shadow: 0px 4px 21px rgba(51, 51, 51, 0.25);
         border-radius: 17px;
+        margin-bottom: 20px;
+    }
+
+    &__info-box {
+        width: 50%;
+        padding: 24px;
+        margin-right: 10px;
+        background-color: $link-color;
+        box-shadow: 0px 4px 21px rgba(51, 51, 51, 0.25);
+        border-radius: 17px;
+        margin-bottom: 20px;
+    }
+
+    &__title {
+        @include title-fonts;
+    }
+
+    &__item {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        border-radius: 30px;
+        padding: 15px 30px;
+        background-color: rgb(214, 235, 255);
+    }
+
+    &__item-status {
+        display: inline-block;
+        margin-top: 7px;
+        @include text-fonts;
+    }
+
+    &__item-link {
+        transition: all .3s;
+        background-color: $btn-color;
+        padding: 15px 25px;
+        @include subtitle-fonts;
+        color: $link-color;
+        border-radius: 30px;
+        margin-top: 15px;
+
+        &:hover {
+            color: rgb(214, 235, 255);
+        }
+    }
+
+    &__item-title {
+        @include subtitle-fonts;
     }
 
     &__ava-box {
@@ -45,7 +101,7 @@
     }
 
     &__email {
-        @extend %title-font;
+        @include title-fonts;
     }
 
     &__input-file {
@@ -53,7 +109,11 @@
         width: 0;
         visibility: hidden;
         position: absolute;
+    }
 
+    &__empty {
+        margin-top: 15px;
+        @include subtitle-fonts;
     }
 
     .hidden {
@@ -76,6 +136,32 @@
         }
     }
 }
+
+@media (max-width: 1300px) {
+    .profile {
+        &__info {
+            flex-direction: column;
+        }
+
+        &__info-box {
+            width: 100%;
+        }
+    }
+}
+@media (max-width: 1000px) {
+    .profile {
+        &__content {
+            flex-direction: column;
+            align-items: start;
+        }
+
+        &__box,
+        &__info {
+            width: 98%;
+        }
+    }
+}
+
 @media (max-width: 690px) {
     .profile {
         .container {

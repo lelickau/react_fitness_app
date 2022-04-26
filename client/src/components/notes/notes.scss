@@ -1,10 +1,9 @@
 @import '../../styles//variables.scss';
 
 .notes {
-
     &__title {
         margin-top: 39px;
-        @extend %title-font;
+        @include title-fonts;
         margin-bottom: 46px;
     }
 

@@ -3,7 +3,6 @@ body .notes__create-box .hidden {
     overflow:hidden;
 }
 .notes {
-
     &__create-box {
         position: fixed;
         z-index: 250;
@@ -24,7 +23,7 @@ body .notes__create-box .hidden {
         align-items: center;
         border: none;
         height: 53px;
-        background: #444C57;
+        background-color: $btn-color;
         border-radius: 26px;
         cursor: pointer;
     }
@@ -58,6 +57,14 @@ body .notes__create-box .hidden {
     }
 }
 
+@media (max-width: 890px) {
+    .notes {
+        .container {
+            padding-top: 100px;
+        }
+    }
+}
+
 @media (max-width: 690px) {
     .notes {
         .container {
@@ -65,7 +72,6 @@ body .notes__create-box .hidden {
         }
         &__box-items {
             padding: 0;
-            padding-right: 10px;
         }
     }
 }

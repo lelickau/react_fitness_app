@@ -31,7 +31,7 @@
 
     &__label-task {
         display: block;
-        @extend %title-font;
+        @include title-fonts;
         margin-bottom: 36px;
     }
 
@@ -40,7 +40,7 @@
         display: block;
         width: 487px;
         height: 135px;
-        background: #EDEDED;
+        background-color: $input-text;
         border-radius: 9px;
         padding: 18px;
         border: none;
@@ -48,7 +48,7 @@
     }
 
     &__input-title {
-        @extend %iput-item;
+        @include input-item;
     }
 
     &__label-title--error {
@@ -124,7 +124,7 @@
         cursor: pointer;
         padding: 10px 15px;
         background-color: #3EC1D3;
-        color:#fff;
+        color:$link-color;
         border-radius: 50px;
         margin-right: 21px;
     }
@@ -134,7 +134,7 @@
         height: 51px;
         border: none;
         padding: 0 23px;
-        background: #EDEDED;
+        background: $input-text;
         border-radius: 9px;
     }
 

@@ -8,14 +8,14 @@
     align-items: center;
     justify-content: center;
     background: $link-color;
-    background: linear-gradient(to right, #fff 40%, $sidebar-bg 40%);
+    background-color: $sidebar-bg;
 
     &__form-main {
         width: 556px;
         box-shadow: 0px 0px 16px rgba(181, 181, 181, 0.25);
         border-radius: 29px;
         padding: 53px;
-        background-color: #fff;
+        background-color: $link-color;
     }
 
     &__logo img{
@@ -23,7 +23,7 @@
     }
 
     &__title {
-        @extend %title-font;
+        @include title-fonts;
         margin-top: 18px;
         margin-bottom: 40px;
     }
@@ -60,14 +60,14 @@
 
     &__btn {
         cursor: pointer;
-        @extend %title-font;
+        @include title-fonts;
         margin-top: 49px;
         margin-bottom: 13px;
         width: 100%;
         border: none;
         border-radius: 9px;
         height: 51px;
-        color: #fff;
+        color: $link-color;
         background-color: $btn-color;
     }
 
@@ -92,7 +92,7 @@
 
     &__tab {
         cursor: pointer;
-        @extend %title-font;
+        @include title-fonts;
         font-size: 18px;
 
         &:hover {
@@ -112,7 +112,7 @@
         text-align: center;
         margin-bottom: 15px;
         border-radius: 8px;
-        color: #fff;
+        color: $link-color;
         padding: 10px;
         background-color: #FA836A;
     }
@@ -125,9 +125,10 @@
         display: none;
     }
 }
+
 @media (max-width: 1120px) {
     .auth {
-        background: linear-gradient(to right, #fff 34%, $sidebar-bg 34%);
+        background-color: $sidebar-bg;
     }
 }
 
@@ -150,7 +151,7 @@
 
 @media (max-width: 600px) {
     .auth {
-        background: linear-gradient(to right, #fff 0%, $sidebar-bg 0%);
+        background-color: $sidebar-bg;
         &__form-main {
             width: 100%;
             box-shadow: none;
@@ -162,7 +163,7 @@
         &__label,
         &__forgot,
         &__tab {
-            color: #fff;
+            color: $link-color;
         }
 
         &__btn {

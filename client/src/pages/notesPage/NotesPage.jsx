@@ -1,9 +1,8 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Notes from '../../components/notes/Notes';
 import HeaderTitle from '../../components/headerTitle/HeaderTitle';
 import PlusElem from '../../components/UI/elems/PlusMinusElem';
 import ButtonItem from '../../components/UI/buttons/ButtonItem';
-import { getNotes } from '../../redux/actions/notes';
 import { useDispatch, useSelector } from 'react-redux';
 import CreateNote from '../../components/createNote/CreateNote';
 import { changeHidden } from '../../redux/actions/global';
@@ -21,10 +20,6 @@ function NotesPage() {
         e.preventDefault();
         dispatch(changeHidden(false))
     }
-
-    useEffect(() => {
-        dispatch(getNotes())
-    }, [dispatch]);
 
     return (
         <div className="notes">

@@ -1,7 +1,6 @@
 @import '../../styles/variables.scss';
 
 .my-food {
-
     &__title-box {
         position: relative;
         display: flex;
@@ -20,14 +19,14 @@
         right: 30px;
         top: 22px;
         border: 14px solid transparent;
-        border-top: 12px solid #565656;
+        border-top: 12px solid $title;
     }
 
     &__close {
         right: 30px;
         top: 5px;
         border: 14px solid transparent;
-        border-bottom: 12px solid #565656;
+        border-bottom: 12px solid $title;
     }
 
     &__marking {
@@ -46,7 +45,7 @@
     }
 
     &__title {
-        @extend  %title-font;
+        @include title-fonts;
     }
 
     &__nutrients-box {

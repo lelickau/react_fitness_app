@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { initializeApp } from './redux/reducers/initializeReducer';
 
 import './styles/style.scss';
+import { getNotes } from './redux/actions/notes';
+import { getFoods } from './redux/actions/foods';
 
 function App() {
 
@@ -19,8 +21,13 @@ function App() {
     dispatch(initializeApp())
   }, [dispatch]);
 
-  // const {token, login, logout, userId, ready} = useAuth();
-  // const isAauthenticated = !!token;
+  useEffect(() => {
+    if (isAuth) {
+      dispatch(getNotes())
+      dispatch(getFoods())
+    }
+}, [dispatch, isAuth]);
+
   const routes = useRoutes(isAuth);
 
   if(!initialized) {
@@ -30,14 +37,12 @@ function App() {
   }
 
   return (
-    // <AuthContext.Provider value={{token, login, logout, userId, isAauthenticated}}>
       <BrowserRouter>
         <div className="app">
-          {isAuth && <Sidebar/>}
+          {<Sidebar/>}
           {routes}
         </div>
       </BrowserRouter>
-    /* </AuthContext.Provider> */
   );
 }
 

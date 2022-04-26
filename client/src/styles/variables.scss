@@ -7,13 +7,54 @@ $btn-color: #444C57;
 $link-color: #fff;
 $head-bg: #212832;
 
-%title-font{
+@mixin title-fonts {
     font-size: 22px;
     line-height: 26px;
     font-weight: 700;
     color: $title;
+
+    @media (min-width: 1100px) {
+        font-size: 22px;
+        line-height: 26px;
+    }
+
+    @media (max-width: 1100px) {
+        font-size: 20px;
+        line-height: 23px;
+    }
 }
-%iput-item{
+
+@mixin subtitle-fonts {
+    color: $title;
+    font-weight: 700;
+
+    @media (min-width: 1100px) {
+        font-size: 20px;
+        line-height: 23px;
+    }
+
+    @media (max-width: 1100px) {
+        font-size: 18px;
+        line-height: 21px;
+    }
+}
+
+@mixin text-fonts {
+    color: $text;
+    font-weight: 300;
+
+    @media (min-width: 1100px) {
+        font-size: 16px;
+        line-height: 21px;
+    }
+
+    @media (max-width: 1100px) {
+        font-size: 16px;
+        line-height: 18px;
+    }
+}
+
+@mixin input-item {
     width: 100%;
     display: block;
     margin-top: 15px;

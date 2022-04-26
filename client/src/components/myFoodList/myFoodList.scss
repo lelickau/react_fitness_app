@@ -1,9 +1,9 @@
 @import '../../styles/variables.scss';
 
 .food-list {
-    width: 530px;
+    width: 100%;
     padding: 30px;
-    background: #FFFFFF;
+    background: $link-color;
     box-shadow: 0px 4px 21px rgba(51, 51, 51, 0.25);
     border-radius: 17px;
 
@@ -33,7 +33,7 @@
     }
 
     &__title {
-        @extend %title-font;
+        @include title-fonts;
         margin-left: 14px;
     }
 
@@ -53,7 +53,7 @@
         line-height: 21px;
         font-weight: 700;
     }
-    
+
     .hidden {
         display: none;
     }
@@ -68,18 +68,10 @@
     }
 }
 
-@media (max-width: 1090px) {
-    .food-list {
-        width: 450px;
-    }
-}
-@media (max-width: 1000px) {
-    .food-list {
-        width: 550px;
-    }
-}
+
 @media (max-width: 592px) {
     .food-list {
+        padding: 20px;
         &__add {
             height: 40px;
         }
@@ -89,29 +81,9 @@
         }
     }
 }
-@media (max-width: 570px) {
-    .food-list {
-        width: 400px;
-        padding: 20px;
-    }
-}
-@media (max-width: 430px) {
-    .food-list {
-        width: 340px;
-        padding: 20px;
-    }
-}
-@media (max-width: 360px) {
-    .food-list {
-        width: 307px;
-        padding: 12px;
-    }
-}
+
 @media (max-width: 320px) {
     .food-list {
-        width: 260px;
-        padding: 7px;
-
         &__add-title {
             margin: 10px;
         }

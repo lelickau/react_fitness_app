@@ -11,6 +11,7 @@
 
 body {
     background-color: $main-bg;
+    @include text-fonts;
 }
 
 ul,
@@ -58,31 +59,24 @@ input::-webkit-inner-spin-button {
 }
 
 .container {
-    padding-top: 106px;
-    padding-left: 234px;
+    padding: 106px 20px 0 234px;
 }
 
 @media (max-width: 1620px) {
     .container {
-        padding-top: 70px;
-        padding-left: 195px;
+        padding: 70px 20px 0 195px;
     }
 }
 
 @media (max-width: 970px) {
     .container {
-        padding-top: 70px;
-        padding-left: 115px;
-    }
-}
-@media (max-width: 840px) {
-    .container {
-        padding-bottom: 100px;
+        padding: 70px 10px 0 115px;
     }
 }
 
-@media (max-width: 690px) {
+@media (max-width: 890px) {
     .container {
-        padding-left: 6px;
+        padding: 0 10px 100px 10px;
     }
 }
+

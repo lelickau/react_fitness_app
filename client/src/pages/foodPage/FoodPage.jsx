@@ -1,26 +1,21 @@
-import React, {useEffect, useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import LocalLoader from '../../components/loader/LocalLoader';
 import FoodItem from '../../components/foodItem/FoodItem';
 import HeaderTitle from '../../components/headerTitle/HeaderTitle';
 import MyFoodList from '../../components/myFoodList/MyFoodList';
 import SearchFood from '../../components/searchFood/SearchFood';
-import { getFoods } from '../../redux/actions/foods';
 
 import './foodPage.scss';
 
 function FoodPage() {
-    const dispatch = useDispatch()
+    const {isAuth} = useSelector(state => state.user);
     const allSearchedFoods = useSelector(state => state.foods.searchFoodList);
     const isError = useSelector(state => state.global.isError);
     const isLoading = useSelector(state => state.global.isLoading);
 
     const [hiddenContent, setHiddenContent] = useState(false);
     const widthScreen = window.innerWidth;
-
-    useEffect(() => {
-        dispatch(getFoods())
-    }, [dispatch]);
 
     const showSearchContent = (e) => {
         e.preventDefault();
@@ -31,15 +26,28 @@ function FoodPage() {
         setHiddenContent(true);
     }
 
+    const guestStyle = {}
+    if (!isAuth) {
+        guestStyle.width = '100%'
+    }
+
     return (
         <div className="food">
             <HeaderTitle>Food</HeaderTitle>
-            <div className={widthScreen < 1001 ? "food__tab-btns" : "hidden"}>
-                <button className={!hiddenContent ? "food__tab-btn food__tab-btn--active" : "food__tab-btn"} onClick={showSearchContent}>Search</button>
-                <button className={hiddenContent ? "food__tab-btn food__tab-btn--active" : "food__tab-btn"} onClick={showFavsContent}>My Favs</button>
-            </div>
+            {
+                isAuth ?
+                <div className={widthScreen < 1001 ? "food__tab-btns" : "hidden"}>
+                    <button className={!hiddenContent ? "food__tab-btn food__tab-btn--active" : "food__tab-btn"} onClick={showSearchContent}>Search</button>
+                    <button className={hiddenContent ? "food__tab-btn food__tab-btn--active" : "food__tab-btn"} onClick={showFavsContent}>My Favs</button>
+                </div>
+                :
+                ''
+            }
             <article className="food__content container">
-                <div className={hiddenContent ? "food__serach hidden" : "food__serach"}>
+                <div
+                    className={hiddenContent ? "food__serach hidden" : "food__serach"}
+                    style={{...guestStyle}}
+                >
                     <SearchFood/>
                     <div className="food__serach-items">
                         {isLoading ? <div className="food__serach-loader"><LocalLoader/></div> : ""}
@@ -49,10 +57,15 @@ function FoodPage() {
                     }
                     </div>
                 </div>
-                <div
-                    className={widthScreen < 1001 ? `food__add-create ${!hiddenContent ? 'hidden' : ''}` : "food__add-create"}>
-                    <MyFoodList/>
-                </div>
+                {
+                    isAuth ?
+                    <div
+                        className={widthScreen < 1001 ? `food__add-create ${!hiddenContent ? 'hidden' : ''}` : "food__add-create"}>
+                        <MyFoodList/>
+                    </div>
+                    :
+                    ""
+                }
             </article>
         </div>
     );

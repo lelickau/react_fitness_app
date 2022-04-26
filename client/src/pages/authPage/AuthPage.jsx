@@ -148,7 +148,7 @@ function AuthPage() {
                                 className={`auth__btn ${active ? '' : "hidden"}`}
                                 onClick={singUp}
                                 disabled={!formValid}
-                            >Sing Up</button></> : <div className="auth__loader-box"><LocalLoader/></div>}
+                            >Sign Up</button></> : <div className="auth__loader-box"><LocalLoader/></div>}
                         </div>
                     </div>
                     <div

@@ -48,7 +48,8 @@
         color: $link-color;
     }
 
-    &__logout {
+    &__logout,
+    &__login {
         border: none;
         background-color:transparent;
         cursor: pointer;
@@ -57,12 +58,14 @@
         justify-content: center;
     }
 
-    &__logout-ico {
+    &__logout-ico,
+    &__login-ico {
         width: 21px;
         height: 21px;
         margin-right: 7px;
     }
 
+    &__login-title,
     &__logout-title {
         color: $link-color;
         font-weight: 500;
@@ -123,11 +126,13 @@
         }
 
         &__link,
-        &__logout {
+        &__logout,
+        &__login {
             width: 40px;
         }
 
-        &__logout-ico {
+        &__logout-ico,
+        &__login-ico {
             width: 100%;
             height: auto;
             margin-right: 0;
@@ -145,11 +150,13 @@
         }
 
         &__link,
-        &__logout {
+        &__logout,
+        &__login {
             width: 30px;
         }
 
-        &__logout {
+        &__logout,
+        &__login {
             align-items: start;
         }
         &__list {

@@ -17,7 +17,6 @@ app.use('/api', router);
 
 app.use(errorsMiddleware);
 
-
 async function start() {
     try {
         await mongoose.connect(config.get('mongoUri'));
