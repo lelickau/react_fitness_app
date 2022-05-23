@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import Loader from '../../components/loader/Loader';
 import InputItem from '../../components/UI/inputs/InputItem';
 import ButtonItem from '../../components/UI/buttons/ButtonItem';
 import { useDispatch, useSelector } from 'react-redux';
@@ -66,16 +65,7 @@ function CreateNote() {
             setStatusValue(editNote[0].status);
             if (editNote[0].marking) setActiveMarking(7);
             if (editNote[0].status) setActiveStatus(4);
-            // if (editNote[0].marking === '#57AE49') setActiveMarking(1);
-            // if (editNote[0].marking === '#2B76BB') setActiveMarking(2);
-            // if (editNote[0].marking === '#FF7272') setActiveMarking(3);
-            // if (editNote[0].marking === '#FBF458') setActiveMarking(4);
-            // if (editNote[0].marking === '#CC79DA') setActiveMarking(5);
-            // if (editNote[0].marking === '#79F8E1') setActiveMarking(6);
             setActiveMarking(getMarking(editNote[0].marking))
-            // if (editNote[0].status === 'New') setActiveStatus(1);
-            // if (editNote[0].status === 'Discussed') setActiveStatus(2);
-            // if (editNote[0].status === 'Assigned') setActiveStatus(3);
             setActiveStatus(getStatus(editNote[0].status))
 
         };
@@ -189,14 +179,14 @@ function CreateNote() {
             />
             </label>
             <div className="create-note__items-box">
-            <label className="create-note__label-task" >Description
+            <label className="create-note__label-task">Description
             <textarea
                 className="create-note__description"
                 name="description"
                 placeholder="add a description ..."
                 value={task.description}
                 onChange={changeHandler}
-            ></textarea></label>
+            /></label>
 
 
                 <div className="create-note__mark">
@@ -205,7 +195,7 @@ function CreateNote() {
                         name="marking"
                         value={task.marking = markingValue}
                         onChange={changeHandler}
-                    ></input>
+                    />
                     <div
                         className="create-note__label-task"
                         >Marking</div>
@@ -266,7 +256,7 @@ function CreateNote() {
                         name="status"
                         value={task.status = statusValue}
                         onChange={changeHandler}
-                    ></input>
+                    />
                     <div className="create-note__label-task" onClick={showStatus}>Status</div>
                     <ul className='create-note__status-list'>
                             <li
